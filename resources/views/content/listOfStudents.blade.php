@@ -3,12 +3,10 @@
 @section('content')
 
 
-<<<<<<< HEAD
-<table class="table table-bordered" id="StudentList">
-
+<table id="StudentList">
     <thead class="nosort">
         <tr>
-
+            <th>ID</th>
             <th>Student Name</th>
             <th>Course ID</th>
             <th>Gender</th>
@@ -19,23 +17,12 @@
         </tr>
     </thead>
 </table>
-=======
-<p>THIS IS FUCKING INDEX</p>
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-<p>THIS IS FUCKING INDEX</p>
-
->>>>>>> 80bfaa35b4ec30030528f15c4d818d37e2bea81b
 
 
 
 @stop()
 
+@section('script')
+    <script type="text/javascript" src="{{asset('public/assets/js/sample.js')}}"></script>
+@endsection
 

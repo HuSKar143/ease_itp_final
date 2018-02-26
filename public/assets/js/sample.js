@@ -53,16 +53,31 @@ $(function() {
                         row[i][3],
                         row[i][4],
                         row[i][5],
+<<<<<<< HEAD
                         '<button class="btn btn-primary btn-sm mdi mdi-remove-red-eye"></button>'
+=======
+                        row[i][6],
+                        '<button data-pk="'+row[i][0]+'" class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button>' 
+>>>>>>> 80bfaa35b4ec30030528f15c4d818d37e2bea81b
                       
                     ]);
 
                 }
 
                StudentListDataTable.draw();
+                
+                 $('.viewProfile').click(function(e){
+                    
+                    var holderID = $(this).attr('data-pk');
+                     console.log(holderID);
+                    window.location.href='studentProfile/'+holderID;
+                       
+                });
          
 
             }
+
+            
             
         });
 

@@ -119,6 +119,12 @@
             <span class="nav-link-text">Link</span>
           </a>
         </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="{{ url('/listOfStudents') }}">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">List Of Students</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
