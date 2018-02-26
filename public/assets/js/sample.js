@@ -1,10 +1,6 @@
 $(function() {
 
-$.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-        }
-    });
+
     if($('#StudentList')[0]){
         
         var StudentList = $('#StudentList'),
@@ -57,16 +53,26 @@ $.ajaxSetup({
                         row[i][4],
                         row[i][5],
                         row[i][6],
-                        '<button class="btn btn-primary btn-sm mdi mdi-remove-red-eye"></button>'
+                        '<button data-pk="'+row[i][0]+'" class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button>' 
                       
                     ]);
 
                 }
 
                StudentListDataTable.draw();
+                
+                 $('.viewProfile').click(function(e){
+                    
+                    var holderID = $(this).attr('data-pk');
+                     console.log(holderID);
+                    window.location.href='studentProfile/'+holderID;
+                       
+                });
          
 
             }
+
+            
             
         });
 

@@ -24,12 +24,27 @@ class MasterController extends Controller
  				->select('id','course_id','student_name','gender','age','year_level','section')
                 ->orderBy('id','asc')
                 ->get();
-        return json_encode($StudentList);
-
-           
+        return json_encode($StudentList);      
     }
        
+    public function listOfStudents(){
 
+    	return view('content.listOfStudents');
+    }
+
+    public function studentProfile($holderID){
+    	// $details = array(
+    	// 		'name' => 'Jusin',
+    	// 		'age' => '15',
+    	// 		'characteristics' => 'pretty'
+    	// 	);
+    	// return view('content.studentProfile', ['details' => $details]);
+    	    $studentProfile = DB::table('students')
+ 			->select('id','course_id','student_name','gender','age','year_level','section')
+            ->where('id','=', $holderID)
+            ->get();
+           return view('content.studentProfile',['profile' => $studentProfile]);
+    }
 
 
 
