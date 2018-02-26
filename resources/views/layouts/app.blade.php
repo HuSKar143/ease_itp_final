@@ -18,10 +18,10 @@
   <link href="{{asset('public/assets/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/css/material-icons.css')}}" rel="stylesheet">
   <!-- Custom styles for this template-->
-  <link href="{{asset('public/assets/css/sb-admin.css')}}" rel="stylesheet"> @yield('css')
+    <link href="{{asset('public/assets/css/sb-admin.css')}}" rel="stylesheet"> @yield('css')
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">EASE SYSTEM</a>

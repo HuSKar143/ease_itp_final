@@ -3,10 +3,11 @@
 @section('content')
 
 
-<table id="StudentList">
+<table class="table table-bordered" id="StudentList">
+
     <thead class="nosort">
         <tr>
-            <th>ID</th>
+
             <th>Student Name</th>
             <th>Course ID</th>
             <th>Gender</th>

@@ -476,3 +476,59 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+.studentid {
+  
+    width: 20%;
+   
+    margin: 10px;
+}
+.studentinfo {
+    float: left;
+    width: 70%;
+    margin: 10px;
+    border-radius: 10px; 
+    background-color: ;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.info {
+
+font-family: Product Sans;
+font-size: 10pt;  
+}
+.content_sample {
+
+  color: blue;
+}
+img.profpic {
+
+  width: 170px;
+  height: 170px;
+  border-radius: 10%;
+  display: block; margin-left: auto; margin-right:auto; 
+}
+.column {
+
+  margin: 10px  ;
+}
+.column-25
+{
+
+  width:20%;
+}
+
+.bg-try {
+
+  background-color:#EBEBEB  ;
+}
+.navbar-title{
+
+  font-family: Product sans;
+ 
+  color: black;
+}

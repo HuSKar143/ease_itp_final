@@ -1,10 +1,6 @@
 $(function() {
 
-$.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-        }
-    });
+
     if($('#StudentList')[0]){
         
         var StudentList = $('#StudentList'),
@@ -30,8 +26,8 @@ $.ajaxSetup({
                    
 
                         row.push([
-                            j.id
-                            , j.course_id
+                      
+                             j.course_id
                             , j.student_name
                             , j.gender
                             , j.age
@@ -43,20 +39,20 @@ $.ajaxSetup({
 
                 for(var i = 0; i < row.length; i++) {
                     var temp;
-                    if(row[i][1]==1){
+                    if(row[i][0]==1){
                         temp = "Institute of Computing";
-                    }else if(row[i][1]==2){
+                    }else if(row[i][0]==2){
                         temp = "Computer Science";
                     }
 
                     StudentListDataTable.row.add([
-                        row[i][0],
-                        row[i][2],
+ 
+                        row[i][1],
                         temp,
+                        row[i][2],
                         row[i][3],
                         row[i][4],
                         row[i][5],
-                        row[i][6],
                         '<button class="btn btn-primary btn-sm mdi mdi-remove-red-eye"></button>'
                       
                     ]);

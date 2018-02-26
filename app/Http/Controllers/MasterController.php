@@ -28,7 +28,11 @@ class MasterController extends Controller
 
            
     }
-       
+     
+     public function studentProfile(){
+		
+		return view('content.Profile');
+	}  
 
 
 
