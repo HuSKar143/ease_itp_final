@@ -149,7 +149,7 @@
 
 	<div class="column">
 
-	<canvas id="myChart"  class="lineChart" width="600" height="300"></canvas>
+	<canvas id="myChart"  class="lineChart" width="900" height="300"></canvas>
 
 	</div>
 
