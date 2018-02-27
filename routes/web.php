@@ -28,4 +28,5 @@ use Illuminate\Http\Request;
  // Generate data(passing of data(json,or any))
  Route::get('/studentLists', 'MasterController@generateStudentsList');
  Route::get('/profile', 'MasterController@studentProfile');
+ // Route::get('/studentRadarData/{x}', 'MasterController@generateRadarData');
 

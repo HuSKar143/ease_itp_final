@@ -1,5 +1,5 @@
 
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 
 
@@ -105,13 +105,6 @@
     	echo "4th Year";
     }
 
-  
-
-    	
-
-
-
-
 
     	?> 
 
@@ -132,15 +125,30 @@
 </table>
 
 </div>
-
-
+ @foreach ($eq as $eqq)
+<input type="hidden" id="1st" value="<?php echo $eqq->intrapersonal ?>">
+<input type="hidden" id="2nd" value="<?php echo $eqq->interpersonal ?>">
+<input type="hidden" id="3rd" value="<?php echo $eqq->stress ?>">
+<input type="hidden" id="4th" value="<?php echo $eqq->adapt ?>">
+<input type="hidden" id="5th" value="<?php echo $eqq->mood ?>">
+@endforeach
 
 
 
 <div class="row">
-	
+  @foreach ($profile as $val)
+
+
+
+  @endforeach	
 	<div class="column"> 
 		Radar graph
+		  @foreach ($profile as $val)
+
+<canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar" width="300" height="300"></canvas>
+
+  @endforeach	
+		
 	</div>
 
 	<div class="column">
@@ -160,6 +168,8 @@
 
 @section('script')
     <script type="text/javascript" src="{{asset('public/assets/js/sample.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/assets/chart.js/chart.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/assets/js/radardata.js')}}"></script>
 @endsection
 
 

@@ -50,7 +50,7 @@ $(function() {
                         row[i][5],
                         row[i][6],
                         row[i][7],
-                        '<button data-pk="'+row[i][0]+'" class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button>' 
+                        '<button value="'+row[i][0]+'" class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button>' 
 
                       
                     ]);
@@ -59,12 +59,18 @@ $(function() {
 
                StudentListDataTable.draw();
                 
-                 $('.viewProfile').click(function(e){
+                //  $('.viewProfile').click(function(e){
                     
-                    var holderID = $(this).attr('data-pk');
+                //     var holderID = $(this).attr('value');
+                //      console.log(holderID);
+                //     // window.location.href='studentProfile/'+holderID;
+                       
+                // });
+                $("#StudentList").on("click", " .viewProfile", function(e){
+                    var holderID = $(this).attr('value');
                      console.log(holderID);
                     window.location.href='studentProfile/'+holderID;
-                       
+
                 });
          
 
