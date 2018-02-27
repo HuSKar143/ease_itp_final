@@ -136,11 +136,7 @@
 
 
 <div class="row">
-  @foreach ($profile as $val)
-
-
-
-  @endforeach	
+	
 	<div class="column"> 
 		Radar graph
 		  @foreach ($profile as $val)
