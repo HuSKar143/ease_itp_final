@@ -3,7 +3,7 @@
 @section('content')
 
 
-<table id="StudentList">
+<table id="StudentList" class="table table-bordered">
     <thead class="nosort">
         <tr>
             <th>First Name</th>
@@ -17,7 +17,7 @@
         </tr>
     </thead>
 </table>
-
+<br>
 
 
 @stop()
