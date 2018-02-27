@@ -6,9 +6,9 @@
 <table id="StudentList">
     <thead class="nosort">
         <tr>
-            <th>ID</th>
-            <th>Student Name</th>
-            <th>Course ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Course Name</th>
             <th>Gender</th>
             <th>Age</th>
             <th>Year Level</th>

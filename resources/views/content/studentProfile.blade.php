@@ -11,7 +11,8 @@
 
  @foreach ($profile as $val)
                                         
-   <p> {{$val->student_name}}</p>
+   <p> {{$val->firstname}}</p>
+   <p> {{$val->lastname}}</p>
                                      
 @endforeach
 

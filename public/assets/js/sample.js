@@ -26,43 +26,36 @@ $(function() {
                    
 
                         row.push([
-                      
-                             j.course_id
-                            , j.student_name
+                             j.id
+                            , j.firstname
+                            , j.lastname
+                            , j.coursename
                             , j.gender
                             , j.age
-                            , j.year_level
+                            , j.yearlevel
                             , j.section
                           
                         ]);     
                 }
 
                 for(var i = 0; i < row.length; i++) {
-                    var temp;
-                    if(row[i][0]==1){
-                        temp = "Institute of Computing";
-                    }else if(row[i][0]==2){
-                        temp = "Computer Science";
-                    }
+                    
 
                     StudentListDataTable.row.add([
- 
+                        
                         row[i][1],
-                        temp,
                         row[i][2],
                         row[i][3],
                         row[i][4],
                         row[i][5],
-<<<<<<< HEAD
-                        '<button class="btn btn-primary btn-sm mdi mdi-remove-red-eye"></button>'
-=======
                         row[i][6],
+                        row[i][7],
                         '<button data-pk="'+row[i][0]+'" class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button>' 
->>>>>>> 80bfaa35b4ec30030528f15c4d818d37e2bea81b
+
                       
                     ]);
 
-                }
+                 }
 
                StudentListDataTable.draw();
                 
