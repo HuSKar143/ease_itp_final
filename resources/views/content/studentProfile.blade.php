@@ -149,7 +149,8 @@
 
 	<div class="column">
 
-	GWA
+	<canvas id="myChart"  class="lineChart" width="600" height="300"></canvas>
+
 	</div>
 
 
@@ -165,6 +166,7 @@
 @section('script')
     <script type="text/javascript" src="{{asset('public/assets/js/sample.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/chart.js/chart.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/assets/js/lineChart.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/js/radardata.js')}}"></script>
 @endsection
 
