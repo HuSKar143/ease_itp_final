@@ -29,4 +29,5 @@ use Illuminate\Http\Request;
  Route::get('/studentLists', 'MasterController@generateStudentsList');
  Route::get('/profile', 'MasterController@studentProfile');
  Route::get('/studentProfile/{x}/fff', 'MasterController@gendata');
+ Route::get('/studentProfile/{x}/ffff', 'MasterController@gendata2');
 

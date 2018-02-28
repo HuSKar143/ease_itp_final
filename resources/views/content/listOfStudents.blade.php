@@ -13,7 +13,7 @@
             <th>Age</th>
             <th>Year Level</th>
             <th>Section</th>
-            <th>Action</th>       </tr>
+            <th>Action</th>   </tr>
     </thead>
 </table>
 <br>

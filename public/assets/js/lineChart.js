@@ -1,15 +1,31 @@
 $(function() {
 	
+var x = document.getElementById("myChart").getAttribute("value");
+
+$.ajax({
+            type: 'GET'
+            , url: 'http://localhost/ease_itp_final/studentProfile/' +x +'/ffff'
+            , dataType: 'json'
+            , success: function (data) {
+
+    var school_year = [];
+    var gwa = [];
+
+    $.each(data, function(keys, values){
+    	school_year.push(values['year'] + " " + values['semester']);
+    	gwa.push(values['gwa']);
+    });
+
 
 
  var studentdata =  { title:{text: "Hello"} ,labels: 
- 		["2nd Year(1)", "2nd year(2)", "3rd year(1)", "3rd year(2)", "4th year(1)", "4th year(2)"],
+ 		school_year,
         datasets: [{
         	lineTension:0,
             borderWidth: 1,
             pointBorderWidth:2,
             label: 'General Weighted Average',
-            data: [1.2, 5, 1.3, 3, 2, 1.3],
+            data: gwa,
             backgroundColor: ['rgba(0, 138, 230, .5)'],
             borderColor: [
                 
@@ -101,5 +117,5 @@ var myChart = new Chart(ctx, {
     }
 });
 
-
-});
+}})
+}); 

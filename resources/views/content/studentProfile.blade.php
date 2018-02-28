@@ -125,13 +125,7 @@
 </table>
 
 </div>
- @foreach ($eq as $eqq)
-<input type="hidden" id="1st" value="<?php echo $eqq->intrapersonal ?>">
-<input type="hidden" id="2nd" value="<?php echo $eqq->interpersonal ?>">
-<input type="hidden" id="3rd" value="<?php echo $eqq->stress ?>">
-<input type="hidden" id="4th" value="<?php echo $eqq->adapt ?>">
-<input type="hidden" id="5th" value="<?php echo $eqq->mood ?>">
-@endforeach
+
 
 
 
@@ -153,9 +147,11 @@ Emotional Quotient<br />
 	<label for = "idOfCanvas">
 General Weight Average<br />
     
+@foreach ($profile as $val)
 
+	<canvas id="myChart"  class="lineChart" value="<?php echo $val->id ?>" width="1100" height="200"></canvas>
 
-	<canvas id="myChart"  class="lineChart" width="500" height="200"></canvas>
+	@endforeach
 </label>
 	</div>
 

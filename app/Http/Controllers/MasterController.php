@@ -33,10 +33,23 @@ class MasterController extends Controller
                 ->select('intrapersonal','interpersonal','stress','adapt','mood')
                 ->where('id','=', $x)
                 ->get();
+
+          
         return json_encode($studentradarData);
     }
 
+     public function gendata2($x) {
+    
+            $studentGwaData = DB::table('grades')
+                ->select('*')
+                ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+                ->where('grades.student_id','=', $x)
+                ->get();    
+          
+        return json_encode($studentGwaData);
+    }
 
+ 
        
     public function listOfStudents(){
 
@@ -56,11 +69,11 @@ class MasterController extends Controller
             ->where('id','=', $holderID)
             ->get();
             //hack
-             $studentRadarData = DB::table('eq')
-                ->select('intrapersonal','interpersonal','stress','adapt','mood')
-                ->where('student_id','=', $holderID)
-                ->get();
-           return view('content.studentProfile',['profile' => $studentProfile, 'eq' => $studentRadarData]);
+            // $studentRadarData = DB::table('eq')
+            //    ->select('intrapersonal','interpersonal','stress','adapt','mood')
+            //    ->where('student_id','=', $holderID)
+            //    ->get();
+           return view('content.studentProfile',['profile' => $studentProfile]);
     }
 
 
