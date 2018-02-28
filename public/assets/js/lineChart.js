@@ -2,11 +2,11 @@ $(function() {
 	
 
 
- var studentdata =  { labels: 
+ var studentdata =  { title:{text: "Hello"} ,labels: 
  		["2nd Year(1)", "2nd year(2)", "3rd year(1)", "3rd year(2)", "4th year(1)", "4th year(2)"],
         datasets: [{
-        
-            borderWidth: 3,
+        	lineTension:0,
+            borderWidth: 1,
             pointBorderWidth:2,
             label: 'General Weighted Average',
             data: [1.2, 5, 1.3, 3, 2, 1.3],
@@ -56,6 +56,7 @@ $(function() {
 
     
  var options = {
+ 			bezierCurve: true,
  	        scales: {
             yAxes: [{
             	  legend: {
@@ -91,9 +92,7 @@ $(function() {
 
 var ctx = $("#myChart");
 var myChart = new Chart(ctx, {
-	title: {
-		text: "Number of iPhones Sold in Different Quarters"
-	},
+	
     type: 'line',
     data: studentdata,
     options: options,

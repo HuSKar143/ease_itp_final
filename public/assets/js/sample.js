@@ -7,6 +7,8 @@ $(function() {
             StudentListFilter = $('#StudentListFilter'),
             StudentListDataTable = StudentList.DataTable();
         
+
+
         $.ajax({
             type: 'GET'
             , url: 'studentLists'
@@ -50,7 +52,7 @@ $(function() {
                         row[i][5],
                         row[i][6],
                         row[i][7],
-                        '<button value="'+row[i][0]+'" class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button>' 
+                        '<center><button value="'+row[i][0]+'"class="btn btn-primary btn-sm mdi mdi-remove-red-eye viewProfile"></button></center>' 
 
                       
                     ]);

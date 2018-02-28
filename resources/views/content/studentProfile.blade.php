@@ -135,22 +135,28 @@
 
 
 
-<div class="row">
+<div class="row" style="margin: 20px 20px 90px 20px;">
 	
 	<div class="column"> 
-		Radar graph
+		<label for = "idOfCanvas">
+Emotional Quotient<br />
 		  @foreach ($profile as $val)
 
-<canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar" width="300" height="300"></canvas>
+<canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar" width="400" height="200"></canvas>
 
   @endforeach	
-		
+		</label>
 	</div>
 
 	<div class="column">
 
-	<canvas id="myChart"  class="lineChart" width="900" height="300"></canvas>
+	<label for = "idOfCanvas">
+General Weight Average<br />
+    
 
+
+	<canvas id="myChart"  class="lineChart" width="500" height="200"></canvas>
+</label>
 	</div>
 
 
