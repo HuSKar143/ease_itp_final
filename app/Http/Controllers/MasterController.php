@@ -27,13 +27,13 @@ class MasterController extends Controller
         return json_encode($StudentList);      
     }
 
-    public function generateRadarData($x) {
-
-            $studentRadarData = DB::table('eq')
+    public function gendata($x) {
+    
+            $studentradarData = DB::table('eq')
                 ->select('intrapersonal','interpersonal','stress','adapt','mood')
-                ->where('student_id','=',$x)
+                ->where('id','=', $x)
                 ->get();
-        return json_encode($studentRadarData);
+        return json_encode($studentradarData);
     }
 
 
@@ -58,7 +58,7 @@ class MasterController extends Controller
             //hack
              $studentRadarData = DB::table('eq')
                 ->select('intrapersonal','interpersonal','stress','adapt','mood')
-                ->where('student_id','=',$holderID)
+                ->where('student_id','=', $holderID)
                 ->get();
            return view('content.studentProfile',['profile' => $studentProfile, 'eq' => $studentRadarData]);
     }
