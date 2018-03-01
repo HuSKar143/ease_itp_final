@@ -76,6 +76,40 @@ class MasterController extends Controller
            return view('content.studentProfile',['profile' => $studentProfile]);
     }
 
+    public function endYear($start){
+
+        $schoolYear = DB::table('schoolyear')
+                ->select('id', 'year', 'semester')
+                ->where('id', '>', $start)
+                ->orderBy('id', 'asc')
+                ->get();
+
+            return json_encode($schoolYear);
+    }
+
+    public function getCurrentGraph($to, $from){
+    $schoolYear = DB::table('grades')
+        ->select('*')
+        ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+        ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+        ->whereBetween('grades.schoolyear', array($from, $to))
+        ->get();
+    
+        return json_encode($schoolYear);
+    }
 
 
-}
+
+  public function filterStudent() {
+             $filterStudents = DB::table('schoolyear')
+                ->select('id','year','semester')
+                ->orderBy('id','asc')
+                ->get();
+
+                $gender = DB::table('students')
+                ->select('id','gender')
+                ->orderBy('id','asc')
+                ->get();
+            // return jason_encode($filter);
+         return view('content.filterStudents',['filter'=>$filterStudents,'gender'=>$gender]);
+}}

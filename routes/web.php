@@ -30,4 +30,6 @@ use Illuminate\Http\Request;
  Route::get('/profile', 'MasterController@studentProfile');
  Route::get('/studentProfile/{x}/fff', 'MasterController@gendata');
  Route::get('/studentProfile/{x}/ffff', 'MasterController@gendata2');
-
+ Route::get('/filterStudents', 'MasterController@filterStudent');
+ Route::get('/filterStudents/{x}', 'MasterController@endYear');
+ Route::get('/getFilterGraph/{to}/{from}', 'MasterController@getCurrentGraph');
