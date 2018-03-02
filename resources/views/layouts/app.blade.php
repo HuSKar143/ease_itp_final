@@ -19,7 +19,8 @@
   <link href="{{asset('public/assets/css/material-icons.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/bootstrap/js/bootstrap.min.js')}}" rel="stylesheet">
   <!-- Custom styles for this template-->
-    <link href="{{asset('public/assets/css/sb-admin.css')}}" rel="stylesheet"> @yield('css')
+    <link href="{{asset('public/assets/css/sb-admin.css')}}" rel="stylesheet">
+ @yield('css')
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -232,25 +233,26 @@
     </div>
   </nav>
 
-  
-  <div class="content-wrapper">
-    <div class="container-fluid"> 
+ 
 
+  
 
 <main>
-
+<div class="content-wrapper">
+    <div class="container-fluid"> 
 @yield('content')
-
-
- </main>
  </div>
  </div>
+</main>
+
+
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>EASE SYSTEM 2018</small>
         </div>
       </div>
     </footer>

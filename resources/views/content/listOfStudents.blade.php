@@ -2,6 +2,12 @@
 @extends('layouts.app') 
 @section('content')
 
+<div class="col-md-12">
+<!-- Example Pie Chart Card-->
+       <div class="card mb-3 text-center">
+            <div class="card-header" style="background-color: #002663; color: white;">
+             <strong> <i class="fa"></i> List of Students</div></strong>
+            <div class="card-body">
 
 <table id="StudentList" class="table table-bordered">
     <thead class="nosort">
@@ -17,7 +23,9 @@
     </thead>
 </table>
 <br>
-
+</div>
+</div>
+</div>
 
 @stop()
 

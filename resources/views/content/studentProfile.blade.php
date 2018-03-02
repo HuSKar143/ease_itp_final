@@ -5,39 +5,38 @@
 
 
 
+<section class="content">
+
+
+           
+<div class="col-md-12">
+<!-- Example Pie Chart Card-->
+       <div class="card card-inverse card-primary mb-3">
+            <div class="card-header" style="background-color: #002663; color: white;">
+              <center><strong><i class="fa"></i> Student Information</div></strong></center>
+            <div class="card-body">
 
 
 <div class="row">
+    
+ <div class="col-md-3">
   <div class="studentid">
   @foreach ($profile as $val)
 
   	 <img class="profpic" src= <?php 
-
   	 if($val->gender=="m") {
-
-  	 	 echo  asset('public/assets/profile_pics/boy.png');
-
-  	 	 }
-  	 	 
+  	 	   echo  asset('public/assets/profile_pics/boy.png');
+  	 	 } 	 	 
   	 else if($val->gender=="f") {
-
-  	 	 echo  asset('public/assets/profile_pics/girl.png');
-
+  	 	   echo  asset('public/assets/profile_pics/girl.png');
   	 	 }
-
   	 	 ?>>
 
   @endforeach
   </div>
+  </div>
 
-
-  <!--<div class="studentinfo"> 
-  <h1 class="info"> Name: </h1> <br>
-  <h1 class="info"> Address: </h1><br>
-  <h1 class="info">  Course: </h1><br>
-  <h1 class="info">  Year & Section: </h1></div>
- 
-</div> -->
+<div class="col-md-6">
 <div class="studentinfo info" > 
 <table  border="0" align="left" cellpadding="5">
   @foreach ($profile as $val)
@@ -51,14 +50,14 @@
     <td valign="top"> <?php 
    
     if ($val->coursename=="BSIT") {
-    	
-    	echo "Information Technology"; 
+      
+      echo "Information Technology"; 
     }
     
     else if($val->coursename=="BSCS"){
-    	
-    	echo "Computer Science";
-	}
+      
+      echo "Computer Science";
+  }
 
 ?>
     </td>
@@ -68,16 +67,16 @@
    
     if ($val->gender=="m") {
 
-    	echo "Male";
+      echo "Male";
     }
 
 
-	else if ($val->gender=="f") {
+  else if ($val->gender=="f") {
 
-    	echo "Female";
+      echo "Female";
     }
 
-    	?>  </td>
+      ?>  </td>
   </tr>
   
   </tr>
@@ -91,25 +90,25 @@
    
     if ($val->yearlevel=="2") {
 
-    	echo "2nd Year";
+      echo "2nd Year";
     }
 
 
-	else if ($val->yearlevel=="3") {
+  else if ($val->yearlevel=="3") {
 
-    	echo "3rd Year";
+      echo "3rd Year";
     }
 
     else if ($val->yearlevel=="4") {
 
-    	echo "4th Year";
+      echo "4th Year";
     }
 
 
-    	?> 
+      ?> 
 
 
-    	</td>
+      </td>
   </tr>
    <tr>
     <td valign="top"><div align="left">Section: </div></td>
@@ -117,53 +116,58 @@
 
   </tr>
 </table>
-<p align="center"><a href="index.php"></a></p>
+
 </div>
-</td>
-</tr>
+</div>
 @endforeach
-</table>
 
 </div>
-
-
-
-
-<div class="row" style="margin: 20px 20px 90px 20px;">
-	
-	<div class="column"> 
-		<label for = "idOfCanvas">
-Emotional Quotient<br />
-		  @foreach ($profile as $val)
-
-<canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar" width="400" height="200"></canvas>
-
-  @endforeach	
-		</label>
-	</div>
-
-	<div class="column">
-
-	<label for = "idOfCanvas">
-General Weight Average<br />
-    
-@foreach ($profile as $val)
-
-	<canvas id="myChart"  class="lineChart" value="<?php echo $val->id ?>" width="1100" height="200"></canvas>
-
-	@endforeach
-</label>
-	</div>
-
-
-
-
-
 </div>
-</body>
+
+</section>
+
+  <!--<div class="studentinfo"> 
+  <h1 class="info"> Name: </h1> <br>
+  <h1 class="info"> Address: </h1><br>
+  <h1 class="info">  Course: </h1><br>
+  <h1 class="info">  Year & Section: </h1></div>
+ 
+</div> -->
 
 
-@stop 
+
+          <div class="col-md-6"><!-- Example Pie Chart Card-->
+          <div class="card mb-3">
+            <div class="card-header" style="background-color: #c10000; color:white;">
+             <strong> <i class="fa fa-pie-chart"></i> Emotional Quotient</div> </strong>
+            <div class="card-body">
+             @foreach ($profile as $val)
+              <canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar" > </canvas>
+              @endforeach 
+            </div>
+            
+          </div>
+          </div>
+        <div class="col-md-12">
+
+         <div class="card mb-3">
+        <div class="card-header" style="background-color:#c10000 ; color: white;">
+          <strong><i class="fa fa-area-chart"></i> Academic Performance</div></strong>
+        <div class="card-body">
+          @foreach ($profile as $val)      
+                  <canvas id="myChart"  class="lineChart" value=" <?php echo $val->id ?>" width="100%" height="300"></canvas>
+                @endforeach 
+        </div>
+        
+      </div>
+</div>
+    </section>
+
+
+
+
+
+@endsection 
 
 @section('script')
     <script type="text/javascript" src="{{asset('public/assets/js/sample.js')}}"></script>

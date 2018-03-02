@@ -22,42 +22,16 @@ $.ajax({
  		school_year,
         datasets: [{
         	lineTension:0,
-            borderWidth: 1,
+            borderWidth: 3,
             pointBorderWidth:2,
             label: 'General Weighted Average',
             data: gwa,
-            backgroundColor: ['rgba(0, 138, 230, .5)'],
-            borderColor: [
-                
-                'rgba(0, 138, 230, 1)'
-                
-            ],
+            backgroundColor: 'rgba(193, 0, 0,0.7)',
+            borderColor: 'rgba(193,0, 0,1)',
             
-            pointBackgroundColor: [
+            pointBackgroundColor: 'rgba(193,0, 0,1)',
 
-            'rgba(255,255,255,1)', 	
-            'rgba(255,255,255,1)', 
-            'rgba(255,255,255,1)', 
-            'rgba(255,255,255,1)', 
-            'rgba(255,255,255,1)', 
-            'rgba(255,255,255,1)', 
-
-   			
-
-            ],
-
-            pointBorderColor: [
-
-          
-			'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)'
-
-
-            ],
+            pointBorderColor:'rgba(193, 0, 0,1)',
 
             pointHoverBorderColor: [
             'rgba(0, 138, 230, 1)',  
@@ -72,6 +46,8 @@ $.ajax({
 
     
  var options = {
+ 			maintainAspectRatio: false,
+ 			 responsive: true,
  			bezierCurve: true,
  	        scales: {
             yAxes: [{
@@ -91,10 +67,17 @@ $.ajax({
                     reverse: true,
                     stepSize: 3,
                     max: 5,
-                    min: 1
+                    min: 1,
+                    autoskip:false
                 }
             }],
-       			 
+       			 xAxes: [{
+
+				autoSkip: false
+                    
+
+
+       			 }]
 
           
 
@@ -112,9 +95,7 @@ var myChart = new Chart(ctx, {
     type: 'line',
     data: studentdata,
     options: options,
-    title:{
-      text: "Employee Performance"      
-    }
+   
 });
 
 }})

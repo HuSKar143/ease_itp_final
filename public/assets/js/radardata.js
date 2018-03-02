@@ -65,7 +65,7 @@ var x = document.getElementById("studentData").getAttribute("value");
 
 
 var options = {
-    responsive: false,
+    responsive: true,
     maintainAspectRatio: true,
     scale: {
         ticks: {
@@ -84,15 +84,17 @@ var studentData = {
     ],
     datasets: [{
         label: "Emotional Quotient",
-        backgroundColor: "rgba(255, 153, 255,0.6)",
-        borderColor: "rgba(255, 0, 255,0.7)",
+        backgroundColor: "rgba(193, 0, 0,0.7)",
+        borderColor: "rgba(193, 0, 0,1)",
         borderWidth: "1",
-        pointBackgroundColor: "rgba(255, 153, 204,1)",
+        pointBackgroundColor: "rgba(255, 255, 255,1)",
         pointRadius: "1.5",
-        pointBorderColor: "rgba(255, 51, 0,1)",
+        pointBorderColor: "rgba(193, 0, 0,1)",
         pointHoverBackgroundColor: "rgba(51, 204, 51,1)",
         pointHoverRadius: "1.5",
         pointHoverBorderColor: "rgba(51, 204, 51,1)",
+        pointBorderWidth:4,
+        
         data: [
             data[0].intrapersonal, data[0].interpersonal, data[0].stress, data[0].adapt,
             data[0].mood,
