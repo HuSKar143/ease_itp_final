@@ -10,7 +10,7 @@
 <select class="form-control" id="exampleFormControlSelect1">
 
 @foreach ($filter as $val)
-	  <option selected hidden>Start Semester</option>
+	  <option selected hidden>TO</option>
       <option value="{{ $val->id }}"> {{$val->year}} {{$val->semester}}</option>
    
     @endforeach
@@ -18,6 +18,7 @@
 </div>
 <div class="column">
 <select class="form-control" id="exampleFormControlSelect2">
+<option selected hidden>FROM</option>
 
 </select>
 </div>

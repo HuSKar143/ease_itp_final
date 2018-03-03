@@ -45,6 +45,12 @@
             <strong><span class="nav-link-text nav-color" sty>List of students</span></strong>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="{{ url('/filterStudents') }}">
+            <i class="fa fa-fw fa-table"></i>
+            <strong><span class="nav-link-text nav-color" sty>Data Visualization</span></strong>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
