@@ -10,10 +10,14 @@
 
            
 <div class="col-md-12">
+
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
             <div class="card-header" style="background-color: #002663; color: white;">
-              <center><strong><i class="fa"></i> Student Information</div></strong></center>
+            
+
+
+            <center><strong><i class="fa fa-drivers-license-o"></i> Student Information</div></strong></center>
             <div class="card-body">
 
 
