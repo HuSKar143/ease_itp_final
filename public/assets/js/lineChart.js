@@ -47,14 +47,15 @@ $.ajax({
     
  var options = {
  			maintainAspectRatio: false,
- 			 responsive: true,
+ 			responsive: true,
  			bezierCurve: true,
  	        scales: {
             yAxes: [{
+
             	  legend: {
             	  title: "Number of Sales",
  				  titleFontColor: 'rgba(0,0,0,1)',	
-      			  display: true,
+      			  display: false,
                   position: 'bottom',
                   labels: {
                 fontColor: 'rgb(0,0,0,1)'
@@ -72,11 +73,8 @@ $.ajax({
                 }
             }],
        			 xAxes: [{
-
-				autoSkip: false
-                    
-
-
+				autoSkip: false,
+				
        			 }]
 
           

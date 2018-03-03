@@ -6,17 +6,13 @@
 
 
 
-<p>THIS IS FUCKING INDEX</p>
-<p>THIS IS FUCKING INDEX</p>
+<div class="content">
+      <div class="title m-b-md">
+                     Welcome 
+                
+      </div>
 
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-
-<p>THIS IS FUCKING INDEX</p>
-<p>THIS IS FUCKING INDEX</p>
+</div>
 
 
 

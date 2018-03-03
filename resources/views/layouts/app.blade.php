@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="{{ url('/') }}">
             <i class="fa fa-fw fa-dashboard"></i>
             <strong><span class="nav-link-text nav-color">Home</span></strong>
           </a>
@@ -45,6 +45,13 @@
             <strong><span class="nav-link-text nav-color" sty>List of students</span></strong>
           </a>
         </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="{{ url('/filterStudents') }}">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <strong><span class="nav-link-text nav-color" sty>Filter Students</span></strong>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -54,6 +61,7 @@
         </li>
       </ul>
      <ul class="navbar-nav ml-auto">
+      
           <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>

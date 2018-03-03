@@ -6,11 +6,11 @@
 <!-- Example Pie Chart Card-->
        <div class="card mb-3 text-center">
             <div class="card-header" style="background-color: #002663; color: white;">
-             <strong> <i class="fa"></i> List of Students</div></strong>
+             <strong> <i class="fa fa-address-book-o"></i> List of Students</div></strong>
             <div class="card-body">
 
-<table id="StudentList" class="table table-bordered">
-    <thead class="nosort">
+<table id="StudentList" class="table">
+    <thead class="nosort thead-light">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
