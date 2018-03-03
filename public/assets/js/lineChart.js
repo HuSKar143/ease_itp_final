@@ -46,22 +46,14 @@ $.ajax({
 
     
  var options = {
- 			maintainAspectRatio: false,
+ 			maintainAspectRatio: true,
  			responsive: true,
  			bezierCurve: true,
  	        scales: {
             yAxes: [{
 
-            	  legend: {
-            	  title: "Number of Sales",
- 				  titleFontColor: 'rgba(0,0,0,1)',	
-      			  display: false,
-                  position: 'bottom',
-                  labels: {
-                fontColor: 'rgb(0,0,0,1)'
-            }
-                           },	
-
+            	labels: {
+                fontColor: 'rgb(0,0,0,1)'},                         	
             	ticks:
             	{
                     beginAtZero:true,

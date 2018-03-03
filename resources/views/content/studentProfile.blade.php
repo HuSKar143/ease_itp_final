@@ -14,16 +14,17 @@
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
             <div class="card-header" style="background-color: #002663; color: white;">
-            
+            <a class="nav-link back-button" href="{{ url('/listOfStudents') }}">
+            <i class="fa fa-fw fa-mail-reply"></i></a>
 
 
-            <center><strong><i class="fa fa-drivers-license-o"></i> Student Information</div></strong></center>
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Student Information</div></strong></center>
             <div class="card-body">
 
 
 <div class="row">
     
- <div class="col-md-3">
+ <div class="col-md-2">
   <div class="studentid">
   @foreach ($profile as $val)
 
@@ -40,7 +41,7 @@
   </div>
   </div>
 
-<div class="col-md-6">
+<div class="col-md-6" style="margin-left:1%;">
 <div class="studentinfo info" > 
 <table  border="0" align="left" cellpadding="5">
   @foreach ($profile as $val)
@@ -139,31 +140,32 @@
 </div> -->
 
 
-
+<div class="row">
           <div class="col-md-6"><!-- Example Pie Chart Card-->
           <div class="card mb-3">
             <div class="card-header" style="background-color: #c10000; color:white;">
              <strong> <i class="fa fa-pie-chart"></i> Emotional Quotient</div> </strong>
             <div class="card-body">
              @foreach ($profile as $val)
-              <canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar" > </canvas>
+              <canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar"  > </canvas>
               @endforeach 
             </div>
             
           </div>
           </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
 
          <div class="card mb-3">
         <div class="card-header" style="background-color:#c10000 ; color: white;">
           <strong><i class="fa fa-area-chart"></i> Academic Performance</div></strong>
         <div class="card-body">
           @foreach ($profile as $val)      
-                  <canvas id="myChart"  class="lineChart" value=" <?php echo $val->id ?>" width="100%" height="300"></canvas>
+                  <canvas id="myChart"  class="lineChart" value=" <?php echo $val->id ?>" ></canvas>
                 @endforeach 
         </div>
         
       </div>
+</div>
 </div>
     </section>
 
