@@ -74,6 +74,9 @@ var options = {
             maxTicksLimit: 3,
             display: false
         },
+        pointLabels :{
+           fontStyle: "bold",
+        },
 
     }
 };
@@ -86,13 +89,13 @@ var studentData = {
         label: "Emotional Quotient",
         backgroundColor: "rgba(193, 0, 0,0.7)",
         borderColor: "rgba(193, 0, 0,1)",
-        borderWidth: "1",
+        borderWidth: "3",
         pointBackgroundColor: "rgba(255, 255, 255,1)",
         pointRadius: "1.5",
         pointBorderColor: "rgba(193, 0, 0,1)",
-        pointHoverBackgroundColor: "rgba(51, 204, 51,1)",
+        pointHoverBackgroundColor: "rgba(193, 0, 0,1)",
         pointHoverRadius: "1.5",
-        pointHoverBorderColor: "rgba(51, 204, 51,1)",
+        pointHoverBorderColor: "rgba(193, 0, 0,1)",
         pointBorderWidth:4,
         
         data: [
