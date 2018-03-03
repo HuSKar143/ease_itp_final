@@ -9,7 +9,7 @@
 
 
            
-<div class="col-md-12">
+<div class="col-lg-12">
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -141,7 +141,7 @@
 
 
 <div class="row">
-          <div class="col-md-6"><!-- Example Pie Chart Card-->
+          <div class="col-lg-6"><!-- Example Pie Chart Card-->
           <div class="card mb-3">
             <div class="card-header" style="background-color: #c10000; color:white;">
              <strong> <i class="fa fa-pie-chart"></i> Emotional Quotient</div> </strong>
@@ -153,12 +153,12 @@
             
           </div>
           </div>
-        <div class="col-md-6">
+        <div class="col-lg-6">
 
          <div class="card mb-3">
         <div class="card-header" style="background-color:#c10000 ; color: white;">
           <strong><i class="fa fa-area-chart"></i> Academic Performance</div></strong>
-        <div class="card-body">
+        <div class="card-body" >
           @foreach ($profile as $val)      
                   <canvas id="myChart"  class="lineChart" value=" <?php echo $val->id ?>" ></canvas>
                 @endforeach 

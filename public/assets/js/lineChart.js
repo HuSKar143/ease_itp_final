@@ -16,10 +16,10 @@ $.ajax({
     	gwa.push(values['gwa']);
     });
 
+// school_year
 
-
- var studentdata =  { title:{text: "Hello"} ,labels: 
- 		school_year,
+ var studentdata =  {
+ 			labels:["1","2","3","4","5","6","7","8","9"],
         datasets: [{
         	lineTension:0,
             borderWidth: 3,
@@ -33,39 +33,49 @@ $.ajax({
 
             pointBorderColor:'rgba(193, 0, 0,1)',
 
-            pointHoverBorderColor: [
-            'rgba(0, 138, 230, 1)',  
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)', 
-            'rgba(0, 138, 230, 1)'
-            ],   
+            pointHoverBorderColor:'rgba(0, 138, 230, 1)'
+           
         }]
     };
 
     
  var options = {
+
  			maintainAspectRatio: true,
  			responsive: true,
  			bezierCurve: true,
- 	        scales: {
-            yAxes: [{
+ 	    scales: {
 
-            	labels: {
-                fontColor: 'rgb(0,0,0,1)'},                         	
-            	ticks:
-            	{
-                    beginAtZero:true,
-                    reverse: true,
-                    stepSize: 3,
-                    max: 5,
-                    min: 1,
-                    autoskip:false
+          yAxes: [{ 
+          	gridLines: {
+          		lineWidth: 0,
+          		color: 'rgba(0,0,0,1)'
+        },
+            ticks:
+            	{	
+                   beginAtZero:true,
+                   reverse: true,
+                   stepSize: 1,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
+                   fontSize:12
                 }
             }],
+
        			 xAxes: [{
+
+
+       			 	title:{
+       			 		fontsize: 5
+       			 	},
 				autoSkip: false,
+				gridLines: {
+          		lineWidth: 0,
+          		color: 'rgba(0,0,0,1)',
+
+
+        }
 				
        			 }]
 
@@ -75,11 +85,12 @@ $.ajax({
        			 }
 
 
-    };
+    	};
 
 
+Chart.defaults.global.defaultFontStyle = 'Bold'
 
-var ctx = $("#myChart");
+var ctx = document.getElementById("myChart").getContext("2d");
 var myChart = new Chart(ctx, {
 	
     type: 'line',
@@ -87,6 +98,7 @@ var myChart = new Chart(ctx, {
     options: options,
    
 });
+
 
 }})
 }); 

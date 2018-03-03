@@ -347,7 +347,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   color: white;
 }
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:active {
-  color: red;
+  color: #ffffff;
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a,

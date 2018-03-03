@@ -89,7 +89,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>EASE SYSTEM 2018</small>
+          <small><strong>EASE SYSTEM 2018</strong></small>
         </div>
       </div>
     </footer>
