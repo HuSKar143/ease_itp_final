@@ -51,62 +51,52 @@
 </div>
 </div>
 
-           
-<div class="col-md-12">
 <div class="row">
-          <div class="col-md-8"><!-- Example Pie Chart Card-->
-          <div class="card mb-3">
 
+ <div class="col-md-8" style="
+">
 
-<div id="exTab2" class="container">	
-<ul class="nav nav-tabs">
-			<li class="active">
-        <a  href="#1" data-toggle="tab">Overview</a>
-			</li>
-			<li><a href="#2" data-toggle="tab">Without clearfix</a>
-			</li>
-			<li><a href="#3" data-toggle="tab">Solution</a>
-			</li>
-</ul>
-
-			<div class="tab-content ">
-			  <div class="tab-pane active" id="1">
-
-			  </div>
-				
-			  <div class="tab-pane" id="2">
-    
-			  </div>
-
-       		  <div class="tab-pane" id="3">
-
-			  </div>
-			</div>
-</div>
-
-            
-          </div>
-          </div>
-        <div class="col-md-4">
-         <div class="card mb-3">
-        <div class="card-header" style="background-color:#c10000 ; color: white;">
-          <strong><i class="fa fa-area-chart"></i> Academic Performance</div></strong>
-        <div class="card-body">
-              
-                  <canvas id="myChart"  class="lineChart" value=" asd>" ></canvas>
+<!-- Example Pie Chart Card-->
+       <div class="card card-inverse card-primary mb-3">
+            <div class="card-header"  style="background-color: #002663; color: white; ">
            
-        </div>
-        
-      </div>
-</div>
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Results</strong></center></div>
+ <div class="card-body" >
+ 
+  <ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#home">Summary</a></li>
+    <li><a data-toggle="tab" href="#menu1">Results 1 </a></li>
+    <li><a data-toggle="tab" href="#menu2">Results 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Results 3</a></li>
+  </ul>
+ 
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane active">
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
 
 </div>
-
-
-
-
+</div>
 @stop 
 @section('script')
-    <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
+
+
+
+     <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
 
 @endsection

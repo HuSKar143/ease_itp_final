@@ -13,7 +13,7 @@
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
-            <div class="card-header" style="background-color: #002663; color: white;">
+            <div class="card-header"  style="background-color: #002663; color: white; ">
             <a class="nav-link back-button" href="{{ url('/listOfStudents') }}">
             <i class="fa fa-fw fa-mail-reply"></i></a>
 
