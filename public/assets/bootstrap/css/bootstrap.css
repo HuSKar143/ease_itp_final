@@ -8988,7 +8988,10 @@ a.text-dark:hover, a.text-dark:focus {
  * Responsive Bootstrap Tabs by @hayatbiralem
  * 15 May 2015
  */
+.nav-contents{
 
+    -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; 
+}
 .nav>li {
     position: relative;
     display: block;
@@ -9000,6 +9003,7 @@ a.text-dark:hover, a.text-dark:focus {
     display: block;
     padding: 10px 55px;
     font-weight: bold;
+    font-size: 10px;
     color:#002663;
 }
 
@@ -9039,6 +9043,7 @@ a.text-dark:hover, a.text-dark:focus {
     max-width: none
 }
 
+
 .nav-tabs {
     border-bottom: 1px solid #ddd;
 
@@ -9048,7 +9053,11 @@ a.text-dark:hover, a.text-dark:focus {
     float: left; 
     list-style:none;
     margin-bottom: -1px;
-   
+   list-style: none; 
+  float:left; 
+  display:block; 
+ 
+
    
 }
 
@@ -9058,11 +9067,13 @@ a.text-dark:hover, a.text-dark:focus {
 #nav li a { display: block; padding:5px; background: #ddd; margin-right:1px; }
 
 .nav-tabs>li>a {
-    margin-right: 2px;
-    line-height: 1.42857143;
+   
+   
     border: 1px solid transparent;
     border-radius: 4px 4px 0 0;
-   
+    display: block;  
+  padding: 5px 10px 5px 10px; 
+    
 
 }
 
@@ -9239,3 +9250,15 @@ a.text-dark:hover, a.text-dark:focus {
     border-top-left-radius: 0;
     border-top-right-radius: 0
 }
+   .full-width-tabs > ul.nav.nav-tabs {
+                display: table;
+                width: 100%;
+                table-layout: fixed; /* To make all "columns" equal width regardless of content */
+            }
+            .full-width-tabs > ul.nav.nav-tabs > li {
+                float: none;
+                display: table-cell;
+            }
+            .full-width-tabs > ul.nav.nav-tabs > li > a {
+                text-align: center;
+            }
