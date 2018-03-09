@@ -26,7 +26,7 @@
 <button class="btn btn-primary btn-filter" >Submit</button>
 </div>
 </div> -->
-
+<div class="card-body" >
 <div class="row">
 
 
@@ -50,43 +50,58 @@
 <button class="btn btn-primary btn-filter" >Submit</button>
 </div>
 </div>
+</div>
 
 <div class="row">
 
- <div class="col-md-8" style="
-">
+ <div class="col-md-12">
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
             <div class="card-header"  style="background-color: #002663; color: white; ">
            
             <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Results</strong></center></div>
- <div class="card-body" >
- 
-  <ul class="nav nav-tabs">
-    <li><a data-toggle="tab" href="#home">Summary</a></li>
-    <li><a data-toggle="tab" href="#menu1">Results 1 </a></li>
-    <li><a data-toggle="tab" href="#menu2">Results 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Results 3</a></li>
-  </ul>
- 
+ <div class="card-body" style="" >
 
-  <div class="tab-content">
+ <select class="form-control" id="results">
+
+
+	  <option selected hidden>Results</option>
+      <option value="">Spearman Rank Correlation</option>
+      <option value="">Significance Test</option>
+      <option value="">Summary of Emotional Quotient</option>
+
+</select>
+
+<div class="row" style="margin-top:2%;">
+
+ <div class="tabbable full-width-tabs">
+  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+    <li><a data-toggle="tab" href="#home">Intrapersonal</a></li>
+    <li><a data-toggle="tab" href="#menu1">Interpersonal </a></li>
+    <li><a data-toggle="tab" href="#menu2">Stress Management</a></li>
+    <li><a data-toggle="tab" href="#menu3">Adaptability</a></li>
+    <li><a data-toggle="tab" href="#menu4">General Mood</a></li>
+  </ul>
+ </div>
+ </div>
+ 
+  <div class="tab-content" style="margin-top: 2%;">
     <div id="home" class="tab-pane active">
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    
+       <canvas id="intraChart"></canvas>
     </div>
     <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <canvas id="interChart"></canvas>
     </div>
     <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      <canvas id="stressChart"></canvas>
     </div>
     <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <canvas id="adaptChart"></canvas>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <canvas id="moodChart"></canvas>
     </div>
   </div>
 
@@ -96,7 +111,7 @@
 @section('script')
 
 
-
+	 <script type="text/javascript" src="{{asset('public/assets/js/scatterChart	.js')}}"></script>	
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
 
 @endsection

@@ -1,18 +1,6 @@
 $(function() {
 
-$.ajax({
-            type: 'GET'
-            , url: 'http://localhost/ease_itp_final/studentProfile/' +x +'/ffff'
-            , dataType: 'json'
-            , success: function (data) {
 
-    var school_year = [];
-    var gwa = [];
-
-    $.each(data, function(keys, values){
-      school_year.push(values['year'] + " " + values['semester']);
-      gwa.push(values['gwa']);
-    });
 
 Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById("intraChart").getContext("2d");
@@ -443,7 +431,7 @@ var scatterChart = new Chart(ctx, {
 });
 
 
-}});
+
 
 
 });
