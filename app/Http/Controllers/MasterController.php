@@ -31,7 +31,7 @@ class MasterController extends Controller
     
             $studentradarData = DB::table('eq')
                 ->select('intrapersonal','interpersonal','stress','adapt','mood')
-                ->where('id','=', $x)
+                ->where('student_id','=', $x)
                 ->get();
 
           
@@ -95,6 +95,10 @@ class MasterController extends Controller
         ->whereBetween('grades.schoolyear', array($from, $to))
         ->get();
     
+    //     ->whereBetween('grades.schoolyear', array($from, $to))
+    //     ->get();
+    //     var_dump($otherdata);
+        
         return json_encode($schoolYear);
     }
 
