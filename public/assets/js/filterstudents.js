@@ -131,7 +131,7 @@ $(function(){
 
 //     				var gwa = [];
 
-drawGraph(student_gwa);
+
 
     					$.each(student_eq, function(keys, values){
     						interpersonal.push(values['interpersonal']);
@@ -431,15 +431,67 @@ drawGraph(student_gwa);
 //********************GRAPHS************************
 //********************GRAPHS************************
 
-//graph INTERPERSONAL~GWA_SCATTERPLOT
+//INTERPERSONAL~GWA_SCATTERPLOT
 
 
     var interGwaData = [];
         for(let i=0;i<interpersonalPerfectCopy.length;i++){
             var obj = {x:interpersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
             interGwaData.push(obj);
-        }console.log(interGwaData);
-var options = {
+        }graphInterpersonalScatter(interGwaData);
+
+
+
+//INTRAPERSONAL~GWA_SCATTERPLOT
+
+    var intraGwaData = [];
+        for(let i=0;i<intrapersonalPerfectCopy.length;i++){
+            var obj = {x:intrapersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
+            intraGwaData.push(obj);
+        }graphIntrapersonalScatter(intraGwaData);
+   
+
+
+//STRESS~GWA_SCATTERPLOT
+
+    var stressGwaData = [];
+        for(let i=0;i<stressPerfectCopy.length;i++){
+            var obj = {x:stressPerfectCopy[i],y:gwaPerfectCopy[i]};
+            stressGwaData.push(obj);
+        }graphStressScatter(stressGwaData);
+ 
+
+
+//MOOD~GWA_SCATTERPLOT
+    var moodGwaData = [];
+        for(let i=0;i<moodPerfectCopy.length;i++){
+            var obj = {x:moodPerfectCopy[i],y:gwaPerfectCopy[i]};
+            moodGwaData.push(obj);
+        }graphMoodScatter(moodGwaData);
+
+
+
+//ADAPT~GWA_SCATTERPLOT
+    var adaptGwaData = [];
+        for(let i=0;i<adaptabilityPerfectCopy.length;i++){
+            var obj = {x:adaptabilityPerfectCopy[i],y:gwaPerfectCopy[i]};
+            adaptGwaData.push(obj);
+        }graphAdaptabilityScatter(adaptGwaData);
+          
+
+
+
+				} //success
+		}); //ajax
+
+
+}); //button filter
+				
+	}); //function ending tag
+
+
+function graphInterpersonalScatter(data){
+    var options = {
 
        title: {
             display: true,
@@ -501,7 +553,7 @@ var interData = {
             BackgroundColor:'rgba(0,0,0,1)',
 
             label: 'INTERPERSONAL and GWA',
-            data: interGwaData,
+            data: data,
         }]
     };
 
@@ -513,16 +565,10 @@ var scatterChart = new Chart(ctx, {
     options: options
 
 });
-
-
-//graph INTRAPERSONAL~GWA_SCATTERPLOT
-
-    var intraGwaData = [];
-        for(let i=0;i<intrapersonalPerfectCopy.length;i++){
-            var obj = {x:intrapersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
-            intraGwaData.push(obj);
-        }
-var options = {
+	
+}
+function graphIntrapersonalScatter(data){
+    var options = {
 
        title: {
             display: true,
@@ -584,7 +630,7 @@ var intraData = {
             BackgroundColor:'rgba(0,0,0,1)',
 
             label: 'INTRAPERSONAL and GWA',
-            data: intraGwaData,
+            data: data,
         }]
     };
 
@@ -595,17 +641,11 @@ var scatterChart = new Chart(ctx, {
     data: intraData,
     options: options
 
-});   
-
-
-//graph STRESS~GWA_SCATTERPLOT
-
-    var stressGwaData = [];
-        for(let i=0;i<stressPerfectCopy.length;i++){
-            var obj = {x:stressPerfectCopy[i],y:gwaPerfectCopy[i]};
-            stressGwaData.push(obj);
-        }
-var options = {
+});
+    
+}
+function graphStressScatter(data){
+    var options = {
 
        title: {
             display: true,
@@ -667,7 +707,7 @@ var stressData = {
             BackgroundColor:'rgba(0,0,0,1)',
 
             label: 'STRESS MANAGEMENT and GWA',
-            data: stressGwaData,
+            data: data,
         }]
     };
 
@@ -678,100 +718,11 @@ var scatterChart = new Chart(ctx, {
     data: stressData,
     options: options
 
-}); 
-
-
-//graph MOOD~GWA_SCATTERPLOT
-
-    var moodGwaData = [];
-        for(let i=0;i<moodPerfectCopy.length;i++){
-            var obj = {x:moodPerfectCopy[i],y:gwaPerfectCopy[i]};
-            moodGwaData.push(obj);
-        }
-var options = {
-
-       title: {
-            display: true,
-            text: 'General Mood and GWA Scatterplot',
-            fontSize: 20,
-        },
-
-        scales: {
-
-            xAxes: [{
-
-              ticks: {
-
-                beginAtZero: true
-              },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'General Weighted Average'
-                            },
-
-                scaleBeginAtZero : true,
-                gridLines:{
-               display:false, 
-                lineWidth:0,
-                color: "rgba(0,0,0,0.3)" 
-
-
-              },
-                type: 'linear',
-                position: 'bottom',
-                
-            }],
-            yAxes: [{
-                ticks: {
-
-                beginAtZero: true
-              },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Mood Management'
-                            },
-
-                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
-
-
-
-            }]
-        }
-    }
-
-var moodData = { 
-      labels:["GENERAL MOOD","GWA"],
-
-        datasets: [{
-            pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
-
-            label: 'GENERAL MOOD and GWA',
-            data: moodGwaData,
-        }]
-    };
-
-
-var ctx = document.getElementById("moodChart").getContext("2d");
-var scatterChart = new Chart(ctx, {
-    type: 'scatter',
-    data: moodData,
-    options: options
-
 });
-
-
-//graph ADAPT~GWA_SCATTERPLOT
-
-    var adaptGwaData = [];
-        for(let i=0;i<adaptabilityPerfectCopy.length;i++){
-            var obj = {x:adaptabilityPerfectCopy[i],y:gwaPerfectCopy[i]};
-            adaptGwaData.push(obj);
-        }
-var options = {
+    
+}
+function graphAdaptabilityScatter(data){
+    var options = {
 
        title: {
             display: true,
@@ -833,7 +784,7 @@ var adaptData = {
             BackgroundColor:'rgba(0,0,0,1)',
 
             label: 'ADAPTABILITY and GWA',
-            data: adaptGwaData,
+            data: data,
         }]
     };
 
@@ -844,19 +795,83 @@ var scatterChart = new Chart(ctx, {
     data: adaptData,
     options: options
 
-});               
+});     
+    
+}
+function graphMoodScatter(data){
+    var options = {
+
+       title: {
+            display: true,
+            text: 'General Mood and GWA Scatterplot',
+            fontSize: 20,
+        },
+
+        scales: {
+
+            xAxes: [{
+
+              ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'General Weighted Average'
+                            },
+
+                scaleBeginAtZero : true,
+                gridLines:{
+               display:false, 
+                lineWidth:0,
+                color: "rgba(0,0,0,0.3)" 
+
+
+              },
+                type: 'linear',
+                position: 'bottom',
+                
+            }],
+            yAxes: [{
+                ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Mood Management'
+                            },
+
+                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
 
 
 
-				} //success
-		}); //ajax
+            }]
+        }
+    }
+
+var moodData = { 
+      labels:["GENERAL MOOD","GWA"],
+
+        datasets: [{
+            pointBorderWidth:1,
+            pointBorderColor: 'rgba(0,0,0,1)',
+            pointBackgroundColor: 'rgba(0,0,0,1)',
+            borderColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(0,0,0,1)',
+
+            label: 'GENERAL MOOD and GWA',
+            data: data,
+        }]
+    };
 
 
-}); //button filter
-				
-	}); //function ending tag
+var ctx = document.getElementById("moodChart").getContext("2d");
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: moodData,
+    options: options
 
-
-function drawGraph(array){
-	
+});
+    
 }
