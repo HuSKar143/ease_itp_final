@@ -87,19 +87,50 @@ class MasterController extends Controller
             return json_encode($schoolYear);
     }
 
-    public function getCurrentGraph($to, $from){
+    public function endYear2($start){
+
+        $schoolYear = DB::table('schoolyear')
+                ->select('id', 'year', 'semester')
+                ->where('id', '>', $start)
+                ->orderBy('id', 'asc')
+                ->get();
+
+            return json_encode($schoolYear);
+    }
+
+    public function endYear3($start){
+
+        $schoolYear = DB::table('schoolyear')
+                ->select('id', 'year', 'semester')
+                ->where('id', '>', $start)
+                ->orderBy('id', 'asc')
+                ->get();
+
+            return json_encode($schoolYear);
+    }
+
+    public function getCurrentGraph($to, $from, $qwe, $ewq){
     $schoolYear = DB::table('grades')
         ->select('*')
         ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
         ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
         ->whereBetween('grades.schoolyear', array($from, $to))
         ->get();
+
+    $schoolYear2 = DB::table('grades')
+        ->select('*')
+        ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+        ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+        ->whereBetween('grades.schoolyear', array($qwe, $ewq))
+        ->get();
+    $pussy['a']=$schoolYear;
+    $pussy['b']=$schoolYear2;
     
     //     ->whereBetween('grades.schoolyear', array($from, $to))
     //     ->get();
     //     var_dump($otherdata);
         
-        return json_encode($schoolYear);
+        return json_encode($pussy);
     }
 
 

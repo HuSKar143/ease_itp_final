@@ -29,7 +29,9 @@
 <div class="card-body" >
 <div class="row">
 
-
+<div class="column">
+<p>COMPARE DATA FROM</p>
+</div>
 <div class="column">
 <select class="form-control" id="exampleFormControlSelect1">
 
@@ -45,12 +47,33 @@
 <option selected hidden>TO</option>
 </select>
 </div>
-
+</div>
+<div class="row">
+<div class="column">
+<p>COMPARE DATA TO</p>
+</div>
+<div class="column">
+<select class="form-control" id="exampleFormControlSelect3">
+@foreach ($filter as $val)
+<option selected hidden>FROM</option>
+<option value="{{ $val->id }}"> {{$val->year}} {{$val->semester}}</option>
+@endforeach
+</select>
+</div>
+<div class="column">
+<select class="form-control" id="exampleFormControlSelect4">
+<option selected hidden>TO</option>
+</select>
+</div>
+</div>
+<div class="row">
 <div class="column">
 <button class="btn btn-primary btn-filter" >Submit</button>
 </div>
 </div>
 </div>
+
+
 
 <div class="row">
 
@@ -111,7 +134,6 @@
 @section('script')
 
 
-	 <script type="text/javascript" src="{{asset('public/assets/js/scatterChart	.js')}}"></script>	
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
 
 @endsection

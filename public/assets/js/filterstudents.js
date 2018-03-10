@@ -3,7 +3,9 @@
 $(function(){
 
 		$("#exampleFormControlSelect1").change(function(event){
+
 			var start = this.value;
+            console.log(start);
 			$.ajax({
 				url: 'http://localhost/ease_itp_final/filterStudents/'+start,
 				method: 'get',
@@ -17,12 +19,36 @@ $(function(){
 						});
 
 					$("#exampleFormControlSelect2").append(option);
+                    var start2 = $("#exampleFormControlSelect2").val();
+                    console.log(start2);
+
+
+                    $.ajax({
+                        url: 'http://localhost/ease_itp_final/filterStudents2/'+start2,
+                        method: 'get',
+                        dataType: 'json',
+                        success: function (data) {
+                            var option = "";
+                            $("#exampleFormControlSelect3").html("");
+
+                                $.each(data, function(key, event){
+                                option += "<option value='"+event['id']+"'>"+event['year']+" "+event['semester']+"</option>";
+                            });
+
+                            $("#exampleFormControlSelect3").append(option);
+
+                        }
+
+                    });
+
+
 
 				}
 			});
 
 
 		});
+
 
 		
 
@@ -36,16 +62,18 @@ $(function(){
 
 			var from = $("#exampleFormControlSelect1").val();
 			var to = $("#exampleFormControlSelect2").val();
+            var qwe = 1; var ewq =12;
 			var filteredStudents = $('#filteredStudents'),
             StudentListFilter = $('#StudentListFilter'),
             filteredStudentsDataTable = filteredStudents.DataTable();
 			
 			
 			$.ajax({
-				url: 'http://localhost/ease_itp_final/getFilterGraph/'+ to + '/' + from,
+				url: 'http://localhost/ease_itp_final/getFilterGraph/'+ to + '/' + from +'/' + qwe + '/' + ewq,
 				method: 'get',
 				dataType: 'json',
 				success: function(data){
+                    console.log(data);
 					var interpersonal = [];
 					var intrapersonal = [];
 					var stress = [];
@@ -53,7 +81,7 @@ $(function(){
 					var mood = [];
 					var gwa = [];
 
-					var properEQ = data.reduce(function(result, current) {
+					var properEQ = data['a'].reduce(function(result, current) {
 				        result[current.student_id] = result[current.student_id] || [];
 				        result[current.student_id].push(current);
 				        return result;
@@ -88,15 +116,16 @@ $(function(){
 
 
 					});
-					// console.log(student_gwa);
+
+					
 						
 				 //    var searchId = 61;
 
 					// for(x =0 ; x<student_eq.length; x++){
 					// 	if(student_eq[x]==searchId){
-					// 		console.log(student_eq[x]['stress']);
+					// 		console.log("stress: "+ student_eq[x]['stress']);
 					// 	}	
-					// } stress = [50,20,25,40]
+					// }// stress = [50,20,25,40]
 
 					
 
@@ -114,11 +143,13 @@ drawGraph(student_gwa);
    						
    						});
 
+
    						$.each(student_gwa, function(keys, values){
     						gwa.push(values['studentGWA']);
-   						});
+   						}); 
 
-   						var gwaCopy = gwa.slice();
+
+   						var gwaCopy = gwa.slice(); 
    						var interpersonalCopy = interpersonal.slice();
    						var intrapersonalCopy = intrapersonal.slice();
 						var stressCopy = stress.slice();
@@ -130,19 +161,19 @@ drawGraph(student_gwa);
 							  return b - a;
 							});
 							var intrasorted = intrapersonal.sort(function(a, b) {
-							  return a - b;
+							  return b - a;
 							});
 							var stresssorted = stress.sort(function(a, b) {
-							  return a - b;
+							  return b - a;
 							});
 							var adaptsorted = adaptability.sort(function(a, b) {
-							  return a - b;
+							  return b - a;
 							});
 							var moodsorted = mood.sort(function(a, b) {
-							  return a - b;
+							  return b - a;
 							});
 							var gwasorted = gwa.sort(function(a, b){
-								return a - b;
+								return b - a;
 							});
 					
 							//  
@@ -312,7 +343,9 @@ drawGraph(student_gwa);
         // console.log(student_gwa,gwad);
 
 
-//variable for correlation
+//*****************************************variable for correlation*****************************************
+//*****************************************variable for correlation*****************************************
+//*****************************************variable for correlation*****************************************
         var intergwa = [],intragwa = [],stressgwa = [],adaptgwa = [],moodgwa = [];
 
 //correlation|| interpersonal~GWA
@@ -330,7 +363,7 @@ drawGraph(student_gwa);
 
 //correlation|| intrapersonal~GWA
 		for(let i = 0; i < intrad.length; i++) {
-		  intragwa.push(Math.pow(intrad[i] - gwad[i],2));
+		  intragwa.push(Math.pow(intrapersonalCopy[i] - gwaCopy[i],2));
 		}
 		sumOfD2 = intragwa.reduce(function(a, b) { return a + b; }, 0);
 		numerator = sumOfD2*6;
@@ -340,7 +373,469 @@ drawGraph(student_gwa);
 		denominator = ncubed-n;
 		correlation = 1-(numerator/denominator);
 		
-		// console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+		console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+
+//correlation|| stress~GWA
+        for(let i = 0; i < intrad.length; i++) {
+          stressgwa.push(Math.pow(stressCopy[i] - gwaCopy[i],2));
+        }
+        sumOfD2 = stressgwa.reduce(function(a, b) { return a + b; }, 0);
+        numerator = sumOfD2*6;
+        n = dataLen;
+        ncubed = Math.pow(n,3);
+
+        denominator = ncubed-n;
+        correlation = 1-(numerator/denominator);
+        
+        console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+
+//correlation|| adapt~GWA
+        for(let i = 0; i < intrad.length; i++) {
+          adaptgwa.push(Math.pow(adaptabilityCopy[i] - gwaCopy[i],2));
+        }
+        sumOfD2 = adaptgwa.reduce(function(a, b) { return a + b; }, 0);
+        numerator = sumOfD2*6;
+        n = dataLen;
+        ncubed = Math.pow(n,3);
+
+        denominator = ncubed-n;
+        correlation = 1-(numerator/denominator);
+        
+        console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+
+//correlation|| mood~GWA
+        for(let i = 0; i < intrad.length; i++) {
+          moodgwa.push(Math.pow(moodCopy[i] - gwaCopy[i],2));
+        }
+        sumOfD2 = moodgwa.reduce(function(a, b) { return a + b; }, 0);
+        numerator = sumOfD2*6;
+        n = dataLen;
+        ncubed = Math.pow(n,3);
+
+        denominator = ncubed-n;
+        correlation = 1-(numerator/denominator);
+        
+        console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+
+//********************GRAPHS************************
+//********************GRAPHS************************
+//********************GRAPHS************************
+
+//graph INTERPERSONAL~GWA_SCATTERPLOT
+
+    var interGwaData = [];
+        for(let i=0;i<interpersonal.length;i++){
+            var obj = {x:interpersonal[i],y:gwa[i]};
+            interGwaData.push(obj);
+        }
+var options = {
+
+       title: {
+            display: true,
+            text: 'Interpersonal and GWA Scatterplot',
+            fontSize: 20,
+        },
+
+        scales: {
+
+            xAxes: [{
+
+              ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'General Weighted Average'
+                            },
+
+                scaleBeginAtZero : true,
+                gridLines:{
+               display:false, 
+                lineWidth:0,
+                color: "rgba(0,0,0,0.3)" 
+
+
+              },
+                type: 'linear',
+                position: 'bottom',
+                
+            }],
+            yAxes: [{
+                ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Interpersonal'
+                            },
+
+                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
+
+
+
+            }]
+        }
+    }
+
+var interData = { 
+      labels:["INTERPERSONAL","GWA"],
+
+        datasets: [{
+            pointBorderWidth:1,
+            pointBorderColor: 'rgba(0,0,0,1)',
+            pointBackgroundColor: 'rgba(0,0,0,1)',
+            borderColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(0,0,0,1)',
+
+            label: 'INTERPERSONAL and GWA',
+            data: interGwaData,
+        }]
+    };
+
+
+var ctx = document.getElementById("interChart").getContext("2d");
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: interData,
+    options: options
+
+});
+
+
+//graph INTRAPERSONAL~GWA_SCATTERPLOT
+
+    var intraGwaData = [];
+        for(let i=0;i<intrapersonal.length;i++){
+            var obj = {x:intrapersonal[i],y:gwa[i]};
+            intraGwaData.push(obj);
+        }
+var options = {
+
+       title: {
+            display: true,
+            text: 'Intrapersonal and GWA Scatterplot',
+            fontSize: 20,
+        },
+
+        scales: {
+
+            xAxes: [{
+
+              ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'General Weighted Average'
+                            },
+
+                scaleBeginAtZero : true,
+                gridLines:{
+               display:false, 
+                lineWidth:0,
+                color: "rgba(0,0,0,0.3)" 
+
+
+              },
+                type: 'linear',
+                position: 'bottom',
+                
+            }],
+            yAxes: [{
+                ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Intrapersonal'
+                            },
+
+                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
+
+
+
+            }]
+        }
+    }
+
+var intraData = { 
+      labels:["INTRAPERSONAL","GWA"],
+
+        datasets: [{
+            pointBorderWidth:1,
+            pointBorderColor: 'rgba(0,0,0,1)',
+            pointBackgroundColor: 'rgba(0,0,0,1)',
+            borderColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(0,0,0,1)',
+
+            label: 'INTRAPERSONAL and GWA',
+            data: intraGwaData,
+        }]
+    };
+
+
+var ctx = document.getElementById("intraChart").getContext("2d");
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: intraData,
+    options: options
+
+});   
+
+
+//graph STRESS~GWA_SCATTERPLOT
+
+    var stressGwaData = [];
+        for(let i=0;i<stress.length;i++){
+            var obj = {x:stress[i],y:gwa[i]};
+            stressGwaData.push(obj);
+        }
+var options = {
+
+       title: {
+            display: true,
+            text: 'Stress Management and GWA Scatterplot',
+            fontSize: 20,
+        },
+
+        scales: {
+
+            xAxes: [{
+
+              ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'General Weighted Average'
+                            },
+
+                scaleBeginAtZero : true,
+                gridLines:{
+               display:false, 
+                lineWidth:0,
+                color: "rgba(0,0,0,0.3)" 
+
+
+              },
+                type: 'linear',
+                position: 'bottom',
+                
+            }],
+            yAxes: [{
+                ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Stress Management'
+                            },
+
+                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
+
+
+
+            }]
+        }
+    }
+
+var stressData = { 
+      labels:["STRESS MANAGEMENT","GWA"],
+
+        datasets: [{
+            pointBorderWidth:1,
+            pointBorderColor: 'rgba(0,0,0,1)',
+            pointBackgroundColor: 'rgba(0,0,0,1)',
+            borderColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(0,0,0,1)',
+
+            label: 'STRESS MANAGEMENT and GWA',
+            data: stressGwaData,
+        }]
+    };
+
+
+var ctx = document.getElementById("stressChart").getContext("2d");
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: stressData,
+    options: options
+
+}); 
+
+
+//graph MOOD~GWA_SCATTERPLOT
+
+    var moodGwaData = [];
+        for(let i=0;i<mood.length;i++){
+            var obj = {x:mood[i],y:gwa[i]};
+            moodGwaData.push(obj);
+        }
+var options = {
+
+       title: {
+            display: true,
+            text: 'General Mood and GWA Scatterplot',
+            fontSize: 20,
+        },
+
+        scales: {
+
+            xAxes: [{
+
+              ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'General Weighted Average'
+                            },
+
+                scaleBeginAtZero : true,
+                gridLines:{
+               display:false, 
+                lineWidth:0,
+                color: "rgba(0,0,0,0.3)" 
+
+
+              },
+                type: 'linear',
+                position: 'bottom',
+                
+            }],
+            yAxes: [{
+                ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Mood Management'
+                            },
+
+                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
+
+
+
+            }]
+        }
+    }
+
+var moodData = { 
+      labels:["GENERAL MOOD","GWA"],
+
+        datasets: [{
+            pointBorderWidth:1,
+            pointBorderColor: 'rgba(0,0,0,1)',
+            pointBackgroundColor: 'rgba(0,0,0,1)',
+            borderColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(0,0,0,1)',
+
+            label: 'GENERAL MOOD and GWA',
+            data: moodGwaData,
+        }]
+    };
+
+
+var ctx = document.getElementById("moodChart").getContext("2d");
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: moodData,
+    options: options
+
+});
+
+
+//graph ADAPT~GWA_SCATTERPLOT
+
+    var adaptGwaData = [];
+        for(let i=0;i<adaptability.length;i++){
+            var obj = {x:adaptability[i],y:gwa[i]};
+            adaptGwaData.push(obj);
+        }
+var options = {
+
+       title: {
+            display: true,
+            text: 'adaptability and GWA Scatterplot',
+            fontSize: 20,
+        },
+
+        scales: {
+
+            xAxes: [{
+
+              ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'General Weighted Average'
+                            },
+
+                scaleBeginAtZero : true,
+                gridLines:{
+               display:false, 
+                lineWidth:0,
+                color: "rgba(0,0,0,0.3)" 
+
+
+              },
+                type: 'linear',
+                position: 'bottom',
+                
+            }],
+            yAxes: [{
+                ticks: {
+
+                beginAtZero: true
+              },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Adaptability'
+                            },
+
+                 gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
+
+
+
+            }]
+        }
+    }
+
+var adaptData = { 
+      labels:["ADAPTABILITY","GWA"],
+
+        datasets: [{
+            pointBorderWidth:1,
+            pointBorderColor: 'rgba(0,0,0,1)',
+            pointBackgroundColor: 'rgba(0,0,0,1)',
+            borderColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(0,0,0,1)',
+
+            label: 'ADAPTABILITY and GWA',
+            data: adaptGwaData,
+        }]
+    };
+
+
+var ctx = document.getElementById("adaptChart").getContext("2d");
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: adaptData,
+    options: options
+
+});               
+
+
 
 				} //success
 		}); //ajax
