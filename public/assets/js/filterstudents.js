@@ -146,7 +146,9 @@ drawGraph(student_gwa);
 
    						$.each(student_gwa, function(keys, values){
     						gwa.push(values['studentGWA']);
-   						}); 
+   						});
+
+                        
 
 
    						var gwaCopy = gwa.slice(); 
@@ -155,6 +157,15 @@ drawGraph(student_gwa);
 						var stressCopy = stress.slice();
 						var adaptabilityCopy = adaptability.slice();
 						var moodCopy = mood.slice();
+
+// *****************variables to be used on graphs*****************
+                        var gwaPerfectCopy = gwa.slice(); 
+                        var interpersonalPerfectCopy = interpersonal.slice();
+                        var intrapersonalPerfectCopy = intrapersonal.slice();
+                        var stressPerfectCopy = intrapersonal.slice();
+                        var adaptabilityPerfectCopy = stress.slice();
+                        var moodPerfectCopy = adaptability.slice();
+// *****************variables to be used on graphs*****************
 						
 
    						var intersorted = interpersonal.sort(function(a, b) {
@@ -175,7 +186,7 @@ drawGraph(student_gwa);
 							var gwasorted = gwa.sort(function(a, b){
 								return b - a;
 							});
-					
+
 							//  
 //interpersonal
 		var interd, interi, intern;
@@ -352,7 +363,6 @@ drawGraph(student_gwa);
         for(let i = 0; i < interd.length; i++) {
 		  intergwa.push(Math.pow(interpersonalCopy[i] - gwaCopy[i],2));
 		}
-		console.log(intergwa);
 		var sumOfD2 = intergwa.reduce(function(a, b) { return a + b; }, 0);
 		var numerator = sumOfD2*6;
 		var n = dataLen;
@@ -423,11 +433,12 @@ drawGraph(student_gwa);
 
 //graph INTERPERSONAL~GWA_SCATTERPLOT
 
+
     var interGwaData = [];
-        for(let i=0;i<interpersonal.length;i++){
-            var obj = {x:interpersonal[i],y:gwa[i]};
+        for(let i=0;i<interpersonalPerfectCopy.length;i++){
+            var obj = {x:interpersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
             interGwaData.push(obj);
-        }
+        }console.log(interGwaData);
 var options = {
 
        title: {
@@ -507,8 +518,8 @@ var scatterChart = new Chart(ctx, {
 //graph INTRAPERSONAL~GWA_SCATTERPLOT
 
     var intraGwaData = [];
-        for(let i=0;i<intrapersonal.length;i++){
-            var obj = {x:intrapersonal[i],y:gwa[i]};
+        for(let i=0;i<intrapersonalPerfectCopy.length;i++){
+            var obj = {x:intrapersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
             intraGwaData.push(obj);
         }
 var options = {
@@ -590,8 +601,8 @@ var scatterChart = new Chart(ctx, {
 //graph STRESS~GWA_SCATTERPLOT
 
     var stressGwaData = [];
-        for(let i=0;i<stress.length;i++){
-            var obj = {x:stress[i],y:gwa[i]};
+        for(let i=0;i<stressPerfectCopy.length;i++){
+            var obj = {x:stressPerfectCopy[i],y:gwaPerfectCopy[i]};
             stressGwaData.push(obj);
         }
 var options = {
@@ -673,8 +684,8 @@ var scatterChart = new Chart(ctx, {
 //graph MOOD~GWA_SCATTERPLOT
 
     var moodGwaData = [];
-        for(let i=0;i<mood.length;i++){
-            var obj = {x:mood[i],y:gwa[i]};
+        for(let i=0;i<moodPerfectCopy.length;i++){
+            var obj = {x:moodPerfectCopy[i],y:gwaPerfectCopy[i]};
             moodGwaData.push(obj);
         }
 var options = {
@@ -756,8 +767,8 @@ var scatterChart = new Chart(ctx, {
 //graph ADAPT~GWA_SCATTERPLOT
 
     var adaptGwaData = [];
-        for(let i=0;i<adaptability.length;i++){
-            var obj = {x:adaptability[i],y:gwa[i]};
+        for(let i=0;i<adaptabilityPerfectCopy.length;i++){
+            var obj = {x:adaptabilityPerfectCopy[i],y:gwaPerfectCopy[i]};
             adaptGwaData.push(obj);
         }
 var options = {
