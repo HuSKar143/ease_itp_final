@@ -55,9 +55,9 @@ $(function(){
 		$(".btn-filter").click(function(event){
 
 
-			var arr = [79, 5, 18, 5, 32, 1, 16, 1, 82, 13];
-			var sorted = arr.slice().sort(function(a,b){return b-a});
-			var ranks = arr.slice().map(function(v){ return sorted.indexOf(v)+1 });
+			// var arr = [79, 5, 18, 5, 32, 1, 16, 1, 82, 13];
+			// var sorted = arr.slice().sort(function(a,b){return b-a});
+			// var ranks = arr.slice().map(function(v){ return sorted.indexOf(v)+1 });
 
 
 			var from = $("#exampleFormControlSelect1").val();
@@ -74,6 +74,7 @@ $(function(){
 				dataType: 'json',
 				success: function(data){
                     console.log(data);
+
 					var interpersonal = [];
 					var intrapersonal = [];
 					var stress = [];
@@ -85,10 +86,11 @@ $(function(){
 				        result[current.student_id] = result[current.student_id] || [];
 				        result[current.student_id].push(current);
 				        return result;
-				    }, {});console.log(Object.keys(properEQ).length);
+				    }, {});
+                    console.log(Object.keys(properEQ).length);//length of (data)
 				    var dataLen =Object.keys(properEQ).length;
 				    
-
+                    //get the individual eq and gwa
 				    var student_eq = [];
 				    var student_gwa = [];
 				    $.each(properEQ, function(keys, values){
@@ -132,7 +134,7 @@ $(function(){
 //     				var gwa = [];
 
 
-
+                        //pushing the individual EQ and GWA
     					$.each(student_eq, function(keys, values){
     						interpersonal.push(values['interpersonal']);
     						intrapersonal.push(values['intrapersonal']);
@@ -148,348 +150,208 @@ $(function(){
     						gwa.push(values['studentGWA']);
    						});
 
-                        
+                  
 
 
+// *****************variables to be used on ranking*****************
    						var gwaCopy = gwa.slice(); 
    						var interpersonalCopy = interpersonal.slice();
    						var intrapersonalCopy = intrapersonal.slice();
 						var stressCopy = stress.slice();
 						var adaptabilityCopy = adaptability.slice();
 						var moodCopy = mood.slice();
+                      
 
 // *****************variables to be used on graphs*****************
                         var gwaPerfectCopy = gwa.slice(); 
                         var interpersonalPerfectCopy = interpersonal.slice();
                         var intrapersonalPerfectCopy = intrapersonal.slice();
-                        var stressPerfectCopy = intrapersonal.slice();
-                        var adaptabilityPerfectCopy = stress.slice();
-                        var moodPerfectCopy = adaptability.slice();
-// *****************variables to be used on graphs*****************
+                        var stressPerfectCopy = stress.slice();
+                        var adaptabilityPerfectCopy = adaptability.slice();
+                        var moodPerfectCopy = mood.slice();
+
 						
-
-   						var intersorted = interpersonal.sort(function(a, b) {
-							  return b - a;
-							});
-							var intrasorted = intrapersonal.sort(function(a, b) {
-							  return b - a;
-							});
-							var stresssorted = stress.sort(function(a, b) {
-							  return b - a;
-							});
-							var adaptsorted = adaptability.sort(function(a, b) {
-							  return b - a;
-							});
-							var moodsorted = mood.sort(function(a, b) {
-							  return b - a;
-							});
-							var gwasorted = gwa.sort(function(a, b){
-								return b - a;
-							});
-
-							//  
-//interpersonal
-		var interd, interi, intern;
-        intern = interpersonal.length;
-
-        interd = new Array(intern);
-        for (interi = 0; interi < intern; interi++) {
-            var interrank, interfirst, interlast;
-         // Handle tied ranks.
-            interfirst = intersorted.indexOf(interpersonal[interi]);
-            interlast = intersorted.lastIndexOf(interpersonal[interi]);
-            if (interfirst === interlast) {
-                interrank = interfirst;
-            } else {
-                interrank = (interfirst + interlast) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            interd[interi] = interrank + 1;
-        }
-
-        for(x = 0 ;x<intersorted.length; x++){
-        	for(y = 0 ; y<interpersonalCopy.length; y++){
-        		if(interpersonalCopy[y]== intersorted[x]){
-        			interpersonalCopy[y] = interd[x];
-        		}
-        	}
-        } 
-// console.log(interpersonalCopy);
- //intrapersonal
-		var intrad, intrai, intran;
-        intran = intrapersonal.length;
-
-        intrad = new Array(intran);
-        for (intrai = 0; intrai < intran; intrai++) {
-            var intrarank, intrafirst, intralast;
-         // Handle tied ranks.
-            intrafirst = intrasorted.indexOf(intrapersonal[intrai]);
-            intralast = intrasorted.lastIndexOf(intrapersonal[intrai]);
-            if (intrafirst === intralast) {
-                intrarank = intrafirst;
-            } else {
-                intrarank = (intrafirst + intralast) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            intrad[intrai] = intrarank + 1;
-        }
-
-        for(x = 0 ;x<intrasorted.length; x++){
-        	for(y = 0 ; y<intrapersonalCopy.length; y++){
-        		if(intrapersonalCopy[y]== intrasorted[x]){
-        			intrapersonalCopy[y] = intrad[x];
-        		}
-        	}
-        }  
-
-  //stress
-		var stressd, stressi, stressn;
-        stressn = stress.length;
-
-        stressd = new Array(stressn);
-        for (stressi = 0; stressi < stressn; stressi++) {
-            var stressrank, stressfirst, stresslast;
-         // Handle tied ranks.
-            stressfirst = stresssorted.indexOf(stress[stressi]);
-            stresslast = stresssorted.lastIndexOf(stress[stressi]);
-            if (stressfirst === stresslast) {
-                stressrank = stressfirst;
-            } else {
-                stressrank = (stressfirst + stresslast) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            stressd[stressi] = stressrank + 1;
-        } 
-        for(x = 0 ;x<stresssorted.length; x++){
-        	for(y = 0 ; y<stressCopy.length; y++){
-        		if(stressCopy[y]== stresssorted[x]){
-        			stressCopy[y] = stressd[x];
-        		}
-        	}
-        } 
-
- //adapt
-		var adaptd, adapti, adaptn;
-        adaptn = adaptability.length;
-
-        adaptd = new Array(adaptn);
-        for (adapti = 0; adapti < adaptn; adapti++) {
-            var adaptrank, adaptfirst, adaptlast;
-         // Handle tied ranks.
-            adaptfirst = adaptsorted.indexOf(adaptability[adapti]);
-            adaptlast = adaptsorted.lastIndexOf(adaptability[adapti]);
-            if (adaptfirst === adaptlast) {
-                adaptrank = adaptfirst;
-            } else {
-                adaptrank = (adaptfirst + adaptlast) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            adaptd[adapti] = adaptrank + 1;
-        } 
-        for(x = 0 ;x<adaptsorted.length; x++){
-        	for(y = 0 ; y<adaptabilityCopy.length; y++){
-        		if(adaptabilityCopy[y]== adaptsorted[x]){
-        			adaptabilityCopy[y] = adaptd[x];
-        		}
-        	}
-        } 
-
- //mood
-		var moodd, moodi, moodn;
-        moodn = mood.length;
-
-        moodd = new Array(moodn);
-        for (moodi = 0; moodi < moodn; moodi++) {
-            var moodrank, moodfirst, moodlast;
-         // Handle tied ranks.
-            moodfirst = moodsorted.indexOf(mood[moodi]);
-            moodlast = moodsorted.lastIndexOf(mood[moodi]);
-            if (moodfirst === moodlast) {
-                moodrank = moodfirst;
-            } else {
-                moodrank = (moodfirst + moodlast) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            moodd[moodi] = moodrank + 1;
-        }  
-        for(x = 0 ;x<moodsorted.length; x++){
-        	for(y = 0 ; y<moodCopy.length; y++){
-        		if(moodCopy[y]== moodsorted[x]){
-        			moodCopy[y] = moodd[x];
-        		}
-        	}
-        } 
-
- //gwa
-		var gwad, gwai, gwan;
-        gwan = gwa.length;
-       
-
-        gwad = new Array(gwan);
-        for (gwai = 0; gwai < gwan; gwai++) {
-            var gwarank, gwafirst, gwalast;
-         // Handle tied ranks.
-            gwafirst = gwasorted.indexOf(gwa[gwai]);
-            gwalast = gwasorted.lastIndexOf(gwa[gwai]);
-            if (gwafirst === gwalast) {
-                gwarank = gwafirst;
-            } else {
-                gwarank = (gwafirst + gwalast) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            gwad[gwai] = gwarank + 1;
-
-        } 
-
-        for(x = 0 ;x<gwasorted.length; x++){
-        	for(y = 0 ; y<gwaCopy.length; y++){
-        		if(gwaCopy[y]== gwasorted[x]){
-        			gwaCopy[y] = gwad[x];
-        		}
-        	}
-        }
-
-          // console.log(student_gwa,gwaCopy);
-
-        // console.log(student_gwa,gwad);
+// *****************sorted eq and gwa*****************
+   						var intersorted = interpersonal.sort(sortData);
+						var intrasorted = intrapersonal.sort(sortData);
+						var stresssorted = stress.sort(sortData);
+						var adaptsorted = adaptability.sort(sortData);
+                        var moodsorted = mood.sort(sortData)
+                        var gwasorted = gwa.sort(sortData);
 
 
-//*****************************************variable for correlation*****************************************
-//*****************************************variable for correlation*****************************************
-//*****************************************variable for correlation*****************************************
-        var intergwa = [],intragwa = [],stressgwa = [],adaptgwa = [],moodgwa = [];
+//Getting the RANK  
+//interpersonal Rank
+getRanking(interpersonal,interpersonalCopy,intersorted);
 
+//intrapersonal Rank
+getRanking(intrapersonal,intrapersonalCopy,intrasorted); 
+
+//stress Rank
+getRanking(stress,stressCopy,stresssorted); 
+
+//adapt Rank
+getRanking(adaptability,adaptabilityCopy,adaptsorted); 
+
+//mood Rank
+getRanking(mood,moodCopy,moodsorted); 
+
+//gwa Rank
+getRanking(gwa,gwaCopy,gwasorted); 
+
+
+
+//CORRELATION RESULT
 //correlation|| interpersonal~GWA
-        for(let i = 0; i < interd.length; i++) {
-		  intergwa.push(Math.pow(interpersonalCopy[i] - gwaCopy[i],2));
-		}
-		var sumOfD2 = intergwa.reduce(function(a, b) { return a + b; }, 0);
-		var numerator = sumOfD2*6;
-		var n = dataLen;
-		var ncubed = Math.pow(n,3);
-		var denominator = ncubed-n;
-		var correlation = 1-(numerator/denominator);
-		console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+var correlationResult = getCorrelationResult(interpersonal,interpersonalCopy,gwaCopy,dataLen);
+console.log("correlation (inter+gwa): " +correlationResult);
 
 //correlation|| intrapersonal~GWA
-		for(let i = 0; i < intrad.length; i++) {
-		  intragwa.push(Math.pow(intrapersonalCopy[i] - gwaCopy[i],2));
-		}
-		sumOfD2 = intragwa.reduce(function(a, b) { return a + b; }, 0);
-		numerator = sumOfD2*6;
-		n = dataLen;
-		ncubed = Math.pow(n,3);
-
-		denominator = ncubed-n;
-		correlation = 1-(numerator/denominator);
-		
-		console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+var correlationResult = getCorrelationResult(intrapersonal,intrapersonalCopy,gwaCopy,dataLen);
+console.log("correlation (intra+gwa): " +correlationResult);
 
 //correlation|| stress~GWA
-        for(let i = 0; i < intrad.length; i++) {
-          stressgwa.push(Math.pow(stressCopy[i] - gwaCopy[i],2));
-        }
-        sumOfD2 = stressgwa.reduce(function(a, b) { return a + b; }, 0);
-        numerator = sumOfD2*6;
-        n = dataLen;
-        ncubed = Math.pow(n,3);
-
-        denominator = ncubed-n;
-        correlation = 1-(numerator/denominator);
-        
-        console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+var correlationResult = getCorrelationResult(stress,stressCopy,gwaCopy,dataLen);
+console.log("correlation (stress+gwa): " +correlationResult);
 
 //correlation|| adapt~GWA
-        for(let i = 0; i < intrad.length; i++) {
-          adaptgwa.push(Math.pow(adaptabilityCopy[i] - gwaCopy[i],2));
-        }
-        sumOfD2 = adaptgwa.reduce(function(a, b) { return a + b; }, 0);
-        numerator = sumOfD2*6;
-        n = dataLen;
-        ncubed = Math.pow(n,3);
-
-        denominator = ncubed-n;
-        correlation = 1-(numerator/denominator);
-        
-        console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
+var correlationResult = getCorrelationResult(adaptability,adaptabilityCopy,gwaCopy,dataLen);
+console.log("correlation (adapt+gwa): " +correlationResult);
 
 //correlation|| mood~GWA
-        for(let i = 0; i < intrad.length; i++) {
-          moodgwa.push(Math.pow(moodCopy[i] - gwaCopy[i],2));
-        }
-        sumOfD2 = moodgwa.reduce(function(a, b) { return a + b; }, 0);
-        numerator = sumOfD2*6;
-        n = dataLen;
-        ncubed = Math.pow(n,3);
+var correlationResult = getCorrelationResult(mood,moodCopy,gwaCopy,dataLen);
+console.log("correlation (mood+gwa): " +correlationResult);
 
-        denominator = ncubed-n;
-        correlation = 1-(numerator/denominator);
-        
-        console.log(sumOfD2,numerator,n,ncubed,denominator,correlation);
 
 //********************GRAPHS************************
 //********************GRAPHS************************
 //********************GRAPHS************************
 
+//*********SCATTER PLOT*********
 //INTERPERSONAL~GWA_SCATTERPLOT
-
-
     var interGwaData = [];
         for(let i=0;i<interpersonalPerfectCopy.length;i++){
             var obj = {x:interpersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
-            interGwaData.push(obj);
-        }graphInterpersonalScatter(interGwaData);
-
-
+                interGwaData.push(obj);
+        }
+    graphInterpersonalScatter(interGwaData);
 
 //INTRAPERSONAL~GWA_SCATTERPLOT
-
     var intraGwaData = [];
         for(let i=0;i<intrapersonalPerfectCopy.length;i++){
             var obj = {x:intrapersonalPerfectCopy[i],y:gwaPerfectCopy[i]};
-            intraGwaData.push(obj);
-        }graphIntrapersonalScatter(intraGwaData);
+             intraGwaData.push(obj);
+        }
+    graphIntrapersonalScatter(intraGwaData);
    
-
-
 //STRESS~GWA_SCATTERPLOT
-
     var stressGwaData = [];
         for(let i=0;i<stressPerfectCopy.length;i++){
             var obj = {x:stressPerfectCopy[i],y:gwaPerfectCopy[i]};
-            stressGwaData.push(obj);
-        }graphStressScatter(stressGwaData);
+                stressGwaData.push(obj);
+        }
+    graphStressScatter(stressGwaData);
  
-
-
 //MOOD~GWA_SCATTERPLOT
     var moodGwaData = [];
         for(let i=0;i<moodPerfectCopy.length;i++){
             var obj = {x:moodPerfectCopy[i],y:gwaPerfectCopy[i]};
-            moodGwaData.push(obj);
-        }graphMoodScatter(moodGwaData);
-
-
+             moodGwaData.push(obj);
+        }
+    graphMoodScatter(moodGwaData);
 
 //ADAPT~GWA_SCATTERPLOT
     var adaptGwaData = [];
         for(let i=0;i<adaptabilityPerfectCopy.length;i++){
             var obj = {x:adaptabilityPerfectCopy[i],y:gwaPerfectCopy[i]};
-            adaptGwaData.push(obj);
-        }graphAdaptabilityScatter(adaptGwaData);
-          
+                adaptGwaData.push(obj);
+        }
+    graphAdaptabilityScatter(adaptGwaData);
+
+//**********BAR GRAPHS***********
+
+//Interpersonal BarGraph
+graphInterpersonalBar(interpersonalPerfectCopy);
+
+//Intrapersonal BarGraph
+graphIntrapersonalBar(intrapersonalPerfectCopy);
+
+//Stress BarGraph
+graphStressBar(stressPerfectCopy);
+
+//Mood BarGraph
+graphMoodBar(moodPerfectCopy);
+
+//Adapt BarGraph
+graphAdaptabilityBar(adaptabilityPerfectCopy);
 
 
 
-				} //success
-		}); //ajax
+
+			 } //success
+	    }); //ajax
 
 
 }); //button filter
 				
 	}); //function ending tag
 
+//***list of functions***
 
+function sortData(a,b){
+
+    return b-a;
+                   
+}
+        
+function getRanking(orig,copy,sorted){
+    var d, i, n;
+        n = orig.length;
+
+        d = new Array(n);
+        for (i = 0; i < n; i++) {
+            var rank, first, last;
+         // Handle tied ranks.
+            first = sorted.indexOf(orig[i]);
+            last = sorted.lastIndexOf(orig[i]);
+            if (first === last) {
+                rank = first;
+            } else {
+                rank = (first + last) / 2;
+            }
+         // Add 1 because ranks start with 1.
+            d[i] = rank + 1;
+        }
+
+        for(x = 0 ;x<sorted.length; x++){
+            for(y = 0 ; y<copy.length; y++){
+                if(copy[y]== sorted[x]){
+                    copy[y] = d[x];
+                }
+            }
+        }
+        return copy;
+
+}
+
+function getCorrelationResult(orig,origcopy,gwacopy,datalen){
+        var x = [];
+        for(let i = 0; i < orig.length; i++) {
+          x.push(Math.pow(origcopy[i] - gwacopy[i],2));
+        }
+        var sumOfD2 = x.reduce(function(a, b) { return a + b; }, 0);
+        var numerator = sumOfD2*6;
+        var n = datalen;
+        var ncubed = Math.pow(n,3);
+        var denominator = ncubed-n;
+        var correlation = 1-(numerator/denominator);
+        return correlation;
+
+}
+
+//*******************below here is all about graphs***********************
+
+//ScatterGraphs
 function graphInterpersonalScatter(data){
     var options = {
 
@@ -550,7 +412,7 @@ var interData = {
             pointBorderColor: 'rgba(0,0,0,1)',
             pointBackgroundColor: 'rgba(0,0,0,1)',
             borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
+            BackgroundColor:'rgba(51, 102, 255)',
 
             label: 'INTERPERSONAL and GWA',
             data: data,
@@ -567,7 +429,11 @@ var scatterChart = new Chart(ctx, {
 });
 	
 }
+
+
 function graphIntrapersonalScatter(data){
+ 
+
     var options = {
 
        title: {
@@ -644,7 +510,10 @@ var scatterChart = new Chart(ctx, {
 });
     
 }
+
+
 function graphStressScatter(data){
+  
     var options = {
 
        title: {
@@ -668,7 +537,7 @@ function graphStressScatter(data){
 
                 scaleBeginAtZero : true,
                 gridLines:{
-               display:false, 
+                display:false, 
                 lineWidth:0,
                 color: "rgba(0,0,0,0.3)" 
 
@@ -721,6 +590,8 @@ var scatterChart = new Chart(ctx, {
 });
     
 }
+
+
 function graphAdaptabilityScatter(data){
     var options = {
 
@@ -745,7 +616,7 @@ function graphAdaptabilityScatter(data){
 
                 scaleBeginAtZero : true,
                 gridLines:{
-               display:false, 
+                display:false, 
                 lineWidth:0,
                 color: "rgba(0,0,0,0.3)" 
 
@@ -798,6 +669,8 @@ var scatterChart = new Chart(ctx, {
 });     
     
 }
+
+
 function graphMoodScatter(data){
     var options = {
 
@@ -822,7 +695,7 @@ function graphMoodScatter(data){
 
                 scaleBeginAtZero : true,
                 gridLines:{
-               display:false, 
+                display:false, 
                 lineWidth:0,
                 color: "rgba(0,0,0,0.3)" 
 
@@ -875,3 +748,348 @@ var scatterChart = new Chart(ctx, {
 });
     
 }
+
+// **********BAR GRAPHS***********
+function graphInterpersonalBar(data){
+
+   var x = [],sum=0,sum2=0,sum3=0;
+    for(let i=0;i<data.length;i++){
+        if(data[i]>=50 && data[i]<=84){
+            sum =sum +1;
+        }else if(data[i]>=85 && data[i]<=114){
+            sum2 =sum2 +1;
+        }else if(data[i]>=115 && data[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }x.push(sum);x.push(sum2);x.push(sum3);
+
+var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+            gridLines: {
+                offsetGridLines: false
+            }
+        }]
+        }
+    }
+
+var interData = { 
+      labels:["LOW","AVERAGE","HIGH"],
+
+        datasets: [{
+
+            label: 'Summarized Interpersonal',
+            data: x,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+var ctx = document.getElementById("interBarChart").getContext("2d");
+var barChart = new Chart(ctx, {
+    type: 'bar',
+    data: interData,
+    options: options
+
+});
+
+}
+
+function graphIntrapersonalBar(data){
+
+var x = [],sum=0,sum2=0,sum3=0;
+    for(let i=0;i<data.length;i++){
+        if(data[i]>=50 && data[i]<=84){
+            sum =sum +1;
+        }else if(data[i]>=85 && data[i]<=114){
+            sum2 =sum2 +1;
+        }else if(data[i]>=115 && data[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }x.push(sum);x.push(sum2);x.push(sum3);
+
+var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+            gridLines: {
+                offsetGridLines: false
+            }
+        }]
+        }
+    }
+
+var intraData = { 
+      labels:["LOW","AVERAGE","HIGH"],
+
+        datasets: [{
+
+            label: 'Summarized Interpersonal',
+            data: x,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+var ctx = document.getElementById("intraBarChart").getContext("2d");
+var barChart = new Chart(ctx, {
+    type: 'bar',
+    data: intraData,
+    options: options
+
+}); 
+
+}
+
+function graphStressBar(data){
+
+var x = [],sum=0,sum2=0,sum3=0;
+    for(let i=0;i<data.length;i++){
+        if(data[i]>=50 && data[i]<=84){
+            sum =sum +1;
+        }else if(data[i]>=85 && data[i]<=114){
+            sum2 =sum2 +1;
+        }else if(data[i]>=115 && data[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }x.push(sum);x.push(sum2);x.push(sum3);
+
+var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+            gridLines: {
+                offsetGridLines: false
+            }
+        }]
+        }
+    }
+
+var stressData = { 
+      labels:["LOW","AVERAGE","HIGH"],
+
+        datasets: [{
+
+            label: 'Summarized Interpersonal',
+            data: x,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+var ctx = document.getElementById("stressBarChart").getContext("2d");
+var barChart = new Chart(ctx, {
+    type: 'bar',
+    data: stressData,
+    options: options
+
+});
+
+}
+
+function graphMoodBar(data){
+
+var x = [],sum=0,sum2=0,sum3=0;
+    for(let i=0;i<data.length;i++){
+        if(data[i]>=50 && data[i]<=84){
+            sum =sum +1;
+        }else if(data[i]>=85 && data[i]<=114){
+            sum2 =sum2 +1;
+        }else if(data[i]>=115 && data[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }x.push(sum);x.push(sum2);x.push(sum3);
+
+var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+            gridLines: {
+                offsetGridLines: false
+            }
+        }]
+        }
+    }
+
+var moodData = { 
+      labels:["LOW","AVERAGE","HIGH"],
+
+        datasets: [{
+
+            label: 'Summarized Interpersonal',
+            data: x,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+var ctx = document.getElementById("moodBarChart").getContext("2d");
+var barChart = new Chart(ctx, {
+    type: 'bar',
+    data: moodData,
+    options: options
+
+});
+
+}
+
+function graphAdaptabilityBar(data){
+
+var x = [],sum=0,sum2=0,sum3=0;
+    for(let i=0;i<data.length;i++){
+        if(data[i]>=50 && data[i]<=84){
+            sum =sum +1;
+        }else if(data[i]>=85 && data[i]<=114){
+            sum2 =sum2 +1;
+        }else if(data[i]>=115 && data[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }x.push(sum);x.push(sum2);x.push(sum3);
+
+var options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+            gridLines: {
+                offsetGridLines: false
+            }
+        }]
+        }
+    }
+
+var adaptData = { 
+      labels:["LOW","AVERAGE","HIGH"],
+
+        datasets: [{
+
+            label: 'Summarized Interpersonal',
+            data: x,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)',
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+var ctx = document.getElementById("adaptBarChart").getContext("2d");
+var barChart = new Chart(ctx, {
+    type: 'bar',
+    data: adaptData,
+    options: options
+
+});
+
+}
+
+
+//example ni sa pag combine sa duha ka dataset
+ // datasets: [{
+ //            pointBorderWidth:1,
+ //            pointBorderColor: 'rgba(0,0,0,1)',
+ //            pointBackgroundColor: 'rgba(0,0,0,1)',
+ //            borderColor:'rgba(0,0,0,1)',
+ //            BackgroundColor:'rgba(51, 102, 255)',
+
+ //            label: 'INTERPERSONAL and GWA',
+ //            data: data,},
+ //            {
+ //            pointBorderWidth:1,
+ //            pointBorderColor: 'rgba(51, 102, 255)',
+ //            pointBackgroundColor: 'rgba(51, 102, 255)',
+ //            borderColor:'rgba(51, 102, 255)',
+ //            BackgroundColor:'rgba(51, 102, 255)',
+
+ //            label: 'Scatter Dataset',
+ //            data: [{
+ //                x: 65,
+ //                y: 2
+ //            }, {
+ //                x:90,
+ //                y: 1
+ //            }, {
+ //                x: 55,
+ //                y: 3
+ //            },
+ //            {
+ //                x: 108,
+ //                y: 4
+ //            },
+ //            {
+ //                x:120,
+ //                y: 2
+ //            },
+ //            {
+ //                x:78,
+ //                y: 3
+ //            },
+ //            {
+ //                x: 88,
+ //                y: 1
+ //            }]
+        
+ //        }]
+ //    };
