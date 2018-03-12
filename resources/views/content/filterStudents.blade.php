@@ -1,5 +1,12 @@
 
 @extends('layouts.app')
+@section('css')
+<style type="text/css">
+	.hide{
+		display: none;
+	}
+</style>
+@endsection
 @section('content')
 
 <!-- 
@@ -27,163 +34,154 @@
 </div>
 </div> -->
 <div class="card-body" >
-<div class="row">
-
-<div class="column">
-<p>COMPARE DATA FROM</p>
-</div>
-<div class="column">
-<select class="form-control" id="exampleFormControlSelect1">
-
-@foreach ($filter as $val)
-	  <option selected hidden>FROM</option>
-      <option value="{{ $val->id }}"> {{$val->year}} {{$val->semester}}</option>
-   
-    @endforeach
-</select>
-</div>
-<div class="column">
-<select class="form-control" id="exampleFormControlSelect2">
-<option selected hidden>TO</option>
-</select>
-</div>
-</div>
-<div class="row">
-<div class="column">
-<p>COMPARE DATA TO</p>
-</div>
-<div class="column">
-<select class="form-control" id="exampleFormControlSelect3">
-@foreach ($filter as $val)
-<option selected hidden>FROM</option>
-<option value="{{ $val->id }}"> {{$val->year}} {{$val->semester}}</option>
-@endforeach
-</select>
-</div>
-<div class="column">
-<select class="form-control" id="exampleFormControlSelect4">
-<option selected hidden>TO</option>
-</select>
-</div>
-</div>
-<div class="row">
-<div class="column">
-<button class="btn btn-primary btn-filter" >Submit</button>
-</div>
-</div>
-</div>
-
 
 
 <div class="row">
 
- <div class="col-md-12">
+	<div class="column">
+		<select class="form-control" id="exampleFormControlSelect1">
+			@foreach ($filter as $val)
+				  <option selected hidden value="0">FROM</option>
+			      <option value="{{ $val->year }}"> School Year {{$val->year}}</option>
+			@endforeach
+		</select>
+	</div>
+
+	<div class="hidden-compared-year hide">
+		<div class="column">
+			<select class="form-control " style="width:auto;"  id="exampleFormControlSelect2">
+				
+			</select>
+		</div>
+	
+	</div>
+		<div class="column col-md-4">
+			<button class="btn btn-primary btn-compare-graph" >Graph</button>
+		</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<div class="row" >
+
+ <div class="column col-lg-11" >
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
-            <div class="card-header"  style="background-color: #002663; color: white; ">
+            <div class="card-header"  style="background-color: #001d4c; color: white; ">
            
             <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Results</strong></center></div>
  <div class="card-body" style="" >
 
- <select class="form-control" id="results">
+ <select class="form-control" id="selectResults" style="margin-bottom: 5%;">
 
 
 	  <option selected hidden>Results</option>
-      <option value="">Spearman Rank Correlation</option>
-      <option value="">Significance Test</option>
-      <option value="">Summary of Emotional Quotient</option>
+      <option value="1">Spearman Rank Correlation</option>
+      <option value="2">Summary of Emotional Quotient</option>
+      <option value="3">significance Test</option>
 
 </select>
 
-<div class="row" style="margin-top:2%;">
+
+
+
+<div class="pr-price d1">
+
+   <div class="card card-inverse card-primary mb-3">
+            <div class="card-header"  style="background-color: #003c9e; color: white; font-size: 8pt; ">
+           
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Spearman Rank Correlation</strong></center></div>
+ <div class="card-body">
 
  <div class="tabbable full-width-tabs">
   <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-    <li><a data-toggle="tab" href="#home">Intrapersonal</a></li>
-    <li><a data-toggle="tab" href="#menu1">Interpersonal </a></li>
-    <li><a data-toggle="tab" href="#menu2">Stress Management</a></li>
-    <li><a data-toggle="tab" href="#menu3">Adaptability</a></li>
-    <li><a data-toggle="tab" href="#menu4">General Mood</a></li>
+    <li><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
+    <li><a data-toggle="tab" href="#interpersonalContainer">Interpersonal </a></li>
+    <li><a data-toggle="tab" href="#stressContainer">Stress Management</a></li>
+    <li><a data-toggle="tab" href="#adaptabilityContainer">Adaptability</a></li>
+    <li><a data-toggle="tab" href="#moodContainer">General Mood</a></li>
   </ul>
  </div>
  </div>
  
   <div class="tab-content" style="margin-top: 2%;">
-    <div id="home" class="tab-pane active">
-    
-       <canvas id="intraChart"></canvas>
+    <div id="intrapersonalContainer" class="tab-pane active">
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <canvas id="interChart"></canvas>
+    <div id="interpersonalContainer" class="tab-pane fade">
     </div>
-    <div id="menu2" class="tab-pane fade">
-      <canvas id="stressChart"></canvas>
+    <div id="stressContainer" class="tab-pane fade">
     </div>
-    <div id="menu3" class="tab-pane fade">
-      <canvas id="adaptChart"></canvas>
+    <div id="adaptabilityContainer" class="tab-pane fade">
     </div>
-    <div id="menu4" class="tab-pane fade">
-      <canvas id="moodChart"></canvas>
+    <div id="moodContainer" class="tab-pane fade">
     </div>
   </div>
 
 </div>
+
 </div>
 
-
-<div class="row">
-
- <div class="col-md-12">
+ <div class="pr-price d2">
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
-            <div class="card-header"  style="background-color: #002663; color: white; ">
+            <div class="card-header"  style="background-color: #003c9e; color: white; ">
            
-            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> BAR GRAPH</strong></center></div>
- <div class="card-body" style="" >
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Bar Graph</strong></center></div>
+ <div class="card-body">
 
 
 
-<div class="row" style="margin-top:2%;">
 
- <div class="tabbable full-width-tabs">
-  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-    <li><a data-toggle="tab" href="#a">Intrapersonal</a></li>
-    <li><a data-toggle="tab" href="#b">Interpersonal </a></li>
-    <li><a data-toggle="tab" href="#c">Stress Management</a></li>
-    <li><a data-toggle="tab" href="#d">Adaptability</a></li>
-    <li><a data-toggle="tab" href="#e">General Mood</a></li>
-  </ul>
- </div>
- </div>
+
+	 <div class="tabbable full-width-tabs">
+		  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+		    <li><a data-toggle="tab" href="#intrapersonalBarContainer">Intrapersonal</a></li>
+		    <li><a data-toggle="tab" href="#interpersonalBarContainer">Interpersonal </a></li>
+		    <li><a data-toggle="tab" href="#stressBarContainer">Stress Management</a></li>
+		    <li><a data-toggle="tab" href="#adaptabilityBarContainer">Adaptability</a></li>
+		    <li><a data-toggle="tab" href="#moodBarContainer">General Mood</a></li>
+		  </ul>
+	 </div>
  
   <div class="tab-content" style="margin-top: 2%;">
-    <div id="a" class="tab-pane active">
-    
-       <canvas id="intraBarChart"></canvas>
-    </div>
-    <div id="b" class="tab-pane fade">
-      <canvas id="interBarChart"></canvas>
-    </div>
-    <div id="c" class="tab-pane fade">
-      <canvas id="stressBarChart"></canvas>
-    </div>
-    <div id="d" class="tab-pane fade">
-      <canvas id="adaptBarChart"></canvas>
-    </div>
-    <div id="e" class="tab-pane fade">
-      <canvas id="moodBarChart"></canvas>
-    </div>
+    <div id="interpersonalBarContainer" class="tab-pane active"></div>
+    <div id="intrapersonalBarContainer" class="tab-pane fade"></div>
+    <div id="stressBarContainer" class="tab-pane fade"></div>
+    <div id="adaptabilityBarContainer" class="tab-pane fade"></div>
+    <div id="moodBarContainer" class="tab-pane fade"></div>
   </div>
 
 </div>
+		</div>
+</div>
+</div>
+</div>
 </div>
 
-@stop 
+
+
+
+</div>
+
+
+@endsection
 @section('script')
 
-
+	
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
+     <script type="text/javascript" src="{{asset('public/assets/js/filterstudents-extension.js')}}"></script>
+     <script type="text/javascript" src="{{asset('public/assets/js/dropDown.js')}}"></script>
 
 @endsection

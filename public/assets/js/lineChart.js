@@ -8,8 +8,8 @@ $.ajax({
             , dataType: 'json'
             , success: function (data) {
 
-    var school_year = [];
-    var gwa = [];
+      var school_year = [];
+      var gwa = [];
 
     $.each(data, function(keys, values){
     	school_year.push(values['year'] + " " + values['semester']);

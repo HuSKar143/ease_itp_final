@@ -73,15 +73,16 @@ class MasterController extends Controller
             //    ->select('intrapersonal','interpersonal','stress','adapt','mood')
             //    ->where('student_id','=', $holderID)
             //    ->get();
-           return view('content.studentProfile',['profile' => $studentProfile]);
+           return view('content.studentProfile',[
+                            'profile' => $studentProfile
+                        ]);
     }
 
     public function endYear($start){
 
         $schoolYear = DB::table('schoolyear')
-                ->select('id', 'year', 'semester')
-                ->where('id', '>', $start)
-                ->orderBy('id', 'asc')
+                ->groupBy('year')
+                ->where('year', '>', $start)
                 ->get();
 
             return json_encode($schoolYear);
@@ -90,9 +91,8 @@ class MasterController extends Controller
     public function endYear2($start){
 
         $schoolYear = DB::table('schoolyear')
-                ->select('id', 'year', 'semester')
-                ->where('id', '>', $start)
-                ->orderBy('id', 'asc')
+                ->groupBy('year')
+                ->where('year', '>', $start)
                 ->get();
 
             return json_encode($schoolYear);
@@ -109,36 +109,63 @@ class MasterController extends Controller
             return json_encode($schoolYear);
     }
 
-    public function getCurrentGraph($to, $from, $qwe, $ewq){
+    public function getCurrentGraph($year, $comparedYear = null){
+    $betweenYears = array();
+    $betweenComparedYears = array();
+
+    $years =  DB::table('schoolyear')
+             ->where('year', '=', $year)
+             ->get();
+
+    $flagFirst = 0;
+    foreach($years as $year){
+        if($flagFirst == 0 || $flagFirst != count($years) - 1){
+            $betweenYears[] = $year->id;
+        }
+        $flagFirst++;
+    }
+
+
+    if($comparedYear != null){         
+        $comparedYear =  DB::table('schoolyear')
+                         ->where('year', '=', $comparedYear)
+                         ->get();
+
+        $flagFirst = 0;
+        foreach($comparedYear as $year){
+            if($flagFirst == 0 || $flagFirst != count($years) - 1){
+                $betweenComparedYears[] = $year->id;
+            }
+            $flagFirst++;
+        }
+    }
+
     $schoolYear = DB::table('grades')
-        ->select('*')
         ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
         ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
-        ->whereBetween('grades.schoolyear', array($from, $to))
+        ->whereBetween('grades.schoolyear', $betweenYears)
         ->get();
 
-    $schoolYear2 = DB::table('grades')
-        ->select('*')
-        ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
-        ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
-        ->whereBetween('grades.schoolyear', array($qwe, $ewq))
-        ->get();
-    $pussy['a']=$schoolYear;
-    $pussy['b']=$schoolYear2;
-    
-    //     ->whereBetween('grades.schoolyear', array($from, $to))
-    //     ->get();
-    //     var_dump($otherdata);
+
+    if($comparedYear != null){
+        $schoolYear2 = DB::table('grades')
+            ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+            ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+            ->whereBetween('grades.schoolyear', $betweenComparedYears)
+            ->get();
+    $pussy['b'] = $schoolYear2 ;
+    }
+
+    $pussy['a'] = $schoolYear;
         
-        return json_encode($pussy);
+         return json_encode($pussy);
     }
 
 
 
   public function filterStudent() {
              $filterStudents = DB::table('schoolyear')
-                ->select('id','year','semester')
-                ->orderBy('id','asc')
+                ->groupBy('year')
                 ->get();
 
                 $gender = DB::table('students')
@@ -146,5 +173,9 @@ class MasterController extends Controller
                 ->orderBy('id','asc')
                 ->get();
             // return jason_encode($filter);
-         return view('content.filterStudents',['filter'=>$filterStudents,'gender'=>$gender]);
+         return view('content.filterStudents',
+            [
+                'filter'=>$filterStudents,
+                'gender'=>$gender
+            ]);
 }}

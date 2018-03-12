@@ -1,0 +1,213 @@
+
+@extends('layouts.app')
+@section('css')
+<style type="text/css">
+	.hide{
+		display: none;
+	}
+</style>
+@endsection
+@section('content')
+
+<!-- 
+<div class="row">
+
+
+<div class="column">
+<select class="form-control" id="exampleFormControlSelect1">
+
+@foreach ($filter as $val)
+	  <option selected hidden>FROM</option>
+      <option value="{{ $val->id }}"> {{$val->year}} {{$val->semester}}</option>
+   
+    @endforeach
+</select>
+</div>
+<div class="column">
+<select class="form-control" id="exampleFormControlSelect2">
+<option selected hidden>TO</option>
+</select>
+</div>
+
+<div class="column">
+<button class="btn btn-primary btn-filter" >Submit</button>
+</div>
+</div> -->
+<div class="card-body" >
+
+
+<div class="row">
+	<div class="column">
+		<select class="form-control" id="exampleFormControlSelect1">
+			@foreach ($filter as $val)
+				  <option selected hidden>FROM</option>
+			      <option value="{{ $val->year }}"> {{$val->year}}</option>
+			@endforeach
+		</select>
+	</div>
+	<div class="column">
+		<select class="form-control" id="exampleFormControlSelect2">
+			<option selected hidden>TO</option>
+		</select>
+	</div>
+	<div class="column">
+		<button class="btn btn-primary btn-filter" >Submit</button>
+	</div>
+</div>
+
+<div id="filter-container" class="row hide">
+<a href="" class="btn" data-target="#modal-compare" data-toggle="modal">Compare Data</a>
+</div>
+
+<div class="modal fade" id="modal-compare" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+         <h4 class="modal-title">select Data</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+         	<div class="row">
+				<div class="column">
+					<select class="form-control" id="exampleFormControlSelect3">
+				
+					</select>
+				</div>
+				<div class="column">
+					<select class="form-control" id="exampleFormControlSelect4">
+						<option selected hidden>TO</option>
+					</select>
+				</div>
+				<div class="column">
+					<button id="btn-compare" type="button" class="btn btn-success">Compare</button>
+				</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+<div class="row">
+
+ <div class="col-md-12">
+
+<!-- Example Pie Chart Card-->
+       <div class="card card-inverse card-primary mb-3">
+            <div class="card-header"  style="background-color: #002663; color: white; ">
+           
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Results</strong></center></div>
+ <div class="card-body" style="" >
+
+ <select class="form-control" id="results">
+
+
+	  <option selected hidden>Results</option>
+      <option value="">Spearman Rank Correlation</option>
+      <option value="">Significance Test</option>
+      <option value="">Summary of Emotional Quotient</option>
+
+</select>
+
+<div class="row" style="margin-top:2%;">
+
+ <div class="tabbable full-width-tabs">
+  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+    <li><a data-toggle="tab" href="#home">Intrapersonal</a></li>
+    <li><a data-toggle="tab" href="#menu1">Interpersonal </a></li>
+    <li><a data-toggle="tab" href="#menu2">Stress Management</a></li>
+    <li><a data-toggle="tab" href="#menu3">Adaptability</a></li>
+    <li><a data-toggle="tab" href="#menu4">General Mood</a></li>
+  </ul>
+ </div>
+ </div>
+ 
+  <div class="tab-content" style="margin-top: 2%;">
+    <div id="home" class="tab-pane active">
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <canvas id="interChart"></canvas>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <canvas id="stressChart"></canvas>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <canvas id="adaptChart"></canvas>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <canvas id="moodChart"></canvas>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<div class="row">
+
+ <div class="col-md-12">
+
+<!-- Example Pie Chart Card-->
+       <div class="card card-inverse card-primary mb-3">
+            <div class="card-header"  style="background-color: #002663; color: white; ">
+           
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> BAR GRAPH</strong></center></div>
+ <div class="card-body" style="" >
+
+
+
+<div class="row" style="margin-top:2%;">
+
+ <div class="tabbable full-width-tabs">
+  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+    <li><a data-toggle="tab" href="#a">Intrapersonal</a></li>
+    <li><a data-toggle="tab" href="#b">Interpersonal </a></li>
+    <li><a data-toggle="tab" href="#c">Stress Management</a></li>
+    <li><a data-toggle="tab" href="#d">Adaptability</a></li>
+    <li><a data-toggle="tab" href="#e">General Mood</a></li>
+  </ul>
+ </div>
+ </div>
+ 
+  <div class="tab-content" style="margin-top: 2%;">
+    <div id="a" class="tab-pane active">
+    
+       <canvas id="intraBarChart"></canvas>
+    </div>
+    <div id="b" class="tab-pane fade">
+      <canvas id="interBarChart"></canvas>
+    </div>
+    <div id="c" class="tab-pane fade">
+      <canvas id="stressBarChart"></canvas>
+    </div>
+    <div id="d" class="tab-pane fade">
+      <canvas id="adaptBarChart"></canvas>
+    </div>
+    <div id="e" class="tab-pane fade">
+      <canvas id="moodBarChart"></canvas>
+    </div>
+  </div>
+
+</div>
+</div>
+
+@endsection
+@section('script')
+
+
+     <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
+
+@endsection
