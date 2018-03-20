@@ -67,7 +67,8 @@ body.fixed-nav {
 
 #mainNav .navbar-collapse {
   overflow: auto;
-  max-height: 75vh;
+  max-height: 70vh;
+
 }
 
 #mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
@@ -200,7 +201,19 @@ body.fixed-nav {
 
 #mainNav.fixed-top .sidenav-toggler {
   display: none;
+
 }
+a.selected:hover {
+
+  background-color:rgba(0, 20, 50,.5);
+  color: yellow;
+
+}
+a.left-icon:hover {
+
+  background-color: rgba(0, 10, 15,0.8);
+}
+
 
 @media (min-width: 992px) {
   #mainNav.fixed-top .navbar-sidenav {
@@ -215,6 +228,7 @@ body.fixed-nav {
     -ms-flex-direction: column;
     flex-direction: column;
     margin-top: calc(100vh - 56px);
+
   }
   #mainNav.fixed-top .sidenav-toggler > .nav-item {
     width: 250px;
@@ -234,11 +248,11 @@ body.fixed-nav {
 }
 
 #mainNav.fixed-top.navbar-light .sidenav-toggler {
-  background-color: #dee2e6;
+  background-color:#000a1a;
 }
 
 #mainNav.fixed-top.navbar-light .sidenav-toggler a i {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 1);
 }
 
 body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler {
@@ -330,10 +344,8 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   display: flex;
 }
 
-.nav-color:hover {
 
-  color: white;
-}
+
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
   color: #868e96;
@@ -365,6 +377,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   color: #adb5bd;
 }
 
+
 @media (min-width: 992px) {
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
     background: #343a40;
@@ -387,12 +400,14 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 }
 
 #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, .9);
+
 }
 
 #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:hover {
-  color: rgba(0, 0, 0, 0.7);
+  color:white;
 }
+
 
 #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a,
 #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a {
@@ -541,6 +556,8 @@ img.profpic {
  
   color: black;
 }
+
+
 .back-button {
 
   float:left; 

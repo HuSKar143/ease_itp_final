@@ -29,44 +29,44 @@
 
 <body class="fixed-nav sticky-footer" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><h3><strong>EASE SYSTEM</strong></h3></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#"><h3><strong>EASE SYSTEM</strong></h3></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="{{ url('/') }}">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <strong><span class="nav-link-text nav-color">Home</span></strong>
+      <ul class="navbar-nav navbar-sidenav bg-light" id="exampleAccordion">
+        <li class="nav-item" style="margin-top:4%;" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link selected" href="{{ url('/') }}">
+            <i class="fa fa-fw fa-dashboard nav-color"></i>
+            <strong><span class="nav-link-text nav-color active">Home</span></strong>
           </a>
         </li>
         
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="{{ url('/listOfStudents') }}">
-            <i class="fa fa-fw fa-table"></i>
+          <a class="nav-link selected" href="{{ url('/listOfStudents') }}">
+            <i class="fa fa-fw fa-table nav-color"></i>
             <strong><span class="nav-link-text nav-color" sty>List of students</span></strong>
           </a>
         </li>
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="{{ url('/filterStudents') }}">
-            <i class="fa fa-fw fa-area-chart"></i>
+          <a class="nav-link selected" href="{{ url('/filterStudents') }}">
+            <i class="fa fa-fw fa-area-chart nav-color"></i>
             <strong><span class="nav-link-text nav-color" sty>Data Visualization</span></strong>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
+          <a class="nav-link text-center left-icon" id="sidenavToggler">
             <i class="fa fa-fw fa-angle-left"></i>
           </a>
         </li>
       </ul>
      <ul class="navbar-nav ml-auto">
       
-          <li class="nav-item">
+          <li class="nav-item hello">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
@@ -91,7 +91,7 @@
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
-      <div class="container">
+      <div class="container left-icon">
         <div class="text-center">
           <small><strong>EASE SYSTEM 2018</strong></small>
         </div>
@@ -134,7 +134,7 @@
     <!-- Custom scripts for all pages-->
     <script type="text/javascript" src="{{asset('public/assets/js/sb-admin.min.js')}}"></script>
     <!-- Custom scripts for this page-->
-   
+       <script type="text/javascript" src="{{asset('public/assets/js/selectedNav.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/bootstrap/js/bootstrap-navtabs.min.js')}}" ></script>
     @yield('script')
 </body>

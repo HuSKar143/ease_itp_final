@@ -50,7 +50,7 @@
 	<div class="hidden-compared-year hide">
 		<div class="column">
 			<select class="form-control " style="width:auto;"  id="exampleFormControlSelect2">
-				
+				    
 			</select>
 		</div>
 	
@@ -74,7 +74,7 @@
 
 <div class="row" >
 
- <div class="column col-lg-11" >
+ <div class="column col-lg-12" >
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -127,7 +127,7 @@
     <div id="moodContainer" class="tab-pane fade">
     </div>
   </div>
-
+  <div class="card-footer bg-transparent"><i>Interpretation: </i></div>
 </div>
 
 </div>
@@ -136,7 +136,7 @@
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
-            <div class="card-header"  style="background-color: #003c9e; color: white; ">
+            <div class="card-header"  style="background-color: #003c9e; color: white; font-size: 8pt; ">
            
             <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Bar Graph</strong></center></div>
  <div class="card-body">
@@ -164,6 +164,7 @@
   </div>
 
 </div>
+<div class="card-footer bg-transparent"><i>Interpretation: </i></div>
 		</div>
 </div>
 </div>
