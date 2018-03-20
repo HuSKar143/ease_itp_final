@@ -154,6 +154,7 @@ class MasterController extends Controller
             ->whereBetween('grades.schoolyear', $betweenComparedYears)
             ->get();
     $pussy['b'] = $schoolYear2 ;
+    
     }
 
     $pussy['a'] = $schoolYear;

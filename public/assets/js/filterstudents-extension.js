@@ -52,6 +52,8 @@ function compareGraph(){
 					second: getCorrelationResult(rankSecondGWA, rankSecondAdapt)
 				};
 
+			console.log(correlatedInterpersonal);
+
 			var graphIntraPersonal = drawGraphScatter('intrapersonal', firstYear, secondYear);
 			var graphInterPersonal = drawGraphScatter('interpersonal', firstYear, secondYear);
 			var graphStress = drawGraphScatter('stress', firstYear, secondYear);
@@ -252,14 +254,14 @@ function drawGraphBar(key, firstyear, secondyear){
 
 	var xFirstData = [];
 	var xSecondData = [];
-
+	console.log(key);
 	var x = [],sum=0,sum2=0,sum3=0;
     for(let i=0;i<firstyear.length;i++){
-        if(firstyear[i]['adaptability']>=50 && firstyear[i]['adaptability']<=84){
+        if(firstyear[i][key]>=50 && firstyear[i][key]<=84){
             sum =sum +1;
-        }else if(firstyear[i]['adaptability']>=85 && firstyear[i]['adaptability']<=114){
+        }else if(firstyear[i][key]>=85 && firstyear[i][key]<=114){
             sum2 =sum2 +1;
-        }else if(firstyear[i]['adaptability']>=115 && firstyear[i]['adaptability']<=170){
+        }else if(firstyear[i][key]>=115 && firstyear[i][key]<=170){
             sum3 =sum3 +1;
         }
     }
@@ -270,7 +272,7 @@ function drawGraphBar(key, firstyear, secondyear){
 
 
     var y = [],sum=0,sum2=0,sum3=0;
-    for(let i=0;i<firstyear.length;i++){
+    for(let i=0;i<secondyear.length;i++){
         if(secondyear[i][key]>=50 && secondyear[i][key]<=84){
             sum =sum +1;
         }else if(secondyear[i][key]>=85 && secondyear[i][key]<=114){

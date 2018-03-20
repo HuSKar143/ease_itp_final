@@ -49,7 +49,7 @@ $(function(){
 				    }, {});
                     // console.log(Object.keys(properEQ).length);//length of (data)
 				    var dataLen =Object.keys(properEQ).length;
-				    
+				    console.log("asdasd"+dataLen);
 
 
                     //get the individual eq and gwa
