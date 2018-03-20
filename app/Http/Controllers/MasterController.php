@@ -162,6 +162,20 @@ class MasterController extends Controller
          return json_encode($pussy);
     }
 
+  public function getSummaryGraph() {
+    $betweenYears = [1,12];
+
+    $schoolYear = DB::table('grades')
+        ->leftJoin('students', 'students.id', '=', 'grades.student_id')
+        ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+        ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+        ->whereBetween('grades.schoolyear', $betweenYears)
+        ->get();
+
+    return json_encode($schoolYear);
+
+  }
+
 
 
   public function filterStudent() {

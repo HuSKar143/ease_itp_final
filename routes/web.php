@@ -16,7 +16,8 @@ use Illuminate\Http\Request;
 // /return view('content.studentProfile', ['details' => $details],'var2' => $var2);
 //return view('')->with('succes', 'message');mao na ang session
 
-//Auth::routes();
+// Auth::routes();
+// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //link for pages
  Route::get('/','MasterController@index');
@@ -32,6 +33,7 @@ use Illuminate\Http\Request;
  Route::get('/studentProfile/{x}/ffff', 'MasterController@gendata2');
  Route::get('/filterStudents', 'MasterController@filterStudent');
  Route::get('/filterStudents/{x}', 'MasterController@endYear');
-  Route::get('/filterStudents2/{x}', 'MasterController@endYear2');
+ Route::get('/filterStudents2/{x}', 'MasterController@endYear2');
  Route::get('/getFilterGraph/{to}/{from?}', 'MasterController@getCurrentGraph');
+ Route::get('/summaryGraph','MasterController@getSummaryGraph');
  // Route::get('/getFilterGraph/{to}/{from}/{qwe}/{ewq}', 'MasterController@getCurrentGraph');
