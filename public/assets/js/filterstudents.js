@@ -1,3 +1,5 @@
+var correlationResult = null;
+
 $(function(){
 
 		$(".btn-compare-graph").click(function(event){
@@ -158,34 +160,25 @@ getRanking(mood,moodCopy,moodsorted);
 getRanking(gwa,gwaCopy,gwasorted); 
 
 //CORRELATION RESULT
-//correlation|| interpersonal~GWA
 
-
-
-var correlationResult = getCorrelationResult(gwaCopy, intrapersonalCopy);
-console.log("correlation (inter+gwa): " +correlationResult);
-$("#InterpretationContent").empty()
-
-if (correlationResult<0) {
-$("#InterpretationContent").append('<p>' + correlationResult + ': weak' + '  </p> ');
+correlationResult ={
+intrapersonalinterpret: getCorrelationResult(gwaCopy, intrapersonalCopy),
+interpersonalinterpret: getCorrelationResult(gwaCopy, interpersonalCopy),
+adaptinterpret: getCorrelationResult(gwaCopy, stressCopy),
+stressinterpret: getCorrelationResult(gwaCopy, adaptabilityCopy),
+moodinterpret: getCorrelationResult(gwaCopy, moodCopy)
 
 }
-//correlation|| intrapersonal~GWA
-var correlationResult = getCorrelationResult(gwaCopy, interpersonalCopy);
-console.log("correlation (intra+gwa): " +correlationResult);
+console.log(correlationResult);
 
-//correlation|| stress~GWA
-var correlationResult = getCorrelationResult(gwaCopy, stressCopy);
-console.log("correlation (stress+gwa): " +correlationResult);
 
-//correlation|| adapt~GWA
-var correlationResult = getCorrelationResult(gwaCopy, adaptabilityCopy);
-console.log("correlation (adapt+gwa): " +correlationResult);
 
-//correlation|| mood~GWA
-var correlationResult = getCorrelationResult(gwaCopy, moodCopy);
-console.log("correlation (mood+gwa): " +correlationResult);
 
+//INTERPRETATION
+// $("#spearmanInterpret").empty();
+//  if (correlationResult<0){
+// 	$("#spearmanInterpret").append('<p>' + correlationResult + ': Negative Relationship' + '  </p> ');	
+// }
 
 
 
@@ -216,7 +209,7 @@ console.log("correlation (mood+gwa): " +correlationResult);
             var obj = {x:stressPerfectCopy[i],y:gwaPerfectCopy[i]};
                 stressGwaData.push(obj);
         }
-    graphStressScatter(stressGwaData, intraGwaData);
+    graphStressScatter(stressGwaData);
  
 //MOOD~GWA_SCATTERPLOT
     var moodGwaData = [];
@@ -256,6 +249,26 @@ graphAdaptabilityBar(adaptabilityPerfectCopy);
 	}); //function ending tag
 
 //***list of functions***
+
+function scatterInterpret(key){
+	$("#spearmanInterpret").empty();
+	if (correlationResult[key]<0){
+		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Negative Relationship' + '  </p> ');	
+	}else if(correlationResult[key]>=0 && correlationResult[key]<=0.19){
+		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Very Weak' + '  </p> ');	
+	}else if(correlationResult[key]>=0.20 && correlationResult[key]<=0.39){
+		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Weak' + '  </p> ');	
+	}else if(correlationResult[key]>=0.40 && correlationResult[key]<=0.59){
+		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Moderate' + '  </p> ');	
+	}else if(correlationResult[key]>=0.60 && correlationResult[key]<=0.79){
+		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Strong' + '  </p> ');	
+	}else if(correlationResult[key]>=0.80 && correlationResult[key]<=1.0){
+		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Weak' + '  </p> ');	
+	}
+
+	
+
+}
 
 function sortData(a,b){
 
@@ -315,7 +328,7 @@ function getRanking(orig,copy,sorted){
 //*******************below here is all about graphs***********************
 
 //ScatterGraphs
-function graphInterpersonalScatter(scatter1, scatter2){
+function graphInterpersonalScatter(data){
     var options = {
 
        title: {
@@ -378,16 +391,7 @@ var interData = {
             BackgroundColor:'rgba(51, 102, 255)',
 
             label: 'INTERPERSONAL and GWA',
-            data: scatter1,
-        },{
-            pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(255,255,255,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(51, 102, 255)',
-
-            label: 'INTERPERSONAL and GWA',
-            data: scatter2,
+            data: data,
         }
         ]
     };
@@ -488,7 +492,7 @@ var scatterChart = new Chart(ctx, {
 }
 
 
-function graphStressScatter(data,data1){
+function graphStressScatter(data){
   
     var options = {
 
