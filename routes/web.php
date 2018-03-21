@@ -16,8 +16,8 @@ use Illuminate\Http\Request;
 // /return view('content.studentProfile', ['details' => $details],'var2' => $var2);
 //return view('')->with('succes', 'message');mao na ang session
 
-// Auth::routes();
-// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //link for pages
  Route::get('/','MasterController@index');
