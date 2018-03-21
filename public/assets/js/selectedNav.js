@@ -1,8 +1,8 @@
 $(function(){
 
 
-$('.nav li').click(function(){
-    $('.nav li').removeClass('active');
+$('.nav-link selected').click(function(){
+    $('.nav-link selected').removeClass('active');
     $(this).addClass('active');
 })
 

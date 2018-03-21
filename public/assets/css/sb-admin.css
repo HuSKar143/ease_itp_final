@@ -22,6 +22,7 @@ body.fixed-nav {
 .content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 1rem;
+
 }
 
 .scroll-to-top {
@@ -239,6 +240,11 @@ a.left-icon:hover {
   }
 }
 
+.bg-darkblue {
+
+ background-color: #000a1a;
+
+}
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
   background-color: #212529;
 }
@@ -296,6 +302,7 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 .content-wrapper {
   overflow-x: hidden;
   background: white;
+  padding-right: 10px ;
 }
 
 @media (min-width: 992px) {

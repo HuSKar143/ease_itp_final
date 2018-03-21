@@ -29,28 +29,28 @@
 
 <body class="fixed-nav sticky-footer" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#"><h3><strong>EASE SYSTEM</strong></h3></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-darkblue fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#"><h6><strong>EASE SYSTEM</strong></h6></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav bg-light" id="exampleAccordion">
-        <li class="nav-item" style="margin-top:4%;" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link selected" href="{{ url('/') }}">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link selected active" href="{{ url('/') }}">
             <i class="fa fa-fw fa-dashboard nav-color"></i>
             <strong><span class="nav-link-text nav-color active">Home</span></strong>
           </a>
         </li>
         
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="List of Students">
           <a class="nav-link selected" href="{{ url('/listOfStudents') }}">
             <i class="fa fa-fw fa-table nav-color"></i>
             <strong><span class="nav-link-text nav-color" sty>List of students</span></strong>
           </a>
         </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Data Visualization">
           <a class="nav-link selected" href="{{ url('/filterStudents') }}">
             <i class="fa fa-fw fa-area-chart nav-color"></i>
             <strong><span class="nav-link-text nav-color" sty>Data Visualization</span></strong>
@@ -79,7 +79,7 @@
   
 
 <main>
-<div class="content-wrapper">
+<div class="content-wrapper" style="background-color: #d9d9d9;">
     <div class="container-fluid"> 
 @yield('content')
  </div>

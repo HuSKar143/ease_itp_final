@@ -2,7 +2,7 @@
 @extends('layouts.app') 
 @section('content')
 
-<div class="col-md-12">
+<div class="col-lg-12">
 <!-- Example Pie Chart Card-->
        <div class="card mb-3 text-center">
             <div class="card-header" style="background-color: #002663; color: white;">

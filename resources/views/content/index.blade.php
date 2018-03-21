@@ -16,7 +16,7 @@
        <div class="card card-inverse card-primary mb-3">
             <div class="card-header"  style="background-color: #002663; color: white; ">
            
-            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> BAR GRAPH</strong></center></div>
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Summary of Emotional Quotient of the students</strong></center></div>
  <div class="card-body" style="" >
 
        <canvas id="summaryChartEq"></canvas>
@@ -33,7 +33,7 @@
        <div class="card card-inverse card-primary mb-3">
             <div class="card-header"  style="background-color: #002663; color: white; ">
            
-            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> DOUGHNUT GRAPH</strong></center></div>
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Emotional Quotient Summary by Gender</strong></center></div>
  <div class="card-body" style="" >
 
 

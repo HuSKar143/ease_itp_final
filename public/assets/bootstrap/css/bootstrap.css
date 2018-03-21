@@ -4330,7 +4330,8 @@ tbody.collapse.show {
 }
 
 .navbar-light .navbar-brand {
-  color : rgba(255, 255, 255, 1);
+  color : white; 
+  font-size: 10pt;
 }
 
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
@@ -6141,7 +6142,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color:#001d4d !important;
+  background-color:  #001d4d !important;
 }
 
 

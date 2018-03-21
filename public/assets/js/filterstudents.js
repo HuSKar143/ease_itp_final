@@ -159,9 +159,17 @@ getRanking(gwa,gwaCopy,gwasorted);
 
 //CORRELATION RESULT
 //correlation|| interpersonal~GWA
+
+
+
 var correlationResult = getCorrelationResult(gwaCopy, intrapersonalCopy);
 console.log("correlation (inter+gwa): " +correlationResult);
+$("#InterpretationContent").empty()
 
+if (correlationResult<0) {
+$("#InterpretationContent").append('<p>' + correlationResult + ': weak' + '  </p> ');
+
+}
 //correlation|| intrapersonal~GWA
 var correlationResult = getCorrelationResult(gwaCopy, interpersonalCopy);
 console.log("correlation (intra+gwa): " +correlationResult);
@@ -177,6 +185,8 @@ console.log("correlation (adapt+gwa): " +correlationResult);
 //correlation|| mood~GWA
 var correlationResult = getCorrelationResult(gwaCopy, moodCopy);
 console.log("correlation (mood+gwa): " +correlationResult);
+
+
 
 
 //********************GRAPHS************************
@@ -282,6 +292,8 @@ function getRanking(orig,copy,sorted){
         return copy;
 
 }
+
+
 
 // function getCorrelationResult(orig,origcopy,gwacopy,datalen){
 
@@ -899,6 +911,7 @@ var stressData = {
 
 $("#stressBarContainer").empty();
 $("#stressBarContainer").append('<canvas id="stress-BarChart"></canvas>');
+
 var ctx = document.getElementById("stress-BarChart").getContext("2d");
 var barChart = new Chart(ctx, {
     type: 'bar',
