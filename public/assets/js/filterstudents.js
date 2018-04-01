@@ -131,128 +131,104 @@ $(function(){
                         var moodPerfectCopy = mood.slice();
 
 						
-// *****************sorted eq and gwa*****************
-   						var intersorted = interpersonal.sort(sortData);
-						var intrasorted = intrapersonal.sort(sortData);
-					 	var stresssorted = stress.sort(sortData);
-						var adaptsorted = adaptability.sort(sortData);
-                        var moodsorted = mood.sort(sortData)
-                        var gwasorted = gwa.sort(sortData);
+
 
 //******************variable for xbar/ybar (gwa mean/eq mean)*****************/pearson
           var xbar = getAverageGwa(gwaPerfectCopy);
           //excel C
           var xxbar= getXXbar(gwaPerfectCopy,xbar);
           //excel ymean
-          var intraYbar  = getAverageEq(intrapersonalPerfectCopy);
-          var interYbar  = getAverageEq(interpersonalPerfectCopy);
-          var moodYbar   = getAverageEq(moodPerfectCopy);
-          var adaptYbar  = getAverageEq(adaptabilityPerfectCopy);
-          var stressYbar = getAverageEq(stressPerfectCopy);
+
+          var ybar = {
+            intraYbar:  getAverageEq(intrapersonalPerfectCopy),
+            interYbar:  getAverageEq(interpersonalPerfectCopy),
+            moodYbar:   getAverageEq(moodPerfectCopy),
+            adaptYbar:  getAverageEq(adaptabilityPerfectCopy),
+            stressYbar: getAverageEq(stressPerfectCopy)
+          }
 
           //excel D
-          var intraYYbar  = getYYbar(intrapersonalPerfectCopy,intraYbar);
-          var interYYbar  = getYYbar(interpersonalPerfectCopy,interYbar);
-          var moodYYbar   = getYYbar(moodPerfectCopy,moodYbar);
-          var adaptYYbar  = getYYbar(adaptabilityPerfectCopy,adaptYbar);
-          var stressYYbar = getYYbar(stressPerfectCopy,stressYbar);
+          var yybar = {
+            intraYYbar:  getYYbar(intrapersonalPerfectCopy,ybar.intraYbar),
+            interYYbar:  getYYbar(interpersonalPerfectCopy,ybar.interYbar),
+            moodYYbar:   getYYbar(moodPerfectCopy,ybar.moodYbar),
+            adaptYYbar:  getYYbar(adaptabilityPerfectCopy,ybar.adaptYbar),
+            stressYYbar: getYYbar(stressPerfectCopy,ybar.stressYbar)
+          }
 
           //excel E
-          var xxbarXyybarIntra  = getXXYY(xxbar,intraYYbar);
-          var xxbarXyybarInter  = getXXYY(xxbar,interYYbar);
-          var xxbarXyybarMood   = getXXYY(xxbar,moodYYbar);
-          var xxbarXyybarAdapt  = getXXYY(xxbar,adaptYYbar);
-          var xxbarXyybarStress = getXXYY(xxbar,stressYYbar);
+          var xxbarXyybar = {
+            xxbarXyybarIntra:  getXXYY(xxbar,yybar.intraYYbar),
+            xxbarXyybarInter:  getXXYY(xxbar,yybar.interYYbar),
+            xxbarXyybarMood:   getXXYY(xxbar,yybar.moodYYbar),
+            xxbarXyybarAdapt:  getXXYY(xxbar,yybar.adaptYYbar),
+            xxbarXyybarStress: getXXYY(xxbar,yybar.stressYYbar)
+          }
+
 
           //excel F
           var xxraise = getxxraise(xxbar);
 
           //excell G
-          var yyraiseIntra  = getyyraise(intraYYbar);
-          var yyraiseInter  = getyyraise(interYYbar);
-          var yyraiseMood   = getyyraise(moodYYbar);
-          var yyraiseAdapt  = getyyraise(adaptYYbar);
-          var yyraiseStress = getyyraise(stressYYbar);
+          var yyraise = {
+            yyraiseIntra:  getyyraise(yybar.intraYYbar),
+            yyraiseInter:  getyyraise(yybar.interYYbar),
+            yyraiseMood:   getyyraise(yybar.moodYYbar),
+            yyraiseAdapt:  getyyraise(yybar.adaptYYbar),
+            yyraiseStress: getyyraise(yybar.stressYYbar)
+          }
+
 
           //sumxxbarraise I6
           var sumxxbarraise = xxraise.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
 
           //sumyybarraise I7
-          var sumyyraiseIntra  =  yyraiseIntra.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var sumyyraiseInter  =  yyraiseInter.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var sumyyraiseMood   =  yyraiseMood.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var sumyyraiseAdapt  =  yyraiseAdapt.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var sumyyraiseStress =  yyraiseStress.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
+          var sumOfyyraise = {
+            sumyyraiseIntra:  yyraise.yyraiseIntra.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            sumyyraiseInter:  yyraise.yyraiseInter.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            sumyyraiseMood:   yyraise.yyraiseMood.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            sumyyraiseAdapt:  yyraise.yyraiseAdapt.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            sumyyraiseStress: yyraise.yyraiseStress.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0)
+          }
+
 
           //numerator
-          var numeratorIntra  = xxbarXyybarIntra.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var numeratorInter  = xxbarXyybarInter.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var numeratorMood   = xxbarXyybarMood.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var numeratorAdapt  = xxbarXyybarAdapt.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-          var numeratorStress = xxbarXyybarStress.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
+          var numerator ={
+            numeratorIntra:  xxbarXyybar.xxbarXyybarIntra.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            numeratorInter:  xxbarXyybar.xxbarXyybarInter.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            numeratorMood:   xxbarXyybar.xxbarXyybarMood.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            numeratorAdapt:  xxbarXyybar.xxbarXyybarAdapt.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
+            numeratorStress: xxbarXyybar.xxbarXyybarStress.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0)
+            }
     
 
           //denominator
-          var denominatorIntra  = Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumyyraiseIntra)).toFixed(4));
-          var denominatorInter  = Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumyyraiseInter)).toFixed(4));
-          var denominatorMood  = Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumyyraiseMood)).toFixed(4));
-          var denominatorAdapt  = Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumyyraiseAdapt)).toFixed(4));
-          var denominatorStress  = Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumyyraiseStress)).toFixed(4));
+          var denominator ={
+            denominatorIntra: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseIntra)).toFixed(4)),
+            denominatorInter: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseInter)).toFixed(4)),
+            denominatorMood: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseMood)).toFixed(4)),
+            denominatorAdapt: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseAdapt)).toFixed(4)),
+            denominatorStress: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseStress)).toFixed(4))
+            }
 
           //Pearson Correlation Result
           correlationResult ={
-            intrapersonalinterpret: getPearsonCorrelationResult(numeratorIntra, denominatorIntra),
-            interpersonalinterpret: getPearsonCorrelationResult(numeratorInter, denominatorInter),
-            adaptinterpret: getPearsonCorrelationResult(numeratorMood, denominatorMood),
-            stressinterpret: getPearsonCorrelationResult(numeratorAdapt, denominatorAdapt),
-            moodinterpret: getPearsonCorrelationResult(numeratorStress, denominatorStress)
+            intrapersonalinterpret: getPearsonCorrelationResult(numerator.numeratorIntra, denominator.denominatorIntra),
+            interpersonalinterpret: getPearsonCorrelationResult(numerator.numeratorInter, denominator.denominatorInter),
+            adaptinterpret: getPearsonCorrelationResult(numerator.numeratorMood, denominator.denominatorMood),
+            stressinterpret: getPearsonCorrelationResult(numerator.numeratorAdapt, denominator.denominatorAdapt),
+            moodinterpret: getPearsonCorrelationResult(numerator.numeratorStress, denominator.denominatorStress)
 
             }
-            console.log(correlationResult);
+            
+            var pearsonResult = [];
+            $.each(correlationResult, function(keys, values){
+                pearsonResult.push(values);
+              });console.log("Pearson Result: "+ pearsonResult);
 
 
 
 
-
-// //Getting the RANK  
-// //interpersonal Rank
-// getRanking(interpersonal,interpersonalCopy,intersorted);
-
-// //intrapersonal Rank
-// getRanking(intrapersonal,intrapersonalCopy,intrasorted); 
-
-// //stress Rank
-// getRanking(stress,stressCopy,stresssorted); 
-
-// //adapt Rank
-// getRanking(adaptability,adaptabilityCopy,adaptsorted); 
-
-// //mood Rank
-// getRanking(mood,moodCopy,moodsorted); 
-
-// //gwa Rank
-// getRanking(gwa,gwaCopy,gwasorted); 
-
-// //CORRELATION RESULT
-
-// correlationResult ={
-// intrapersonalinterpret: getCorrelationResult(gwaCopy, intrapersonalCopy),
-// interpersonalinterpret: getCorrelationResult(gwaCopy, interpersonalCopy),
-// adaptinterpret: getCorrelationResult(gwaCopy, stressCopy),
-// stressinterpret: getCorrelationResult(gwaCopy, adaptabilityCopy),
-// moodinterpret: getCorrelationResult(gwaCopy, moodCopy)
-
-// }
-// console.log(correlationResult);
-
-
-
-
-//INTERPRETATION
-// $("#spearmanInterpret").empty();
-//  if (correlationResult<0){
-// 	$("#spearmanInterpret").append('<p>' + correlationResult + ': Negative Relationship' + '  </p> ');	
-// }
 
 
 
@@ -434,60 +410,9 @@ function getPearsonCorrelationResult(numerator,denominator){
 
 }
 
-function sortData(a,b){
-
-    return b-a;
-                   
-}
-        
-function getRanking(orig,copy,sorted){
-    var d, i, n;
-        n = orig.length;
-
-        d = new Array(n);
-        for (i = 0; i < n; i++) {
-            var rank, first, last;
-         // Handle tied ranks.
-            first = sorted.indexOf(orig[i]);
-            last = sorted.lastIndexOf(orig[i]);
-            if (first === last) {
-                rank = first;
-            } else {
-                rank = (first + last) / 2;
-            }
-         // Add 1 because ranks start with 1.
-            d[i] = rank + 1;
-        }
-
-        for(x = 0 ;x<sorted.length; x++){
-            for(y = 0 ; y<copy.length; y++){
-                if(copy[y]== sorted[x]){
-                    copy[y] = d[x];
-                }
-            }
-        }
-        return copy;
-
-}
 
 
 
-// function getCorrelationResult(orig,origcopy,gwacopy,datalen){
-
-//         var x = [];
-//         for(let i = 0; i < dataLen.length; i++) {
-//           x.push(Math.pow(origcopy[i] - gwacopy[i],2));
-//         }
-//         var sumOfD2 = x.reduce(function(a, b) { return a + b; }, 0);
-//         var numerator = sumOfD2*6;
-//         var n = datalen;
-//         var ncubed = Math.pow(n,3);
-//         var denominator = ncubed-n;
-//         var correlation = 1-(numerator/denominator);
- 
-//         return correlation;
-
-// }
       
 //*******************below here is all about graphs***********************
 
