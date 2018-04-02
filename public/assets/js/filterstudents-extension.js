@@ -13,46 +13,46 @@ function compareGraph(){
 			var firstYear = getStudentInfo(data['a']);
 			var secondYear = getStudentInfo(data['b']);
 
-			var rankFirstGWA = setDataToRank(firstYear, 'gwa');
-			var rankSecondGWA = setDataToRank(secondYear, 'gwa');
+			var FirstGWA = setDataSlice(firstYear, 'gwa');
+			var SecondGWA = setDataSlice(secondYear, 'gwa');
 
-			var rankFirstInterpersonal = setDataToRank(firstYear, 'interpersonal');
-			var rankSecondInterpersonal = setDataToRank(secondYear, 'interpersonal');
+			var firstInterpersonal   = setDataToAssign(firstYear,FirstGWA, 'interpersonal');
+			var secondInterpersonal  = setDataToAssign(secondYear,SecondGWA, 'interpersonal');
 
-			var rankFirstIntrapersonal = setDataToRank(firstYear, 'intrapersonal');
-			var rankSecondIntrapersonal = setDataToRank(secondYear, 'intrapersonal');
+			var firstIntrapersonal   = setDataToAssign(firstYear,FirstGWA, 'intrapersonal');
+			var secondIntrapersonal  = setDataToAssign(secondYear,SecondGWA, 'intrapersonal');
 
-			var rankFirstStress = setDataToRank(firstYear, 'stress');
-			var rankSecondStress = setDataToRank(secondYear, 'stress');
+			var firstStress          = setDataToAssign(firstYear,FirstGWA, 'stress');
+			var secondStress         = setDataToAssign(secondYear,SecondGWA, 'stress');
 
-			var rankFirstAdapt = setDataToRank(firstYear, 'adapt');
-			var rankSecondAdapt = setDataToRank(secondYear, 'adapt');
+			var firstAdapt           = setDataToAssign(firstYear,FirstGWA, 'adapt');
+			var secondAdapt          = setDataToAssign(secondYear,SecondGWA, 'adapt');
 
-			var rankFirstMood = setDataToRank(firstYear, 'mood');
-			var rankSecondMood = setDataToRank(secondYear, 'mood');
+			var firstMood            = setDataToAssign(firstYear,FirstGWA, 'mood');
+			var secondMood           = setDataToAssign(secondYear,SecondGWA, 'mood');
 
 			var correlatedInterpersonal = {
-					first: getCorrelationResult(rankFirstGWA, rankFirstInterpersonal),
-					second: getCorrelationResult(rankSecondGWA, rankSecondInterpersonal)
+					first: pearsonResults(firstInterpersonal),
+					second: pearsonResults(secondInterpersonal)
 				};
 			var correlatedIntrapersonal = {
-					first: getCorrelationResult(rankFirstGWA, rankFirstIntrapersonal),
-					second: getCorrelationResult(rankSecondGWA, rankSecondIntrapersonal)
+					first: pearsonResults(firstIntrapersonal),
+					second: pearsonResults(secondIntrapersonal)
 				};
 			var correlatedStress = {
-					first: getCorrelationResult(rankFirstGWA, rankFirstStress),
-					second: getCorrelationResult(rankSecondGWA, rankSecondStress),
+					first: pearsonResults(firstStress),
+					second: pearsonResults(secondStress),
 				};
 			var correlatedAdapt = {
-					first: getCorrelationResult(rankFirstGWA, rankFirstAdapt),
-					second: getCorrelationResult(rankSecondGWA, rankSecondAdapt)
+					first: pearsonResults(firstAdapt),
+					second: pearsonResults(secondAdapt)
 				};
 			var correlatedMood = {
-					first: getCorrelationResult(rankFirstGWA, rankFirstMood),
-					second: getCorrelationResult(rankSecondGWA, rankSecondAdapt)
+					first: pearsonResults(firstMood),
+					second: pearsonResults(secondMood)
 				};
 
-			console.log(correlatedInterpersonal);
+			console.log(correlatedIntrapersonal);
 
 			var graphIntraPersonal = drawGraphScatter('intrapersonal', firstYear, secondYear);
 			var graphInterPersonal = drawGraphScatter('interpersonal', firstYear, secondYear);
@@ -94,66 +94,69 @@ function getStudentInfo(info){
 	return studentInfo;
 }
 
-function setDataToRank(studentData, keyData){
-	var dataSet = [];
-	$.each(studentData, function(key, values){
-		dataSet.push(values[keyData]);
-	});
+function pearsonResults(values) {
+var n = values.length;
+if (n == 0) return 0;
 
-	var copyDataSet = dataSet.slice();
-	var sortedData = preSorted(dataSet);
-
-	return getRanking(sortedData, copyDataSet);
-}	
-
-function preSorted(dataSet){
-	
-	 dataSet.sort(function(a, b){return b-a});
-	 return dataSet;
+let meanX = 0;
+let meanY = 0;
+for (var i = 0; i < n; i++) {
+meanX += values[i].x / n
+meanY += values[i].y / n
 }
 
-function getRanking(orig,copy){
-    var d, i, n;
-        n = orig.length;
+let num = 0;
+let den1 = 0;
+let den2 = 0;
 
-        d = new Array(n);
-        for (i = 0; i < n; i++) {
-            var rank, first, last;
-            first = orig.indexOf(orig[i]);
-            last = orig.lastIndexOf(orig[i]);
-            if (first === last) {
-                rank = first;
-            } else {
-                rank = (first + last) / 2;
-            }
-            d[i] = rank + 1;
-        }
+for (var i = 0; i < n; i++) {
+let dx = (values[i].x - meanX);
+let dy = (values[i].y - meanY);
+num += dx * dy
+den1 += dx * dx
+den2 += dy * dy
+}
 
-        for(x = 0 ;x<orig.length; x++){
-            for(y = 0 ; y<copy.length; y++){
-                if(copy[y]== orig[x]){
-                    copy[y] = d[x];
-                }
-            }
-        }
-        return copy;
+const den = Math.sqrt(den1) * Math.sqrt(den2);
+
+if (den == 0) return 0;
+
+return num / den;
+}
+
+function setDataSlice(studentData, keyData){
+    var dataSet = [];
+    $.each(studentData, function(key, values){
+        dataSet.push(values[keyData].toFixed(3));
+    });
+
+    var gwaSlice = dataSet.slice();
+
+
+    return gwaSlice;
+}
+
+function setDataToAssign(studentData, gwa, keyData){
+    var dataSet = [];
+    $.each(studentData, function(key, values){
+        dataSet.push(values[keyData]);
+    });
+
+    var copyDataSet = dataSet.slice();
+
+    return assignXY(copyDataSet, gwa);
+}
+
+function assignXY(eq, gwa){
+  var a = [];
+     for(let i=0;i<eq.length;i++){
+         var obj = {x:eq[i],y:parseFloat(gwa[i])};
+         a.push(obj);
+     }
+  return a;
 }
 
 
-function getCorrelationResult(gwa, eq){
-	var result = [];
-	for(x=0; x<gwa.length; x++){
-		result[x] = Math.pow(gwa[x] - eq[x], 2);
-	}
-
-	var sumOfD2 = result.reduce(function(a, b) { return a + b; }, 0);
-	var numerator = sumOfD2*6;
-	var nCubed = Math.pow(gwa.length, 3);
-	var denominator = nCubed-gwa.length;
-	var correlation = 1 - (numerator/denominator);
-	
-	return correlation;
-}
 
 function drawGraphScatter(key, firstYear, secondYear){
 
@@ -254,7 +257,7 @@ function drawGraphBar(key, firstyear, secondyear){
 
 	var xFirstData = [];
 	var xSecondData = [];
-	console.log(key);
+	
 	var x = [],sum=0,sum2=0,sum3=0;
     for(let i=0;i<firstyear.length;i++){
         if(firstyear[i][key]>=50 && firstyear[i][key]<=84){

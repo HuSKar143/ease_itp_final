@@ -133,99 +133,27 @@ $(function(){
 						
 
 
-//******************variable for xbar/ybar (gwa mean/eq mean)*****************/pearson
-          var xbar = getAverageGwa(gwaPerfectCopy);
-          //excel C
-          var xxbar= getXXbar(gwaPerfectCopy,xbar);
-          //excel ymean
+//********************assignXY for correlation************************
+//********************assignXY for correlation************************
+var intraGwa  = assignXY(intrapersonalPerfectCopy,gwaPerfectCopy),
+    interGwa  = assignXY(interpersonalPerfectCopy,gwaPerfectCopy),
+    adaptGwa  = assignXY(adaptabilityPerfectCopy,gwaPerfectCopy),
+    stressGwa = assignXY(stressPerfectCopy,gwaPerfectCopy),
+    moodGwa   = assignXY(moodPerfectCopy,gwaPerfectCopy);
 
-          var ybar = {
-            intraYbar:  getAverageEq(intrapersonalPerfectCopy),
-            interYbar:  getAverageEq(interpersonalPerfectCopy),
-            moodYbar:   getAverageEq(moodPerfectCopy),
-            adaptYbar:  getAverageEq(adaptabilityPerfectCopy),
-            stressYbar: getAverageEq(stressPerfectCopy)
-          }
-
-          //excel D
-          var yybar = {
-            intraYYbar:  getYYbar(intrapersonalPerfectCopy,ybar.intraYbar),
-            interYYbar:  getYYbar(interpersonalPerfectCopy,ybar.interYbar),
-            moodYYbar:   getYYbar(moodPerfectCopy,ybar.moodYbar),
-            adaptYYbar:  getYYbar(adaptabilityPerfectCopy,ybar.adaptYbar),
-            stressYYbar: getYYbar(stressPerfectCopy,ybar.stressYbar)
-          }
-
-          //excel E
-          var xxbarXyybar = {
-            xxbarXyybarIntra:  getXXYY(xxbar,yybar.intraYYbar),
-            xxbarXyybarInter:  getXXYY(xxbar,yybar.interYYbar),
-            xxbarXyybarMood:   getXXYY(xxbar,yybar.moodYYbar),
-            xxbarXyybarAdapt:  getXXYY(xxbar,yybar.adaptYYbar),
-            xxbarXyybarStress: getXXYY(xxbar,yybar.stressYYbar)
-          }
-
-
-          //excel F
-          var xxraise = getxxraise(xxbar);
-
-          //excell G
-          var yyraise = {
-            yyraiseIntra:  getyyraise(yybar.intraYYbar),
-            yyraiseInter:  getyyraise(yybar.interYYbar),
-            yyraiseMood:   getyyraise(yybar.moodYYbar),
-            yyraiseAdapt:  getyyraise(yybar.adaptYYbar),
-            yyraiseStress: getyyraise(yybar.stressYYbar)
-          }
-
-
-          //sumxxbarraise I6
-          var sumxxbarraise = xxraise.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-
-          //sumyybarraise I7
-          var sumOfyyraise = {
-            sumyyraiseIntra:  yyraise.yyraiseIntra.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            sumyyraiseInter:  yyraise.yyraiseInter.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            sumyyraiseMood:   yyraise.yyraiseMood.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            sumyyraiseAdapt:  yyraise.yyraiseAdapt.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            sumyyraiseStress: yyraise.yyraiseStress.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0)
-          }
-
-
-          //numerator
-          var numerator ={
-            numeratorIntra:  xxbarXyybar.xxbarXyybarIntra.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            numeratorInter:  xxbarXyybar.xxbarXyybarInter.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            numeratorMood:   xxbarXyybar.xxbarXyybarMood.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            numeratorAdapt:  xxbarXyybar.xxbarXyybarAdapt.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0),
-            numeratorStress: xxbarXyybar.xxbarXyybarStress.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0)
-            }
-    
-
-          //denominator
-          var denominator ={
-            denominatorIntra: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseIntra)).toFixed(4)),
-            denominatorInter: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseInter)).toFixed(4)),
-            denominatorMood: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseMood)).toFixed(4)),
-            denominatorAdapt: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseAdapt)).toFixed(4)),
-            denominatorStress: Math.sqrt((parseFloat(sumxxbarraise)*parseFloat(sumOfyyraise.sumyyraiseStress)).toFixed(4))
-            }
-
-          //Pearson Correlation Result
-          correlationResult ={
-            intrapersonalinterpret: getPearsonCorrelationResult(numerator.numeratorIntra, denominator.denominatorIntra),
-            interpersonalinterpret: getPearsonCorrelationResult(numerator.numeratorInter, denominator.denominatorInter),
-            adaptinterpret: getPearsonCorrelationResult(numerator.numeratorMood, denominator.denominatorMood),
-            stressinterpret: getPearsonCorrelationResult(numerator.numeratorAdapt, denominator.denominatorAdapt),
-            moodinterpret: getPearsonCorrelationResult(numerator.numeratorStress, denominator.denominatorStress)
-
-            }
-            
-            var pearsonResult = [];
-            $.each(correlationResult, function(keys, values){
-                pearsonResult.push(values);
-              });console.log("Pearson Result: "+ pearsonResult);
-
+//Pearson Correlation Result
+correlationResult ={
+  intrapersonalinterpret: pearsonResults(intraGwa),
+  interpersonalinterpret: pearsonResults(interGwa),
+  adaptinterpret:         pearsonResults(adaptGwa),
+  stressinterpret:        pearsonResults(stressGwa),
+  moodinterpret:          pearsonResults(moodGwa)
+}
+var pearsonResult = [];
+  $.each(correlationResult, function(keys, values){
+      pearsonResult.push(values);
+  });
+  console.log("Pearson Result: "+ pearsonResult);
 
 
 
@@ -318,97 +246,46 @@ function scatterInterpret(key){
 
 }
 
-function getAverageGwa(gwa){
-  var sum = 0;
-    for( var i = 0; i < gwa.length; i++ ){
-        sum += parseInt( gwa[i], 10 ); //don't forget to add the base
-    }
+function pearsonResults(values) {
+var n = values.length;
+if (n == 0) return 0;
 
-    var avg = (sum/gwa.length).toFixed(4);
+let meanX = 0;
+let meanY = 0;
+for (var i = 0; i < n; i++) {
+meanX += values[i].x / n
+meanY += values[i].y / n
+}console.log(meanX,meanY);
 
-    return avg;
+let num = 0;
+let den1 = 0;
+let den2 = 0;
 
-
+for (var i = 0; i < n; i++) {
+let dx = (values[i].x - meanX);
+let dy = (values[i].y - meanY);
+num += dx * dy
+den1 += dx * dx
+den2 += dy * dy
 }
 
-function getAverageEq(eq){
-  var sum = 0;
-    for( var i = 0; i < eq.length; i++ ){
-        sum += parseFloat( eq[i], 10 ); //don't forget to add the base
-    }
+const den = Math.sqrt(den1) * Math.sqrt(den2);
 
-    var avg = (sum/eq.length).toFixed(4);
+if (den == 0) return 0;
 
-    return avg;
-
-
+return num / den;
 }
 
-function getYYbar(orig,mean){
-
-    var yybar = [];
-    for (var i=0; i < orig.length; i++){
-      var temp = (parseFloat(orig[i])-mean).toFixed(4);
-      yybar.push(temp);
-
-    }
-
-  return yybar;
-
+function assignXY(eq, gwa){
+  var a = [];
+     for(let i=0;i<eq.length;i++){
+         var obj = {x:eq[i],y:parseFloat(gwa[i])};
+         a.push(obj);
+     }
+  return a;
 }
 
-function getXXbar(orig,mean){
 
-  var xxbar = [];
-    for (var i=0; i < orig.length; i++){
-      var temp = (parseFloat(orig[i])-mean).toFixed(4);
-      xxbar.push(temp);
-
-    }
-
-  return xxbar;
-}
-
-function getXXYY(xbar,ybar){
-    var xxyybar = [];
-    for(var i=0; i< xbar.length; i++) {
-      var temp =  (parseFloat(xbar[i])*parseFloat(ybar[i])).toFixed(4);
-      xxyybar.push(temp);
-    }
-
-  return xxyybar;
-
-}
-
-function getxxraise(xbar){
-    var xxraise = [];
-    for(var i=0; i< xbar.length; i++) {
-      var temp =  (Math.pow(parseFloat(xbar[i]),2).toFixed(4));
-      xxraise.push(temp);
-    }
-
-  return xxraise;  
-
-
-}
-
-function getyyraise(ybar){
-    var yyraise = [];
-    for(var i=0; i< ybar.length; i++) {
-      var temp =  (Math.pow(parseFloat(ybar[i]),2).toFixed(4));
-      yyraise.push(temp);
-    }
-
-  return yyraise; 
-}
-
-function getPearsonCorrelationResult(numerator,denominator){
-
-        var correlation = (parseFloat(numerator)/parseFloat(denominator).toFixed(4));
- 
-        return correlation;
-
-}
 
 
 
