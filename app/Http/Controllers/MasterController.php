@@ -112,10 +112,18 @@ class MasterController extends Controller
     public function getCurrentGraph($year, $comparedYear = null){
     $betweenYears = array();
     $betweenComparedYears = array();
+    $betweenYearsPredict = array();
 
     $years =  DB::table('schoolyear')
              ->where('year', '=', $year)
              ->get();
+
+    $currentYear = DB::table('schoolyear')
+                ->orderBy('id','desc')
+                ->take(3)
+                ->get();
+
+
 
     $flagFirst = 0;
     foreach($years as $year){
@@ -158,6 +166,15 @@ class MasterController extends Controller
     }
 
     $pussy['a'] = $schoolYear;
+    $latestYear = DB::table('grades')
+            ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+            ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+            ->whereBetween('grades.schoolyear', [10,11])
+            ->get();
+
+   
+    $pussy['c'] = $latestYear;
+
         
          return json_encode($pussy);
     }

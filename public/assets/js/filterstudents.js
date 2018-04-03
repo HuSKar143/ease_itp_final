@@ -41,8 +41,111 @@ $(function(){
 					var adaptability = [];
 					var mood = [];
 					var gwa = [];
+					var totaleq = [];
+					var gwac = [];
+					console.log(data['a']);
+					console.log(data['c']);
+
+//***********data c DEFAULT EQ and GWA***********
+var eqeq = data['c'].reduce(function(result, current) {
+				        result[current.student_id] = result[current.student_id] || [];
+				        result[current.student_id].push(current);
+				        return result;
+				    }, {});console.log(eqeq);
+                    // console.log(Object.keys(properEQ).length);//length of (data)
+				    var dataLeneq =Object.keys(eqeq).length;
+				    console.log("total stud"+dataLeneq);
+
+				    console.log(eqeq);
+                    //get the individual eq and gwa
+				    var student_totaleq = [];
+				    var student_gwac = [];
+				    $.each(eqeq, function(keys, values){
+				    	var gwaTotalc = 0;
+
+				  		student_totaleq.push({
+				  			studentId : values[0]['student_id'],
+				  			interpersonal : values[0]['interpersonal'],
+				  			intrapersonal : values[0]['intrapersonal'],
+				  			stress : values[0]['stress'],
+				  			adaptability : values[0]['adapt'],
+				  			mood : values[0]['mood'],
+				  			totaleq : values[0]['total_eq']
+				  			});
+
+				  		$.each(values, function(key, value){
+				  			gwaTotalc += value['gwa'];
+				  		});
+
+				  		gwaTotalc = (gwaTotalc/values.length).toFixed(3);
+
+				  		student_gwac.push({
+				  			studentId : values[0]['student_id'],
+				  			studentGWA : gwaTotalc
+						});
+					});
+
+					
 
 
+                        //pushing the individual EQ and GWA
+    					$.each(student_totaleq, function(keys, values){
+    						totaleq.push(values['totaleq']);    						
+   						});
+
+   						$.each(student_gwac, function(keys, values){
+    						gwac.push(values['studentGWA']);
+   						});
+
+   					   	var gwaCopyC = gwac.slice(); 
+   						var totalEqC = totaleq.slice();	
+
+
+//mean
+var xbar = getAverage(totalEqC);
+console.log(totalEqC,gwaCopyC);
+var ybar = getAverage(gwaCopyC);
+
+//excel c
+var xxbar = getdoublebar(totalEqC,xbar);
+
+//excel d
+var yybar = getdoublebar(gwaCopyC,ybar);
+
+//excel f
+var xxraise = getraise2(xxbar).map(Number);
+//excel g
+var yyraise = getraise2(yybar).map(Number);
+//excel i6
+var sumxxbarraise = xxraise.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
+//sumyybarraise I7
+var sumOfyyraise = yyraise.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
+
+var standardX = standardDeviation(xxraise);
+var standardY = standardDeviation(yyraise);
+
+
+var totaleqGwa   = assignXY(totalEqC,gwaCopyC);
+
+var totaleqR = pearsonResults(totaleqGwa);
+
+var slope = totaleqR * (standardY/standardX);
+
+
+var yintercept = ybar - (slope*xbar);
+
+var predict = yintercept+(slope*70);
+console.log(predict);
+
+
+
+
+
+
+
+
+
+//***********data c DEFAULT EQ and GWA***********closing
 
 					var properEQ = data['a'].reduce(function(result, current) {
 				        result[current.student_id] = result[current.student_id] || [];
@@ -67,6 +170,7 @@ $(function(){
 				  			stress : values[0]['stress'],
 				  			adaptability : values[0]['adapt'],
 				  			mood : values[0]['mood'],
+				  			totaleq : values[0]['total_eq']
 				  			});
 
 				  		$.each(values, function(key, value){
@@ -102,7 +206,8 @@ $(function(){
     						intrapersonal.push(values['intrapersonal']);
     						stress.push(values['stress']);
     						adaptability.push(values['adaptability']);
-    						mood.push(values['mood']);    						
+    						mood.push(values['mood']);
+    						totaleq.push(values['totaleq']);    						
    						});
 
 
@@ -283,6 +388,63 @@ function assignXY(eq, gwa){
          a.push(obj);
      }
   return a;
+}
+
+
+//functions for c
+function getAverage(data){
+  var sum = 0;
+    for( var i = 0; i < data.length; i++ ){
+        sum += parseFloat( data[i], 10 ); //don't forget to add the base
+    }
+
+    var avg = (sum/data.length).toFixed(4);
+
+    return avg;
+
+
+}
+
+function getdoublebar(orig,mean){
+
+    var gg = [];
+    for (var i=0; i < orig.length; i++){
+      var temp = (parseFloat(orig[i])-mean).toFixed(4);
+      gg.push(temp);
+
+    }
+
+  return gg;
+
+}
+
+function getraise2(data){
+    var raise = [];
+    for(var i=0; i< data.length; i++) {
+      var temp =  (Math.pow(parseFloat(data[i]),2).toFixed(4));
+      raise.push(temp);
+    }
+
+  return raise;  
+
+
+}
+
+function standardDeviation(numbersArr) {
+    //--CALCULATE AVAREGE--
+    var lint = (numbersArr.length-1);
+    var total = 0;
+    for(var key in numbersArr) 
+       total += numbersArr[key];
+ 
+    //--CALCULATE AVAREGE--
+  
+    //--CALCULATE STANDARD DEVIATION--
+   
+    var SDresult = Math.sqrt(total/lint); 
+    //--CALCULATE STANDARD DEVIATION--
+   	return SDresult;
+    
 }
 
 
