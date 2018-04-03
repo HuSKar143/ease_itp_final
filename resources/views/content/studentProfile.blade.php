@@ -167,6 +167,24 @@
       </div>
 </div>
 </div>
+
+
+<div class="row">
+          <div class="col-lg-6"><!-- Example Pie Chart Card-->
+          <div class="card mb-3">
+            <div class="card-header" style="background-color: #c10000; color:white;">
+             <strong> <i class="fa fa-pie-chart"></i> Prediction Result</div> </strong>
+            <div class="card-body">
+             <i>Interpretation: <div id="predictInterpret"></div> </i>
+            </div>
+            
+          </div>
+          </div>
+        
+        
+   
+</div>
+</div>
     </section>
 
 

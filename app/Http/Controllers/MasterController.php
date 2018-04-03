@@ -30,7 +30,7 @@ class MasterController extends Controller
     public function gendata($x) {
     
             $studentradarData = DB::table('eq')
-                ->select('intrapersonal','interpersonal','stress','adapt','mood')
+                ->select('intrapersonal','interpersonal','stress','adapt','mood','total_eq')
                 ->where('student_id','=', $x)
                 ->get();
 

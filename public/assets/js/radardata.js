@@ -12,6 +12,8 @@ var x = document.getElementById("studentData").getAttribute("value");
 
 
 
+console.log(data[0].total_eq);
+ getPrediction(data[0].total_eq);   
 
 
 var options = {
@@ -78,5 +80,11 @@ var studentRadar = new Chart(ctx, {
             
         });
 
-    
+
 });
+function getPrediction(data){
+    var yintercept = 1.98800;
+    var slope = 0.00308;
+    var predict = yintercept+(slope*data);
+    return $("#predictInterpret").append('<p>' + predict + ': YOUR GWA NEXT YEAR' + '  </p> ');
+}

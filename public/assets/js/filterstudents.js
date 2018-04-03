@@ -133,7 +133,7 @@ var slope = totaleqR * (standardY/standardX);
 
 
 var yintercept = ybar - (slope*xbar);
-
+console.log(yintercept,slope);
 var predict = yintercept+(slope*70);
 console.log(predict);
 
