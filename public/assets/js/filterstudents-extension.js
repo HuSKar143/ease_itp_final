@@ -15,6 +15,9 @@ function compareGraph(){
 
 			var FirstGWA = setDataSlice(firstYear, 'gwa');
 			var SecondGWA = setDataSlice(secondYear, 'gwa');
+			$("#barInterpret").empty();
+			$("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
+			+ "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
 
 			var firstInterpersonal   = setDataToAssign(firstYear,FirstGWA, 'interpersonal');
 			var secondInterpersonal  = setDataToAssign(secondYear,SecondGWA, 'interpersonal');
@@ -25,8 +28,8 @@ function compareGraph(){
 			var firstStress          = setDataToAssign(firstYear,FirstGWA, 'stress');
 			var secondStress         = setDataToAssign(secondYear,SecondGWA, 'stress');
 
-			var firstAdapt           = setDataToAssign(firstYear,FirstGWA, 'adapt');
-			var secondAdapt          = setDataToAssign(secondYear,SecondGWA, 'adapt');
+			var firstAdapt           = setDataToAssign(firstYear,FirstGWA, 'adaptability');
+			var secondAdapt          = setDataToAssign(secondYear,SecondGWA, 'adaptability');
 
 			var firstMood            = setDataToAssign(firstYear,FirstGWA, 'mood');
 			var secondMood           = setDataToAssign(secondYear,SecondGWA, 'mood');
@@ -39,6 +42,8 @@ function compareGraph(){
 					first: pearsonResults(firstIntrapersonal),
 					second: pearsonResults(secondIntrapersonal)
 				};
+
+				console.log(correlatedIntrapersonal);
 			var correlatedStress = {
 					first: pearsonResults(firstStress),
 					second: pearsonResults(secondStress),
@@ -47,12 +52,35 @@ function compareGraph(){
 					first: pearsonResults(firstAdapt),
 					second: pearsonResults(secondAdapt)
 				};
+				console.log(correlatedAdapt);
 			var correlatedMood = {
 					first: pearsonResults(firstMood),
 					second: pearsonResults(secondMood)
 				};
 
-			console.log(correlatedIntrapersonal);
+			comparedCorrelationResult ={
+  			intrapersonalinterpret: pearsonResults(secondIntrapersonal),
+ 		    interpersonalinterpret: pearsonResults(secondInterpersonal),
+  			adaptinterpret:         pearsonResults(secondAdapt),
+  			stressinterpret:        pearsonResults(secondStress),
+  			moodinterpret:          pearsonResults(secondMood)
+}
+var comparedPearsonResult = [];
+  $.each(comparedCorrelationResult, function(keys, values){
+      comparedPearsonResult.push(values);
+  });
+
+
+$("#comparedInter").append('Compared Interpersonal: ' + pearsonResults(secondInterpersonal));
+$("#comparedIntra").append('Compared Intrapersonal: ' + pearsonResults(secondIntrapersonal));
+$("#comparedStress").append('Compared Stress Management: ' + pearsonResults(secondStress));
+$("#comparedAdapt").append('Compared Adaptability: ' + pearsonResults(secondAdapt));
+$("#comparedMood").append('Compared General Mood: ' + pearsonResults(secondMood));
+
+
+
+
+			
 
 			var graphIntraPersonal = drawGraphScatter('intrapersonal', firstYear, secondYear);
 			var graphInterPersonal = drawGraphScatter('interpersonal', firstYear, secondYear);
@@ -65,13 +93,20 @@ function compareGraph(){
 			var graphStressBar = drawGraphBar('stress', firstYear, secondYear);
 			var graphAdaptabilityBar = drawGraphBar('adaptability', firstYear, secondYear);
 			var graphMoodBar = drawGraphBar('mood', firstYear, secondYear);
+
 			
 		});
 
 		getDataForGraph.fail(function(data){
 
 		});
+
+
+
 }
+
+
+
 
 function getStudentInfo(info){
 	var studentInfo = [];
@@ -182,7 +217,7 @@ function drawGraphScatter(key, firstYear, secondYear){
 	var options = {
        title: {
             display: true,
-            text: 'Intrapersonal and GWA Scatterplot',
+            text: key.charAt(0).toUpperCase() +  key.slice(1)  + ' and GWA Scatterplot',
             fontSize: 20,
         },
         scales: {
@@ -221,23 +256,23 @@ var intraData = {
       labels:["GWA","EQ"],
 
         datasets: [{
-            pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
-
-            label: $("#exampleFormControlSelect1").val(),
+           pointBorderWidth:1,
+            pointBorderColor: 'rgba(0, 82, 204,1)',
+            pointBackgroundColor: 'rgba(26, 117, 255,1)',
+            borderColor:'rgba(0, 82, 204,1)',
+            BackgroundColor:'rgba(26, 117, 255,1)',
+            label: "School Year " + $("#exampleFormControlSelect1").val(),
             data: xFirstData
         },{
             pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(255,255,255,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
-
-            label: $("#exampleFormControlSelect2").val(),
+            pointBorderColor: 'rgba(204, 0, 0,1)',
+            pointBackgroundColor: 'rgba(255, 0, 0,1)',
+            borderColor:'rgba(204, 0, 0,1)',
+            BackgroundColor:'rgba(255, 0, 0,1)',
+            label: "School Year " + $("#exampleFormControlSelect2").val(),
             data: xSecondData
+
+
         }]
     };
 
@@ -288,12 +323,26 @@ function drawGraphBar(key, firstyear, secondyear){
     y.push(sum2);
     y.push(sum3);
 
+
+
+    var maxi = 0; 
+
+    if (firstyear.length>secondyear.length){
+
+    	maxi = firstyear.length;
+    }
+
+    else {
+    	maxi = secondyear.length;
+    }
+    
+
 var options = {
         scales: {
             yAxes: [{
                 ticks: {
                     beginAtZero:true,
-                    max: firstyear.length
+                    max: maxi
                 }
             }],
             xAxes: [{
@@ -304,35 +353,49 @@ var options = {
         }
     }
 
+
+
+//red
+
+// 			   borderColor:'rgba(204, 0, 0,1)',
+//             BackgroundColor:'rgba(255, 0, 0,1)',
+
+//blue
+
+			// pointBorderColor: 'rgba(0, 82, 204,1)',
+   //          pointBackgroundColor: 'rgba(26, 117, 255,1)',
+
+
+
 var interData = { 
       labels:["LOW","AVERAGE","HIGH"],
         datasets: [{
-            label: 'Summarized Interpersonal',
+            label: "School Year " + $("#exampleFormControlSelect1").val(),
             data: x,
              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+               'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)'
             ],
             borderWidth: 1
         },
         {
-            label: 'Summarized Interpersonal',
+            label: "School Year " + $("#exampleFormControlSelect2").val(),
             data: y,
              backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(255, 99, 132, 1)'
+                'rgba(26, 117, 255,0.7)',
+                'rgba(26, 117, 255,0.7)',
+                'rgba(26, 117, 255,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(0, 82, 204,1)',
+                'rgba(0, 82, 204,1)',
+                'rgba(0, 82, 204,1)'
             ],
             borderWidth: 1
         }]

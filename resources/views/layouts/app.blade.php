@@ -79,7 +79,7 @@
   
 
 <main>
-<div class="content-wrapper" style="background-color: #d9d9d9;">
+<div class="content-wrapper" style="background-color: #f2f2f2;">
     <div class="container-fluid"> 
 @yield('content')
  </div>

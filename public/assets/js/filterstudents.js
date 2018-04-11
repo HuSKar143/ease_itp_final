@@ -23,7 +23,7 @@ $(function(){
 			});
 			$("#exampleFormControlSelect2").empty();
 			$("#exampleFormControlSelect2").append(options);
-
+      
 			var filteredStudents = $('#filteredStudents'),
             StudentListFilter = $('#StudentListFilter'),
             filteredStudentsDataTable = filteredStudents.DataTable();
@@ -86,8 +86,7 @@ var eqeq = data['c'].reduce(function(result, current) {
 					});
 
 					
-
-
+ 
                         //pushing the individual EQ and GWA
     					$.each(student_totaleq, function(keys, values){
     						totaleq.push(values['totaleq']);    						
@@ -155,7 +154,10 @@ console.log(predict);
                     // console.log(Object.keys(properEQ).length);//length of (data)
 				    var dataLen =Object.keys(properEQ).length;
 				    console.log("total stud"+dataLen);
-
+            $("#barInterpret").empty();
+            $("#barInterpret").append(
+    '<p>' + $("#exampleFormControlSelect1").val() + ': <b>'+ dataLen +'</b><br><b>Legend:</b><br><i>Low: 50-84 <br> Average: 85-114 <br> High: 115-170</i></p>'
+    )
 
                     //get the individual eq and gwa
 				    var student_eq = [];
@@ -333,23 +335,48 @@ graphAdaptabilityBar(adaptabilityPerfectCopy);
 
 //***list of functions***
 
-function scatterInterpret(key){
-	$("#spearmanInterpret").empty();
+function yearInterpret(key){
+
+  //SCATTER PLOT INTERPRETATION
+	$("#pearsonInterpret").empty();
+  $("#pearsonInterpret2").empty();
+
+
 	if (correlationResult[key]<0){
-		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Negative Relationship' + '  </p> ');	
-	}else if(correlationResult[key]>=0 && correlationResult[key]<=0.19){
-		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Very Weak' + '  </p> ');	
-	}else if(correlationResult[key]>=0.20 && correlationResult[key]<=0.39){
-		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Weak' + '  </p> ');	
-	}else if(correlationResult[key]>=0.40 && correlationResult[key]<=0.59){
-		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Moderate' + '  </p> ');	
-	}else if(correlationResult[key]>=0.60 && correlationResult[key]<=0.79){
-		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Strong' + '  </p> ');	
-	}else if(correlationResult[key]>=0.80 && correlationResult[key]<=1.0){
-		$("#spearmanInterpret").append('<p>' + correlationResult[key] + ': Weak' + '  </p> ');	
+		$("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');	
 	}
 
+
+  else if(correlationResult[key]>=0 && correlationResult[key]<=0.19){
+		$("#pearsonInterpret2").append('Strength of Relationship: <b>Very Weak</b>');	
+	}else if(correlationResult[key]>=0.20 && correlationResult[key]<=0.39){
+		$("#pearsonInterpret2").append('Strength of Relationship: <b>Weak</b>');	
+	}else if(correlationResult[key]>=0.40 && correlationResult[key]<=0.59){
+		$("#pearsonInterpret2").append('Strength of Relationship: <b>Moderate</b>');	
+	}else if(correlationResult[key]>=0.60 && correlationResult[key]<=0.79){
+		$("#pearsonInterpret2").append('Strength of Relationship: <b>Strong</b>');	
+	}else if(correlationResult[key]>=0.80 && correlationResult[key]<=1.0){
+		$("#pearsonInterpret2").append('Strength of Relationship: <b>Very Strong</b>');	
+	}
+  if (correlationResult[key]>0){
+    $("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    }
+  else if(correlationResult[key]>=-0.19 && correlationResult[key]<=0){
+    $("#pearsonInterpret2").append('Strength of Relationship: <b>Very Weak</b>');  
+  }else if(correlationResult[key]>=-0.39 && correlationResult[key]<=-0.20){
+    $("#pearsonInterpret2").append('Strength of Relationship: <b>Weak</b> '); 
+  }else if(correlationResult[key]>=-0.59 && correlationResult[key]<=-0.40){
+    $("#pearsonInterpret2").append('Strength of Relationship: <b>Moderate</b> '); 
+  }else if(correlationResult[key]>=-0.79 && correlationResult[key]<=-0.60){
+    $("#pearsonInterpret2").append('Strength of Relationship: <b>Strong</b> '); 
+  }else if(correlationResult[key]>=-1.0 && correlationResult[key]<=-0.8){
+    $("#pearsonInterpret2").append('Strength of Relationship: <b>Very Strong</b>'); 
+  }
+
+   //SCATTER PLOT INTERPRETATION
 }
+
+
 
 function pearsonResults(values) {
 var n = values.length;
@@ -513,10 +540,10 @@ var interData = {
 
         datasets: [{
             pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(51, 102, 255)',
+            pointBorderColor: 'rgba(0, 82, 204,1)',
+            pointBackgroundColor: 'rgba(26, 117, 255,1)',
+            borderColor:'rgba(0, 82, 204,1)',
+            BackgroundColor:'rgba(26, 117, 255,1)',
 
             label: 'INTERPERSONAL and GWA',
             data: data,
@@ -597,10 +624,10 @@ var intraData = {
 
         datasets: [{
             pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
+           pointBorderColor: 'rgba(0, 82, 204,1)',
+            pointBackgroundColor: 'rgba(26, 117, 255,1)',
+            borderColor:'rgba(0, 82, 204,1)',
+            BackgroundColor:'rgba(26, 117, 255,1)',
 
             label: 'INTRAPERSONAL and GWA',
             data: data,
@@ -678,10 +705,10 @@ var stressData = {
 
         datasets: [{
             pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
+            pointBorderColor: 'rgba(0, 82, 204,1)',
+            pointBackgroundColor: 'rgba(26, 117, 255,1)',
+            borderColor:'rgba(0, 82, 204,1)',
+            BackgroundColor:'rgba(26, 117, 255,1)',
 
             label: 'STRESS MANAGEMENT and GWA',
             data: data,
@@ -711,7 +738,7 @@ function graphAdaptabilityScatter(data){
 
        title: {
             display: true,
-            text: 'adaptability and GWA Scatterplot',
+            text: 'Adaptability and GWA Scatterplot',
             fontSize: 20,
         },
 
@@ -763,10 +790,10 @@ var adaptData = {
 
         datasets: [{
             pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
+           pointBorderColor: 'rgba(0, 82, 204,1)',
+            pointBackgroundColor: 'rgba(26, 117, 255,1)',
+            borderColor:'rgba(0, 82, 204,1)',
+            BackgroundColor:'rgba(26, 117, 255,1)',
 
             label: 'ADAPTABILITY and GWA',
             data: data,
@@ -845,10 +872,10 @@ var moodData = {
 
         datasets: [{
             pointBorderWidth:1,
-            pointBorderColor: 'rgba(0,0,0,1)',
-            pointBackgroundColor: 'rgba(0,0,0,1)',
-            borderColor:'rgba(0,0,0,1)',
-            BackgroundColor:'rgba(0,0,0,1)',
+           pointBorderColor: 'rgba(0, 82, 204,1)',
+            pointBackgroundColor: 'rgba(26, 117, 255,1)',
+            borderColor:'rgba(0, 82, 204,1)',
+            BackgroundColor:'rgba(26, 117, 255,1)',
 
             label: 'GENERAL MOOD and GWA',
             data: data,
@@ -904,15 +931,15 @@ var interData = {
 
             label: 'Summarized Interpersonal',
             data: x,
-             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+           backgroundColor: [
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)'
             ],
             borderWidth: 1
         }]
@@ -963,17 +990,17 @@ var intraData = {
 
         datasets: [{
 
-            label: 'Summarized Interpersonal',
+            label: 'Summarized Intrapersonal',
             data: x,
-             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+           backgroundColor: [
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)'
             ],
             borderWidth: 1
         }]
@@ -1025,17 +1052,17 @@ var stressData = {
 
         datasets: [{
 
-            label: 'Summarized Interpersonal',
+            label: 'Summarized stress Management',
             data: x,
-             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+           backgroundColor: [
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)'
             ],
             borderWidth: 1
         }]
@@ -1088,17 +1115,17 @@ var moodData = {
 
         datasets: [{
 
-            label: 'Summarized Interpersonal',
+            label: 'Summarized General Mood',
             data: x,
-             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+           backgroundColor: [
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)'
             ],
             borderWidth: 1
         }]
@@ -1150,17 +1177,17 @@ var adaptData = {
 
         datasets: [{
 
-            label: 'Summarized Interpersonal',
+            label: 'Summarized Adaptability',
             data: x,
-             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+           backgroundColor: [
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)',
+                'rgba(255, 0, 0,0.7)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)',
+                'rgba(204, 0, 0,1)'
             ],
             borderWidth: 1
         }]
