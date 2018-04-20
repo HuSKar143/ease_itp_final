@@ -29,7 +29,7 @@
 
 <body class="fixed-nav sticky-footer" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-darkblue fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top" id="mainNav">
     <a class="navbar-brand" href="#"><h6><strong>EASE SYSTEM</strong></h6></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -136,7 +136,9 @@
     <!-- Custom scripts for this page-->
        <script type="text/javascript" src="{{asset('public/assets/js/selectedNav.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/bootstrap/js/bootstrap-navtabs.min.js')}}" ></script>
-    @yield('script')
+ @yield('script')
 </body>
 
+
+ 
 </html>

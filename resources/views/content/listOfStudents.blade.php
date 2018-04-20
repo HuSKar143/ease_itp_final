@@ -9,9 +9,9 @@
              <strong> <i class="fa fa-address-book-o"></i> List of Students</div></strong>
             <div class="card-body">
 
-<table id="StudentList" class="table">
+<table id="StudentList" class="table table-bordered table-striped table-sm" style="text-align: left;" >
     <thead class="nosort thead-light">
-        <tr>
+        <tr >
             <th>First Name</th>
             <th>Last Name</th>
             <th>Course Name</th>

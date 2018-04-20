@@ -7,6 +7,11 @@ use View;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Students;
+use App\Grades;
+use App\Eq;
+use App\schoolyear;
+use Maatwebsite\Excel\Facades\Excel;
 use Hash;
 
 
@@ -165,11 +170,27 @@ class MasterController extends Controller
     
     }
 
+    $date = date('Y');
+    $currentSchoolYear = $date.'-'.($date + 1);
+   
+    $thisYears = DB::table('schoolyear')
+            ->where('schoolyear.year', $currentSchoolYear)
+            ->get();
+
+        $flagYears = 0;
+        $curriculumYears = array();
+        foreach ($thisYears as $year) {
+            if($flagYears < count($thisYears)-1){
+                $curriculumYears[] = $year->id;
+            }
+        }
+
+
     $pussy['a'] = $schoolYear;
     $latestYear = DB::table('grades')
             ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
             ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
-            ->whereBetween('grades.schoolyear', [10,11])
+            ->whereBetween('grades.schoolyear', [10, 11])
             ->get();
 
    
@@ -210,4 +231,117 @@ class MasterController extends Controller
                 'filter'=>$filterStudents,
                 'gender'=>$gender
             ]);
-}}
+}
+
+public function importStudentInformation(Request $request){
+    $test = "";
+    if($request->hasFile("importedFile")){
+        $path = $request->file("importedFile")->getRealPath();
+
+        Excel::load($path, function($read) use($path){
+    
+            $excel = Excel::load($path)->get();
+
+            $headers = $excel->first()->toArray();
+          
+            $read->each(function($sheet) use($headers){
+                $headers = $sheet->getHeading();
+                $sheet->each(function($row) use($headers){   
+                 
+                 $students = new Students;
+                 $eq = new Eq;
+                
+
+                 $students->firstname = $row[$headers[1]];
+                 $students->lastname = $row[$headers[2]];
+                 $students->coursename = $row[$headers[3]];
+                 $students->gender = $row[$headers[4]];
+                 $students->age = $row[$headers[5]];
+                 $students->yearlevel = $row[$headers[6]];
+                 $students->section = $row[$headers[7]];
+
+                 $students->save();
+
+                 $eq->student_id = $students->id;
+                 $eq->intrapersonal = $row[$headers[9]];
+                 $eq->interpersonal = $row[$headers[10]];
+                 $eq->stress = $row[$headers[11]];
+                 $eq->adapt = $row[$headers[12]];
+                 $eq->mood = $row[$headers[13]];
+                 $eq->total_eq = $row[$headers[14]];
+
+                 $eq->save();
+
+                 $lastCount = 15;
+                 
+
+                 for($x = $lastCount ; $x < count($headers) ; $x++){
+                    $grades = new Grades;
+
+                    $explodeCurriculum = explode("_", $headers[$x]);
+                
+                    switch(count($explodeCurriculum)){
+                        case 2 :
+                            $year = $explodeCurriculum[0].'-'.($explodeCurriculum[0]+1);
+                            $semester = ucfirst($explodeCurriculum[1]);
+
+                            $schoolYear = Schoolyear::where('year', $year)
+                                            ->where('semester', $semester)
+                                            ->first();
+
+                            if($row[$headers[$x]] != null){
+                                $grades->student_id = $students->id;
+                                $grades->schoolyear = $schoolYear->id;
+                                $grades->gwa = $row[$headers[$x]];                 
+                                
+                                $grades->save();
+                            }
+                        
+                                          
+                            break;
+                        case 3 :
+                            $year = $explodeCurriculum[0].'-'.($explodeCurriculum[0]+1);
+                            $semester = $explodeCurriculum[1].' '.ucfirst($explodeCurriculum[2].'ester');
+
+                            $schoolYear = Schoolyear::where('year', $year)
+                                            ->where('semester', $semester)
+                                            ->first();
+
+                            if($row[$headers[$x]] != null){
+                                $grades->student_id = $students->id;
+                                $grades->schoolyear = $schoolYear->id;
+                                $grades->gwa = $row[$headers[$x]];                 
+                                
+                                $grades->save();
+                            }
+
+                            break;
+
+                        default :
+
+                            exit;
+                    }
+
+                 }
+
+                }
+            );
+        });
+        });
+    }
+
+    return redirect('/filterStudents')->with("success", "The file imported successfully!");
+
+}
+
+public function getPrintData($x, $y = null){
+
+     return view('content.print',[
+                            'x' => $x,
+                            'y' => $y
+                        ]);
+
+}
+
+
+}

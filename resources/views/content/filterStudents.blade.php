@@ -11,6 +11,8 @@
 
 <div class="row">
 
+
+
  <div class="column col-lg-12" >
 
 <!-- Example Pie Chart Card-->
@@ -23,12 +25,7 @@
 {{-- Dropdown filter --}}
  <h4>Filter</h4>
 <div class="row" >
-
-
-
-
-
-  <div class="column" style="padding: 5px 5px 5px 5px;" >
+<div class="column" style="padding: 5px 5px 5px 5px;" >
      <select class="form-control" id="exampleFormControlSelect1">
       @foreach ($filter as $val)
           <option selected hidden value="0">FROM</option>
@@ -47,7 +44,9 @@
   </div>
     <div class="column" >
       <button class="btn btn-primary btn-compare-graph" style="margin-top: 5px;">Compare</button>
+       <a href="" target="_blank" class="btn btn-primary print" style="margin-top: 5px;"><span class="fa fa-print"></span> Print</a>
     </div>
+   
 </div>
 
 
@@ -180,5 +179,30 @@
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents-extension.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/dropDown.js')}}"></script>
+     <!-- <script type="text/javascript">
+      $(function(){
+        $(".print").click(function(event){
+          var oldBody = document.body.innerHTML;
+          var newBody = "<html><head><title></title></head><body>" + 
+               "test" + "</body>";
+          document.body.innerHTML = newBody;
+          window.print();
+          document.body.innerHTML = oldBody;
+        });
+      });
+
+     </script> -->
+     <script type="text/javascript">
+       $('.print').click(function(event){
+        var select = $("#exampleFormControlSelect1").val();
+        var select1 = $("#exampleFormControlSelect2").val();
+
+
+        $(this).attr('href', 'http://localhost/ease_itp_final/getPrintData/'+select+'/'+select1);
+
+       });
+
+
+     </script>
 
 @endsection

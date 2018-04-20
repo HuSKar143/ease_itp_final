@@ -4330,7 +4330,7 @@ tbody.collapse.show {
 }
 
 .navbar-light .navbar-brand {
-  color : white; 
+  color: #FEFFFF; 
   font-size: 10pt;
 }
 
@@ -4397,7 +4397,7 @@ color: white;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.75);
+  color: yellow;
 }
 
 .navbar-dark .navbar-nav .nav-link.disabled {
@@ -6142,7 +6142,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color:  #001d4d !important;
+  background-color:  #17252A !important;
 }
 
 
