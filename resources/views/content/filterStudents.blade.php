@@ -78,11 +78,11 @@
 
  <div class="tabbable full-width-tabs">
   <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-    <li onclick ="yearInterpret('intrapersonalinterpret')"><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
-    <li onclick ="yearInterpret('interpersonalinterpret')"><a data-toggle="tab" href="#interpersonalContainer">Interpersonal </a></li>
-    <li onclick ="yearInterpret('stressinterpret')"><a data-toggle="tab" href="#stressContainer">Stress Management</a></li>
-    <li onclick ="yearInterpret('adaptinterpret')"><a data-toggle="tab" href="#adaptabilityContainer">Adaptability</a></li>
-    <li onclick ="yearInterpret('moodinterpret')"><a data-toggle="tab" href="#moodContainer">General Mood</a></li>
+    <li onclick ="yearInterpret('intrapersonalinterpret'); comparedInterpret('intrapersonalinterpret')"><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
+    <li onclick ="yearInterpret('interpersonalinterpret'); comparedInterpret('interpersonalinterpret')"><a data-toggle="tab" href="#interpersonalContainer">Interpersonal </a></li>
+    <li onclick ="yearInterpret('stressinterpret'); comparedInterpret('stressinterpret')"><a data-toggle="tab" href="#stressContainer">Stress Management</a></li>
+    <li onclick ="yearInterpret('adaptinterpret'); comparedInterpret('adaptinterpret')"><a data-toggle="tab" href="#adaptabilityContainer">Adaptability</a></li>
+    <li onclick ="yearInterpret('moodinterpret'); comparedInterpret('moodinterpret')"><a data-toggle="tab" href="#moodContainer">General Mood</a></li>
   </ul>
  </div>
  </div>
@@ -102,14 +102,18 @@
   <div class="card-footer bg-transparent"><b>Interpretation: </b><br>
   <p id="pearsonInterpret"></p>
   <p id="pearsonInterpret2"></p>
-  <hr>
+ 
   <i>
   <p id="comparedInterpret"></p>
   <p id="comparedInterpret2"></p>
 
 </i>
 
-<hr>
+{{-- Store prediction values --}}
+ <p id="wadap">  </p> 
+ <p id="wadap2"> </p> 
+ <p id="wadap3"> </p>
+
 
 <p id="comparedInter"> </p>
 <p id="comparedIntra"> </p>

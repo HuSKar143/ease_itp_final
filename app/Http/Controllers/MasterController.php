@@ -34,10 +34,20 @@ class MasterController extends Controller
 
     public function gendata($x) {
     
-            $studentradarData = DB::table('eq')
+            $studentradarData['a'] = DB::table('eq')
                 ->select('intrapersonal','interpersonal','stress','adapt','mood','total_eq')
                 ->where('student_id','=', $x)
                 ->get();
+
+            $latestYear = DB::table('grades')
+            ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+            ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+            ->whereBetween('grades.schoolyear', [10, 11])
+            ->get();
+            $studentradarData['b'] = $latestYear;
+
+   
+
 
           
         return json_encode($studentradarData);
@@ -59,6 +69,12 @@ class MasterController extends Controller
     public function listOfStudents(){
 
     	return view('content.listOfStudents');
+    }
+
+    public function getPredictionData(){
+
+
+
     }
 
 

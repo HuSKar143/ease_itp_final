@@ -3,5 +3,5 @@ function getPrediction(data){
 	var slope = 0.00308;
 	var predict = yintercept+(slope*data);
 alert(predict);
-	return $("#predictInterpret").append('<p>' + predict + ': YOUR GWA NEXT YEAR' + '  </p> ');
+	return $("#predictInterpret").append('hELLO');
 }

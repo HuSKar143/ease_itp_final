@@ -1,105 +1,120 @@
+var year;
+var comparedCorrelationResult = {};
 
-function compareGraph($graphData1 = $("#exampleFormControlSelect1").val(), $graphData2 = $("#exampleFormControlSelect2").val()){
-	var year = $graphData1;
-	var yearToCompared = $graphData2;
 
-	var getDataForGraph = $.ajax({
-		url: 'http://localhost/ease_itp_final/getFilterGraph/'+ year + '/'+ yearToCompared,
-		method: 'get',
-		dataType: 'json'
-	});
+function compareGraph(){
+    year = $("#exampleFormControlSelect1").val();
+    var yearToCompared = $("#exampleFormControlSelect2").val();
 
-		getDataForGraph.done(function(data){
-			var firstYear = getStudentInfo(data['a']);
-			var secondYear = getStudentInfo(data['b']);
+    var getDataForGraph = $.ajax({
+        url: 'http://localhost/ease_itp_final/getFilterGraph/'+ year + '/'+ yearToCompared,
+        method: 'get',
+        dataType: 'json'
+    });
+       
+        getDataForGraph.done(function(data){
+            var firstYear = getStudentInfo(data['a']);
+            var secondYear = getStudentInfo(data['b']);
 
-			var FirstGWA = setDataSlice(firstYear, 'gwa');
-			var SecondGWA = setDataSlice(secondYear, 'gwa');
-			$("#barInterpret").empty();
-			$("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
-			+ "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
+            var FirstGWA = setDataSlice(firstYear, 'gwa');
+            var SecondGWA = setDataSlice(secondYear, 'gwa');
+            $("#barInterpret").empty();
+            $("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
+            + "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
 
-			var firstInterpersonal   = setDataToAssign(firstYear,FirstGWA, 'interpersonal');
-			var secondInterpersonal  = setDataToAssign(secondYear,SecondGWA, 'interpersonal');
+            var firstInterpersonal   = setDataToAssign(firstYear,FirstGWA, 'interpersonal');
+            var secondInterpersonal  = setDataToAssign(secondYear,SecondGWA, 'interpersonal');
 
-			var firstIntrapersonal   = setDataToAssign(firstYear,FirstGWA, 'intrapersonal');
-			var secondIntrapersonal  = setDataToAssign(secondYear,SecondGWA, 'intrapersonal');
+            var firstIntrapersonal   = setDataToAssign(firstYear,FirstGWA, 'intrapersonal');
+            var secondIntrapersonal  = setDataToAssign(secondYear,SecondGWA, 'intrapersonal');
 
-			var firstStress          = setDataToAssign(firstYear,FirstGWA, 'stress');
-			var secondStress         = setDataToAssign(secondYear,SecondGWA, 'stress');
+            var firstStress          = setDataToAssign(firstYear,FirstGWA, 'stress');
+            var secondStress         = setDataToAssign(secondYear,SecondGWA, 'stress');
 
-			var firstAdapt           = setDataToAssign(firstYear,FirstGWA, 'adaptability');
-			var secondAdapt          = setDataToAssign(secondYear,SecondGWA, 'adaptability');
+            var firstAdapt           = setDataToAssign(firstYear,FirstGWA, 'adaptability');
+            var secondAdapt          = setDataToAssign(secondYear,SecondGWA, 'adaptability');
 
-			var firstMood            = setDataToAssign(firstYear,FirstGWA, 'mood');
-			var secondMood           = setDataToAssign(secondYear,SecondGWA, 'mood');
+            var firstMood            = setDataToAssign(firstYear,FirstGWA, 'mood');
+            var secondMood           = setDataToAssign(secondYear,SecondGWA, 'mood');
 
-			var correlatedInterpersonal = {
-					first: pearsonResults(firstInterpersonal),
-					second: pearsonResults(secondInterpersonal)
-				};
-			var correlatedIntrapersonal = {
-					first: pearsonResults(firstIntrapersonal),
-					second: pearsonResults(secondIntrapersonal)
-				};
+            var correlatedInterpersonal = {
+                    first: pearsonResults(firstInterpersonal),
+                    second: pearsonResults(secondInterpersonal)
+                };
+            var correlatedIntrapersonal = {
+                    first: pearsonResults(firstIntrapersonal),
+                    second: pearsonResults(secondIntrapersonal)
+                };
 
-				console.log(correlatedIntrapersonal);
-			var correlatedStress = {
-					first: pearsonResults(firstStress),
-					second: pearsonResults(secondStress),
-				};
-			var correlatedAdapt = {
-					first: pearsonResults(firstAdapt),
-					second: pearsonResults(secondAdapt)
-				};
-				console.log(correlatedAdapt);
-			var correlatedMood = {
-					first: pearsonResults(firstMood),
-					second: pearsonResults(secondMood)
-				};
+                console.log(correlatedIntrapersonal);
+            var correlatedStress = {
+                    first: pearsonResults(firstStress),
+                    second: pearsonResults(secondStress),
+                };
+            var correlatedAdapt = {
+                    first: pearsonResults(firstAdapt),
+                    second: pearsonResults(secondAdapt)
+                };
+                console.log(correlatedAdapt);
+            var correlatedMood = {
+                    first: pearsonResults(firstMood),
+                    second: pearsonResults(secondMood)
+                };
 
-			comparedCorrelationResult ={
-  			intrapersonalinterpret: pearsonResults(secondIntrapersonal),
- 		    interpersonalinterpret: pearsonResults(secondInterpersonal),
-  			adaptinterpret:         pearsonResults(secondAdapt),
-  			stressinterpret:        pearsonResults(secondStress),
-  			moodinterpret:          pearsonResults(secondMood)
-}
+            comparedCorrelationResult ={
+            intrapersonalinterpret: pearsonResults(secondIntrapersonal),
+            interpersonalinterpret: pearsonResults(secondInterpersonal),
+            adaptinterpret:         pearsonResults(secondAdapt),
+            stressinterpret:        pearsonResults(secondStress),
+            moodinterpret:          pearsonResults(secondMood)
+
+
+
+
+
+
+} 
+
+
+
+
+    
+ 
 var comparedPearsonResult = [];
   $.each(comparedCorrelationResult, function(keys, values){
       comparedPearsonResult.push(values);
   });
 
 
-$("#comparedInter").append('Compared Interpersonal: ' + pearsonResults(secondInterpersonal));
-$("#comparedIntra").append('Compared Intrapersonal: ' + pearsonResults(secondIntrapersonal));
-$("#comparedStress").append('Compared Stress Management: ' + pearsonResults(secondStress));
-$("#comparedAdapt").append('Compared Adaptability: ' + pearsonResults(secondAdapt));
-$("#comparedMood").append('Compared General Mood: ' + pearsonResults(secondMood));
+
+// $("#comparedIntra").append('Compared Intrapersonal: ' + pearsonResults(secondIntrapersonal));
+// $("#comparedStress").append('Compared Stress Management: ' + pearsonResults(secondStress));
+// $("#comparedAdapt").append('Compared Adaptability: ' + pearsonResults(secondAdapt));
+// $("#comparedMood").append('Compared General Mood: ' + pearsonResults(secondMood));
 
 
 
 
-			
+            
 
-			var graphIntraPersonal = drawGraphScatter('intrapersonal', firstYear, secondYear);
-			var graphInterPersonal = drawGraphScatter('interpersonal', firstYear, secondYear);
-			var graphStress = drawGraphScatter('stress', firstYear, secondYear);
-			var graphAdapt = drawGraphScatter('adaptability', firstYear, secondYear);
-			var graphMood = drawGraphScatter('mood', firstYear, secondYear);
+            var graphIntraPersonal = drawGraphScatter('intrapersonal', firstYear, secondYear);
+            var graphInterPersonal = drawGraphScatter('interpersonal', firstYear, secondYear);
+            var graphStress = drawGraphScatter('stress', firstYear, secondYear);
+            var graphAdapt = drawGraphScatter('adaptability', firstYear, secondYear);
+            var graphMood = drawGraphScatter('mood', firstYear, secondYear);
 
-			var graphIntraPersonalBar = drawGraphBar('intrapersonal', firstYear, secondYear);
-			var graphInterPersonalBar = drawGraphBar('interpersonal', firstYear, secondYear);
-			var graphStressBar = drawGraphBar('stress', firstYear, secondYear);
-			var graphAdaptabilityBar = drawGraphBar('adaptability', firstYear, secondYear);
-			var graphMoodBar = drawGraphBar('mood', firstYear, secondYear);
+            var graphIntraPersonalBar = drawGraphBar('intrapersonal', firstYear, secondYear);
+            var graphInterPersonalBar = drawGraphBar('interpersonal', firstYear, secondYear);
+            var graphStressBar = drawGraphBar('stress', firstYear, secondYear);
+            var graphAdaptabilityBar = drawGraphBar('adaptability', firstYear, secondYear);
+            var graphMoodBar = drawGraphBar('mood', firstYear, secondYear);
 
-			
-		});
+            
+        });
 
-		getDataForGraph.fail(function(data){
+        getDataForGraph.fail(function(data){
 
-		});
+        });
 
 
 
@@ -107,26 +122,71 @@ $("#comparedMood").append('Compared General Mood: ' + pearsonResults(secondMood)
 
 
 
+   function comparedInterpret(key) {
 
+  // $("#comparedInter").empty();
+  //   $("#comparedInter").append("<font color='blue'><b>Compared Year</b></font>");
+  // $("#comparedInter").append("<br>School Year: <b>" + $("#exampleFormControlSelect2").val());
+  // $("#comparedInter").append('<br>Correlation Coefficient: <b>' + comparedcomparedCorrelationResult[key]);
+
+$("#comparedInter").empty();
+$("#comparedIntra").empty();
+$("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </font><br>');
+  if (comparedCorrelationResult[key]<0){
+        $("#comparedInter").append('School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
+     }
+
+
+    else if(comparedCorrelationResult[key]>=0 && comparedCorrelationResult[key]<=0.19){
+        $("#comparedIntra").append('Strength of Relationship: <b>Very Weak</b>');   
+    }else if(comparedCorrelationResult[key]>=0.20 && comparedCorrelationResult[key]<=0.39){
+        $("#comparedIntra").append('Strength of Relationship: <b>Weak</b>');    
+    }else if(comparedCorrelationResult[key]>=0.40 && comparedCorrelationResult[key]<=0.59){
+        $("#comparedIntra").append('Strength of Relationship: <b>Moderate</b>');    
+    }else if(comparedCorrelationResult[key]>=0.60 && comparedCorrelationResult[key]<=0.79){
+        $("#comparedIntra").append('Strength of Relationship: <b>Strong</b>');  
+    }else if(comparedCorrelationResult[key]>=0.80 && comparedCorrelationResult[key]<=1.0){
+        $("#comparedIntra").append('Strength of Relationship: <b>Very Strong</b>'); 
+    }
+
+
+
+  if (comparedCorrelationResult[key]>0){
+    $("#comparedInter").append('School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    }
+  else if(comparedCorrelationResult[key]>=-0.19 && comparedCorrelationResult[key]<=0){
+    $("#comparedIntra").append('Strength of Relationship: <b>Very Weak</b>');  
+  }else if(comparedCorrelationResult[key]>=-0.39 && comparedCorrelationResult[key]<=-0.20){
+    $("#comparedIntra").append('Strength of Relationship: <b>Weak</b> '); 
+  }else if(comparedCorrelationResult[key]>=-0.59 && comparedCorrelationResult[key]<=-0.40){
+    $("#comparedIntra").append('Strength of Relationship: <b>Moderate</b> '); 
+  }else if(comparedCorrelationResult[key]>=-0.79 && comparedCorrelationResult[key]<=-0.60){
+    $("#comparedIntra").append('Strength of Relationship: <b>Strong</b> '); 
+  }else if(comparedCorrelationResult[key]>=-1.0 && comparedCorrelationResult[key]<=-0.8){
+    $("#comparedIntra").append('Strength of Relationship: <b>Very Strong</b>'); 
+  }
+
+
+}
 function getStudentInfo(info){
-	var studentInfo = [];
-	for(x=0; x<info.length; x++){
-		var gwaAverage = 0;
-		if(info[x+1] != null &&info[x]['student_id'] == info[x+1]['student_id']){
-			gwaAverage += (info[x]['gwa'] + info[x+1]['gwa']) / 2;
-			studentInfo.push({
-				studentId : info[x]['student_id'],
-				interpersonal : info[x]['interpersonal'],
-				intrapersonal : info[x]['intrapersonal'],
-				stress : info[x]['stress'],
-				adaptability : info[x]['adapt'],
-				mood : info[x]['mood'],
-				gwa : gwaAverage
-			});
-			x += 1;
-		}
-	}	
-	return studentInfo;
+    var studentInfo = [];
+    for(x=0; x<info.length; x++){
+        var gwaAverage = 0;
+        if(info[x+1] != null &&info[x]['student_id'] == info[x+1]['student_id']){
+            gwaAverage += (info[x]['gwa'] + info[x+1]['gwa']) / 2;
+            studentInfo.push({
+                studentId : info[x]['student_id'],
+                interpersonal : info[x]['interpersonal'],
+                intrapersonal : info[x]['intrapersonal'],
+                stress : info[x]['stress'],
+                adaptability : info[x]['adapt'],
+                mood : info[x]['mood'],
+                gwa : gwaAverage
+            });
+            x += 1;
+        }
+    }   
+    return studentInfo;
 }
 
 function pearsonResults(values) {
@@ -195,26 +255,26 @@ function assignXY(eq, gwa){
 
 function drawGraphScatter(key, firstYear, secondYear){
 
-	
-	var xFirstData = [];
-	var xSecondData = [];
+    
+    var xFirstData = [];
+    var xSecondData = [];
 
 
-	for(x=0; x<firstYear.length; x++){
-		xFirstData.push({
-			x: firstYear[x]['gwa'],
-			y: firstYear[x][key]
-		});
-	}
+    for(x=0; x<firstYear.length; x++){
+        xFirstData.push({
+            x: firstYear[x]['gwa'],
+            y: firstYear[x][key]
+        });
+    }
 
-	for(x=0; x<secondYear.length; x++){
-		xSecondData.push({
-			x: secondYear[x]['gwa'],
-			y: secondYear[x][key]
-		});
-	}
+    for(x=0; x<secondYear.length; x++){
+        xSecondData.push({
+            x: secondYear[x]['gwa'],
+            y: secondYear[x][key]
+        });
+    }
 
-	var options = {
+    var options = {
        title: {
             display: true,
             text: key.charAt(0).toUpperCase() +  key.slice(1)  + ' and GWA Scatterplot',
@@ -290,10 +350,10 @@ var scatterChart = new Chart(ctx, {
 
 function drawGraphBar(key, firstyear, secondyear){
 
-	var xFirstData = [];
-	var xSecondData = [];
-	
-	var x = [],sum=0,sum2=0,sum3=0;
+    var xFirstData = [];
+    var xSecondData = [];
+    
+    var x = [],sum=0,sum2=0,sum3=0;
     for(let i=0;i<firstyear.length;i++){
         if(firstyear[i][key]>=50 && firstyear[i][key]<=84){
             sum =sum +1;
@@ -329,11 +389,11 @@ function drawGraphBar(key, firstyear, secondyear){
 
     if (firstyear.length>secondyear.length){
 
-    	maxi = firstyear.length;
+        maxi = firstyear.length;
     }
 
     else {
-    	maxi = secondyear.length;
+        maxi = secondyear.length;
     }
     
 
@@ -357,12 +417,12 @@ var options = {
 
 //red
 
-// 			   borderColor:'rgba(204, 0, 0,1)',
+//             borderColor:'rgba(204, 0, 0,1)',
 //             BackgroundColor:'rgba(255, 0, 0,1)',
 
 //blue
 
-			// pointBorderColor: 'rgba(0, 82, 204,1)',
+            // pointBorderColor: 'rgba(0, 82, 204,1)',
    //          pointBackgroundColor: 'rgba(26, 117, 255,1)',
 
 

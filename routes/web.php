@@ -38,5 +38,6 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
  Route::get('/summaryGraph','MasterController@getSummaryGraph');
  // Route::get('/getFilterGraph/{to}/{from}/{qwe}/{ewq}', 'MasterController@getCurrentGraph');
 Route::post('/import/excel', 'MasterController@importStudentInformation');
+Route::post('/studentProfile/eut', 'MasterController@getPredictionData');
 
 Route::get('/getPrintData/{x}/{y?}', 'MasterController@getPrintData');

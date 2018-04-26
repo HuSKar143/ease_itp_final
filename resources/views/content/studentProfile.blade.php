@@ -22,6 +22,12 @@
             <div class="card-body">
 
 
+
+
+ <div class="card card-inverse card-primary mb-3">
+            <div class="card-header"  style="background-color: #002663; color: white; ">
+             <strong><i class="fa fa-drivers-license-o" style=" margin-top:1%;"></i> Profile</div></strong>
+ <div class="card-body">            
 <div class="row">
     
  <div class="col-md-2">
@@ -125,12 +131,9 @@
 </div>
 </div>
 @endforeach
-
 </div>
 </div>
-
-</section>
-
+</div>
   <!--<div class="studentinfo"> 
   <h1 class="info"> Name: </h1> <br>
   <h1 class="info"> Address: </h1><br>
@@ -140,7 +143,7 @@
 </div> -->
 
 
-<div class="row">
+<div class="row" style="margin-top: 4%;">
           <div class="col-lg-6"><!-- Example Pie Chart Card-->
           <div class="card mb-3">
             <div class="card-header" style="background-color: #c10000; color:white;">
@@ -149,6 +152,10 @@
              @foreach ($profile as $val)
               <canvas id="studentData" value="<?php echo $val->id ?>" class="studentRadar"  > </canvas>
               @endforeach 
+            </div>
+
+            <div class="card-footer bg-transparent">
+            <p id="interpretEQ"></p>
             </div>
             
           </div>
@@ -163,6 +170,11 @@
                   <canvas id="myChart"  class="lineChart" value=" <?php echo $val->id ?>" ></canvas>
                 @endforeach 
         </div>
+
+         <div class="card-footer bg-transparent">
+
+        <p id="interpretGWA"></p>
+        </div>
         
       </div>
 </div>
@@ -176,6 +188,7 @@
              <strong> <i class="fa fa-pie-chart"></i> Prediction Result</div> </strong>
             <div class="card-body">
              <i>Interpretation: <div id="predictInterpret"></div> </i>
+            
             </div>
             
           </div>
@@ -191,6 +204,8 @@
 
 
 
+
+
 @endsection 
 
 @section('script')
@@ -198,6 +213,8 @@
     <script type="text/javascript" src="{{asset('public/assets/chart.js/chart.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/js/lineChart.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/js/radardata.js')}}"></script>
+
+
 @endsection
 
 

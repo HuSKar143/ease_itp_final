@@ -1,5 +1,6 @@
 var correlationResult = null;
 
+
 $(function(){
 
 		$(".btn-compare-graph").click(function(event){
@@ -46,95 +47,10 @@ $(function(){
 					console.log(data['a']);
 					console.log(data['c']);
 
-//***********data c DEFAULT EQ and GWA***********
-var eqeq = data['c'].reduce(function(result, current) {
-				        result[current.student_id] = result[current.student_id] || [];
-				        result[current.student_id].push(current);
-				        return result;
-				    }, {});console.log(eqeq);
-                    // console.log(Object.keys(properEQ).length);//length of (data)
-				    var dataLeneq =Object.keys(eqeq).length;
-				    console.log("total stud"+dataLeneq);
-
-				    console.log(eqeq);
-                    //get the individual eq and gwa
-				    var student_totaleq = [];
-				    var student_gwac = [];
-				    $.each(eqeq, function(keys, values){
-				    	var gwaTotalc = 0;
-
-				  		student_totaleq.push({
-				  			studentId : values[0]['student_id'],
-				  			interpersonal : values[0]['interpersonal'],
-				  			intrapersonal : values[0]['intrapersonal'],
-				  			stress : values[0]['stress'],
-				  			adaptability : values[0]['adapt'],
-				  			mood : values[0]['mood'],
-				  			totaleq : values[0]['total_eq']
-				  			});
-
-				  		$.each(values, function(key, value){
-				  			gwaTotalc += value['gwa'];
-				  		});
-
-				  		gwaTotalc = (gwaTotalc/values.length).toFixed(3);
-
-				  		student_gwac.push({
-				  			studentId : values[0]['student_id'],
-				  			studentGWA : gwaTotalc
-						});
-					});
-
-					
- 
-                        //pushing the individual EQ and GWA
-    					$.each(student_totaleq, function(keys, values){
-    						totaleq.push(values['totaleq']);    						
-   						});
-
-   						$.each(student_gwac, function(keys, values){
-    						gwac.push(values['studentGWA']);
-   						});
-
-   					   	var gwaCopyC = gwac.slice(); 
-   						var totalEqC = totaleq.slice();	
 
 
-//mean
-var xbar = getAverage(totalEqC);
-console.log(totalEqC,gwaCopyC);
-var ybar = getAverage(gwaCopyC);
-
-//excel c
-var xxbar = getdoublebar(totalEqC,xbar);
-
-//excel d
-var yybar = getdoublebar(gwaCopyC,ybar);
-
-//excel f
-var xxraise = getraise2(xxbar).map(Number);
-//excel g
-var yyraise = getraise2(yybar).map(Number);
-//excel i6
-var sumxxbarraise = xxraise.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-//sumyybarraise I7
-var sumOfyyraise = yyraise.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-
-var standardX = standardDeviation(xxraise);
-var standardY = standardDeviation(yyraise);
 
 
-var totaleqGwa   = assignXY(totalEqC,gwaCopyC);
-
-var totaleqR = pearsonResults(totaleqGwa);
-
-var slope = totaleqR * (standardY/standardX);
-
-
-var yintercept = ybar - (slope*xbar);
-console.log(yintercept,slope);
-var predict = yintercept+(slope*70);
-console.log(predict);
 
 
 
@@ -157,7 +73,11 @@ console.log(predict);
             $("#barInterpret").empty();
             $("#barInterpret").append(
     '<p>' + $("#exampleFormControlSelect1").val() + ': <b>'+ dataLen +'</b><br><b>Legend:</b><br><i>Low: 50-84 <br> Average: 85-114 <br> High: 115-170</i></p>'
-    )
+    )           
+                $("#wadap").append("yintecept ni");
+                $("#wadap2").append("slope ni");
+                $("#wadap3").append("ybar ni");
+        
 
                     //get the individual eq and gwa
 				    var student_eq = [];
@@ -340,6 +260,7 @@ function yearInterpret(key){
   //SCATTER PLOT INTERPRETATION
 	$("#pearsonInterpret").empty();
   $("#pearsonInterpret2").empty();
+
 
 
 	if (correlationResult[key]<0){
