@@ -36,6 +36,7 @@ $(function(){
 				success: function(data){
                     console.log(data);
 
+          var studName = [];
 					var interpersonal = [];
 					var intrapersonal = [];
 					var stress = [];
@@ -86,6 +87,7 @@ $(function(){
 				    	var gwaTotal = 0;
 
 				  		student_eq.push({
+                studName : values[0]['lastname'],
 				  			studentId : values[0]['student_id'],
 				  			interpersonal : values[0]['interpersonal'],
 				  			intrapersonal : values[0]['intrapersonal'],
@@ -124,6 +126,7 @@ $(function(){
 
                         //pushing the individual EQ and GWA
     					$.each(student_eq, function(keys, values){
+                studName.push(values['studName']);
     						interpersonal.push(values['interpersonal']);
     						intrapersonal.push(values['intrapersonal']);
     						stress.push(values['stress']);
@@ -150,6 +153,7 @@ $(function(){
                       
 
 // *****************variables to be used on graphs*****************
+                        var namePerfectCopy = studName.slice();console.log(namePerfectCopy);
                         var gwaPerfectCopy = gwa.slice(); 
                         var interpersonalPerfectCopy = interpersonal.slice();
                         var intrapersonalPerfectCopy = intrapersonal.slice();
@@ -181,6 +185,17 @@ var pearsonResult = [];
       pearsonResult.push(values);
   });
   console.log("Pearson Result: "+ pearsonResult);
+
+
+//********TABLE REPORT*********
+//********TABLE REPORT*********
+//********TABLE REPORT*********
+var reportAllEq = [];
+    for(let i=0;i<namePerfectCopy.length;i++){
+      var obj = {name:namePerfectCopy[i],inter:interpersonalPerfectCopy[i],intra:intrapersonalPerfectCopy[i],adapt:adaptabilityPerfectCopy[i],stress:stressPerfectCopy[i],mood:moodPerfectCopy[i]};
+      reportAllEq.push(obj);
+    }
+generateReportTable(reportAllEq);
 
 
 
@@ -254,6 +269,59 @@ graphAdaptabilityBar(adaptabilityPerfectCopy);
 	}); //function ending tag
 
 //***list of functions***
+
+function generateReportTable(data){
+ 
+        
+    var studentReport = $('#studentReport'),
+    studentReportFilter = $('#studentReportFilter'),
+    studentReportDataTable = studentReport.DataTable();
+
+    studentReportDataTable.clear();
+
+                var row = [];
+            
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var j = data[i];
+
+                   
+
+                        row.push([
+                             j.name
+                            , j.inter
+                            , j.intra
+                            , j.adapt
+                            , j.stress
+                            , j.mood
+                          
+                        ]);     
+                }
+
+                for(var i = 0; i < row.length; i++) {
+                    
+
+                    studentReportDataTable.row.add([
+                        
+                        row[i][0],
+                        row[i][1],
+                        row[i][2],
+                        row[i][3],
+                        row[i][4],
+                        row[i][5]
+                        
+                      
+                    ]);
+
+                 }
+
+               studentReportDataTable.draw();
+
+                
+}
+
+
 
 function yearInterpret(key){
 

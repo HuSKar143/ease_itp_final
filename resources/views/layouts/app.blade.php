@@ -15,6 +15,7 @@
   <link href="{{asset('public/assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="{{asset('public/assets/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
+  <link href="{{asset('public/assets/datatables/buttons.dataTables.min.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/css/material-icons.css')}}" rel="stylesheet">
 
   <link href="{{asset('public/assets/bootstrap/js/bootstrap.min.js')}}" rel="stylesheet">

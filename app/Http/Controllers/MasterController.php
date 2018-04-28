@@ -171,6 +171,7 @@ class MasterController extends Controller
 
     $schoolYear = DB::table('grades')
         ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+        ->leftJoin('students', 'students.id', '=', 'grades.student_id')
         ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
         ->whereBetween('grades.schoolyear', $betweenYears)
         ->get();
@@ -179,6 +180,7 @@ class MasterController extends Controller
     if($comparedYear != null){
         $schoolYear2 = DB::table('grades')
             ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+            ->leftJoin('students', 'students.id', '=', 'grades.student_id')
             ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
             ->whereBetween('grades.schoolyear', $betweenComparedYears)
             ->get();
