@@ -9,7 +9,7 @@
              <strong> <i class="fa fa-address-book-o"></i> List of Students</div></strong>
             <div class="card-body">
 
-<table id="StudentList" class="table table-bordered table-striped table-sm" style="text-align: left;" >
+<table id="StudentList" class="table table-bordered table-striped table-sm" style="text-align: left; width: 100%;" >
     <thead class="nosort thead-light">
         <tr >
             <th>First Name</th>
@@ -28,6 +28,10 @@
 </div>
 
 @stop()
+
+
+
+
 
 @section('script')
     <script type="text/javascript" src="{{asset('public/assets/js/sample.js')}}"></script>

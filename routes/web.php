@@ -41,3 +41,5 @@ Route::post('/import/excel', 'MasterController@importStudentInformation');
 Route::post('/studentProfile/eut', 'MasterController@getPredictionData');
 
 Route::get('/getPrintData/{x}/{y?}', 'MasterController@getPrintData');
+
+Route::get('/get/pdf/{x}/{y?}', 'MasterController@informationPDF');

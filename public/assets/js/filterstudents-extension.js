@@ -131,9 +131,9 @@ var comparedPearsonResult = [];
 
 $("#comparedInter").empty();
 $("#comparedIntra").empty();
-$("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </font><br>');
+
   if (comparedCorrelationResult[key]<0){
-        $("#comparedInter").append('School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
+        $("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
      }
 
 
@@ -152,7 +152,7 @@ $("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </f
 
 
   if (comparedCorrelationResult[key]>0){
-    $("#comparedInter").append('School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    $("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
     }
   else if(comparedCorrelationResult[key]>=-0.19 && comparedCorrelationResult[key]<=0){
     $("#comparedIntra").append('Strength of Relationship: <b>Very Weak</b>');  
@@ -338,6 +338,7 @@ var intraData = {
 
 $("#"+key+"Container").empty();
 $("#"+key+"Container").append('<canvas id="'+key+'-Chart"></canvas>');
+Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById(key+"-Chart").getContext("2d");
 var scatterChart = new Chart(ctx, {
     type: 'scatter',
@@ -462,6 +463,7 @@ var interData = {
     };
 $("#"+key+"BarContainer").empty();
 $("#"+key+"BarContainer").append('<canvas id="'+key+'-BarChart"></canvas>');
+Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById(key+"-BarChart").getContext("2d");
 var barChart = new Chart(ctx, {
     type: 'bar',

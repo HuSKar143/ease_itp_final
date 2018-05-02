@@ -2,9 +2,9 @@
 @extends('layouts.app')
 @section('css')
 <style type="text/css">
-  .hide{
-    display: none;
-  }
+	.hide{
+		display: none;
+	}
 </style>
 @endsection
 @section('content')
@@ -13,7 +13,7 @@
 
 
 
- <div class="column col-lg-12" >
+ <div class="column col-lg-12" width=100% >
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -44,7 +44,7 @@
   </div>
     <div class="column" >
       <button class="btn btn-primary btn-compare-graph" style="margin-top: 5px;">Compare</button>
-       <a href="" target="_blank" class="btn btn-primary print" style="margin-top: 5px;"><span class="fa fa-print"></span> Print</a>
+      <a href="#" class="btn btn-primary print" style="margin-top:5px;"><span class="fa fa-print"></span> Print</a>
     </div>
    
 </div>
@@ -57,7 +57,7 @@
 
 
 
-      <option value="1" selected>Pearson's Correlation Coefficient</option>
+      <option value="1">Pearson's Correlation Coefficient</option>
       <option value="2">Summary of Emotional Quotient</option>
       <option value="3">Students' Emotional Quotient and GWA report</option>
    
@@ -145,15 +145,15 @@
 
 
 
-   <div class="tabbable full-width-tabs">
-      <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-        <li><a data-toggle="tab" href="#intrapersonalBarContainer">Intrapersonal</a></li>
-        <li><a data-toggle="tab" href="#interpersonalBarContainer">Interpersonal </a></li>
-        <li><a data-toggle="tab" href="#stressBarContainer">Stress Management</a></li>
-        <li><a data-toggle="tab" href="#adaptabilityBarContainer">Adaptability</a></li>
-        <li><a data-toggle="tab" href="#moodBarContainer">General Mood</a></li>
-      </ul>
-   </div>
+	 <div class="tabbable full-width-tabs">
+		  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+		    <li><a data-toggle="tab" href="#intrapersonalBarContainer">Intrapersonal</a></li>
+		    <li><a data-toggle="tab" href="#interpersonalBarContainer">Interpersonal </a></li>
+		    <li><a data-toggle="tab" href="#stressBarContainer">Stress Management</a></li>
+		    <li><a data-toggle="tab" href="#adaptabilityBarContainer">Adaptability</a></li>
+		    <li><a data-toggle="tab" href="#moodBarContainer">General Mood</a></li>
+		  </ul>
+	 </div>
  
   <div class="tab-content" style="margin-top: 2%;">
     <div id="interpersonalBarContainer" class="tab-pane active"></div>
@@ -165,7 +165,7 @@
 
 </div>
 <div class="card-footer bg-transparent"><b>Interpretation: </b><div id="barInterpret"></div></div>
-    </div>
+		</div>
 </div>
 {{-- 
 //STUDENTS EQ AND GWA REPORT --}}
@@ -176,7 +176,8 @@
        <div class="card card-inverse card-primary mb-3">
             <div class="card-header"  style="background-color: #003c9e; color: white; font-size: 8pt; ">
            
-            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Datatable for Students GWA and EQ </strong></center></div>
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> 
+              Datatable for Students GWA and EQ </strong></center></div>
  <div class="card-body">
 
 <table id="studentReport" class="table table-bordered table-striped table-sm" style="text-align: center;" >
@@ -193,7 +194,6 @@
 </table>
 
 </div>
-
 </div>
 
 
@@ -218,12 +218,11 @@
 @endsection
 @section('script')
 
-  
+	   <script type="text/javascript" src="{{asset('public/assets/datatables/buttons.print.min.js')}}"></script>
+     <script type="text/javascript" src="{{asset('public/assets/datatables/dataTables.buttons.min.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents-extension.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/dropDown.js')}}"></script>
-     <script type="text/javascript" src="{{asset('public/assets/datatables/buttons.print.min.js')}}"></script>
-     <script type="text/javascript" src="{{asset('public/assets/datatables/dataTables.buttons.min.js')}}"></script>
      <!-- <script type="text/javascript">
       $(function(){
         $(".print").click(function(event){
@@ -243,21 +242,20 @@
         var select1 = $("#exampleFormControlSelect2").val();
 
 
-        $(this).attr('href', 'http://localhost/ease_itp_final/getPrintData/'+select+'/'+select1);
+           $(this).attr('href', 'http://localhost/ease_itp_final/get/pdf/'+select+'/'+select1);
 
        });
 
 
      </script>
-<script type="text/javascript">
+      <script type="text/javascript">
             $(document).ready(function() {
         $('#studentReport ').DataTable( {
             dom: 'Bfrtip',
-            buttons: [
-                'print'
+           buttons: [
+               'print'
             ]
         } );
     } );
 </script>
-
 @endsection

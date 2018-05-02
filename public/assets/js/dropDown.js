@@ -4,9 +4,9 @@
 
   $(function () {
       $('.pr-price').hide();
-      $('.d2').show();
+      $('.d1').show();
       $('#selectResults').change(function (event) {
         $('.pr-price').hide();
         $('.d'+$(this).val()).show();
-      }).val(2); // reflect the div shown 
+      }).val(1); // reflect the div shown 
     });

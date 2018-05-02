@@ -1,10 +1,12 @@
 html {
   position: relative;
   min-height: 100%;
+  
 }
 
 body {
   overflow-x: hidden;
+  
 }
 
 body.sticky-footer {
@@ -22,6 +24,7 @@ body.fixed-nav {
 .content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 1rem;
+  
 
 }
 
@@ -242,7 +245,7 @@ a.left-icon:hover {
 
 .bg-nav {
 
- background-color: #17252A;
+ background-color: #0f181c;
 
 }
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
@@ -373,7 +376,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a,
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a {
-  color: #868e96;
+  color: yellow/*#868e96*/;
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:hover,
@@ -531,7 +534,7 @@ footer.sticky-footer {
 .info {
 
 font-family: Product Sans;
-font-size: 10pt;  
+font-size: 12pt;  
 }
 .content_sample {
 

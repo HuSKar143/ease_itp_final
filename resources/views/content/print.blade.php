@@ -2,12 +2,21 @@
 <html>
 <head>
 	<script type="text/javascript" src="{{asset('public/assets/js/jquery.min.js')}}"></script>
+        <style type="text/css">
++   body{
++       overflow: hidden;
++   }
++       .test{
++           visibility: hidden;
++       }
++   </style>
 </head>
 <body>
-
+<button onclick="test()">Test</button>
++<div class="cc test">
 <input type="hidden" value="{{ $x }}" id="value1">
 <input type="hidden" value="{{ $y }}" id="value2">
-<button onclick="test()">Print</button>
+
 	
 <br>
 <div class="container" style="width:50%; float:left;">
@@ -52,6 +61,7 @@
 <script type="text/javascript" src="{{asset('public/assets/js/filterstudents-extension.js')}}"></script>
 <script type="text/javascript">
 	function test(){
+        $(".cc").removeClass("test")
 		window.print();
 	}
 </script>

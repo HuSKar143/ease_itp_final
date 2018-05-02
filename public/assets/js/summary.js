@@ -200,18 +200,18 @@ var allData = {
             label: 'LOW',
             data: [a[0],b[0],d[0],c[0],e[0]],
              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(41, 182, 246,0.9)',
+                'rgba(41, 182, 246,0.9)',
+                'rgba(41, 182, 246,0.9)',
+                'rgba(41, 182, 246,0.9)',
+                'rgba(41, 182, 246,0.9)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(41, 182, 246,1)',
+                'rgba(41, 182, 246,1)',
+                'rgba(41, 182, 246,1)',
+                'rgba(41, 182, 246,1)',
+                'rgba(41, 182, 246,1)'
             ],
             borderWidth: 1
         },
@@ -219,18 +219,18 @@ var allData = {
             label: 'AVERAGE',
             data: [a[1],b[1],d[1],c[1],e[1]],
              backgroundColor: [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(255, 99, 132, 0.6)'
+                'rgba(2, 136, 209,0.9)',
+                'rgba(2, 136, 209,0.9)',
+                'rgba(2, 136, 209,0.9)',
+                'rgba(2, 136, 209,0.9)',
+                'rgba(2, 136, 209,0.9)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(2, 136, 209,1)',
+                'rgba(2, 136, 209,1)',
+                'rgba(2, 136, 209,1)',
+                'rgba(2, 136, 209,1)',
+                'rgba(2, 136, 209,1)'
             ],
             borderWidth: 1
         },
@@ -238,23 +238,23 @@ var allData = {
             label: 'HIGH',
             data: [a[2],b[2],d[2],c[2],e[2]],
              backgroundColor: [
-                'rgba(255, 99, 132, 0.9)',
-                'rgba(255, 99, 132, 0.9)',
-                'rgba(255, 99, 132, 0.9)',
-                'rgba(255, 99, 132, 0.9)',
-                'rgba(255, 99, 132, 0.9)'
+                'rgba(1, 87, 155,0.9)',
+                'rgba(1, 87, 155,0.9)',
+                'rgba(1, 87, 155,0.9)',
+                'rgba(1, 87, 155,0.9)',
+                'rgba(1, 87, 155,0.9)'
             ],
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)',
-                'rgba(255,99,132,1)'
+                'rgba(1, 87, 155,1)',
+                'rgba(1, 87, 155,1)',
+                'rgba(1, 87, 155,1)',
+                'rgba(1, 87, 155,1)',
+                'rgba(1, 87, 155,1)'
             ],
             borderWidth: 1
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById("summaryChartEq").getContext("2d");
 var barChart = new Chart(ctx, {
     type: 'bar',
@@ -289,8 +289,9 @@ var data = {
         {
             data: [avg,avg2],
             backgroundColor: [
-                "rgba(54, 162, 235, 0.6)",
-                "rgba(255, 99, 132, 0.6)",
+                    "rgba(1, 87, 155,0.9)",
+                "rgba(255, 72, 104, 0.9)"
+              
 
             ]
         }]
@@ -371,6 +372,7 @@ var data = {
             ]
         }]
 };
+Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById("stressDoughChart").getContext("2d");
 var doughnutChart = new Chart(ctx, {
     type: 'doughnut',

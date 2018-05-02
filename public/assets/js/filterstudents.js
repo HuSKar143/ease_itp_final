@@ -35,8 +35,7 @@ $(function(){
 				dataType: 'json',
 				success: function(data){
                     console.log(data);
-
-          var studName = [];
+          var studName = [];          
 					var interpersonal = [];
 					var intrapersonal = [];
 					var stress = [];
@@ -75,11 +74,6 @@ $(function(){
             $("#barInterpret").append(
     '<p>' + $("#exampleFormControlSelect1").val() + ': <b>'+ dataLen +'</b><br><b>Legend:</b><br><i>Low: 50-84 <br> Average: 85-114 <br> High: 115-170</i></p>'
     )           
-                $("#wadap").append("yintecept ni");
-                $("#wadap2").append("slope ni");
-                $("#wadap3").append("ybar ni");
-        
-
                     //get the individual eq and gwa
 				    var student_eq = [];
 				    var student_gwa = [];
@@ -96,7 +90,7 @@ $(function(){
 				  			mood : values[0]['mood'],
 				  			totaleq : values[0]['total_eq']
 				  			});
-
+            
 				  		$.each(values, function(key, value){
 				  			gwaTotal += value['gwa'];
 				  		});
@@ -186,7 +180,6 @@ var pearsonResult = [];
   });
   console.log("Pearson Result: "+ pearsonResult);
 
-
 //********TABLE REPORT*********
 //********TABLE REPORT*********
 //********TABLE REPORT*********
@@ -196,7 +189,6 @@ var reportAllEq = [];
       reportAllEq.push(obj);
     }
 generateReportTable(reportAllEq);
-
 
 
 
@@ -299,10 +291,8 @@ function generateReportTable(data){
                         ]);     
                 }
 
-                for(var i = 0; i < row.length; i++) {
-                    
-
-                    studentReportDataTable.row.add([
+               for(var i = 0; i < row.length; i++) {
+                      studentReportDataTable.row.add([
                         
                         row[i][0],
                         row[i][1],
@@ -316,12 +306,10 @@ function generateReportTable(data){
 
                  }
 
-               studentReportDataTable.draw();
+              studentReportDataTable.draw();
 
                 
 }
-
-
 
 function yearInterpret(key){
 
@@ -433,7 +421,6 @@ function getdoublebar(orig,mean){
   return gg;
 
 }
-
 function getraise2(data){
     var raise = [];
     for(var i=0; i< data.length; i++) {
@@ -462,12 +449,6 @@ function standardDeviation(numbersArr) {
    	return SDresult;
     
 }
-
-
-
-
-
-
       
 //*******************below here is all about graphs***********************
 
@@ -542,6 +523,7 @@ var interData = {
 
  $("#interpersonalContainer").empty();
  $("#interpersonalContainer").append('<canvas id="interpersonal-Chart"></canvas>');
+ Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById("interpersonal-Chart").getContext("2d");
 	ctx.clearRect(0, 0, ctx.width, ctx.height);
 var scatterChart = new Chart(ctx, {
@@ -622,7 +604,7 @@ var intraData = {
             data: data,
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
  $("#intrapersonalContainer").empty();
  $("#intrapersonalContainer").append('<canvas id="intrapersonal-Chart"></canvas>');
 var ctx = document.getElementById("intrapersonal-Chart").getContext("2d");
@@ -708,7 +690,7 @@ var stressData = {
 
   
 
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#stressContainer").empty();
 $("#stressContainer").append('<canvas id="stress-Chart"></canvas>');
 var ctx = document.getElementById("stress-Chart").getContext("2d");
@@ -788,7 +770,7 @@ var adaptData = {
             data: data,
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#adaptabilityContainer").empty();
 $("#adaptabilityContainer").append('<canvas id="adaptability-Chart"></canvas>');
 var ctx = document.getElementById("adaptability-Chart").getContext("2d");
@@ -870,7 +852,7 @@ var moodData = {
             data: data,
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#moodContainer").empty();
 $("#moodContainer").append('<canvas id="mood-Chart"></canvas>');
 var ctx = document.getElementById("mood-Chart").getContext("2d");
@@ -933,6 +915,7 @@ var interData = {
             borderWidth: 1
         }]
     };
+    Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#interpersonalBarContainer").empty();
 $("#interpersonalBarContainer").append('<canvas id="interpersonal-BarChart"></canvas>');
 var ctx = document.getElementById("interpersonal-BarChart").getContext("2d");
@@ -994,7 +977,7 @@ var intraData = {
             borderWidth: 1
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#intrapersonalBarContainer").empty();
 $("#intrapersonalBarContainer").append('<canvas id="intrapersonal-BarChart"></canvas>');
 var ctx = document.getElementById("intrapersonal-BarChart").getContext("2d");
@@ -1056,7 +1039,7 @@ var stressData = {
             borderWidth: 1
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#stressBarContainer").empty();
 $("#stressBarContainer").append('<canvas id="stress-BarChart"></canvas>');
 
@@ -1119,6 +1102,7 @@ var moodData = {
             borderWidth: 1
         }]
     };
+    Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#moodBarContainer").empty();
 $("#moodBarContainer").append('<canvas id="mood-BarChart"></canvas>');
 var ctx = document.getElementById("mood-BarChart").getContext("2d");
@@ -1181,7 +1165,7 @@ var adaptData = {
             borderWidth: 1
         }]
     };
-
+Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#adaptabilityBarContainer").empty();
 $("#adaptabilityBarContainer").append('<canvas id="adaptability-BarChart"></canvas>');
 var ctx = document.getElementById("adaptability-BarChart").getContext("2d");

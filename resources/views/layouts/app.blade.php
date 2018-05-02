@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
   <meta charset="utf-8">
@@ -15,9 +15,8 @@
   <link href="{{asset('public/assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="{{asset('public/assets/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
-  <link href="{{asset('public/assets/datatables/buttons.dataTables.min.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/css/material-icons.css')}}" rel="stylesheet">
-
+  <link href="{{asset('public/assets/datatables/buttons.dataTables.min.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/bootstrap/js/bootstrap.min.js')}}" rel="stylesheet">
   <link href="{{asset('public/assets/jquery/jquery.min.js')}}" rel="stylesheet">
 
@@ -28,14 +27,14 @@
  @yield('css')
 </head>
 
-<body class="fixed-nav sticky-footer" id="page-top">
+<body class="fixed-nav sticky-footer" id="page-top" >
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#"><h6><strong>EASE SYSTEM</strong></h6></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top" id="mainNav" style="padding: 8px;">
+    <img src="{{asset('public/assets/profile_pics/logo.png')}}" width=150></img>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarResponsive" >
       <ul class="navbar-nav navbar-sidenav bg-light" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
           <a class="nav-link selected active" href="{{ url('/') }}">
@@ -80,7 +79,11 @@
   
 
 <main>
-<div class="content-wrapper" style="background-color: #f2f2f2;">
+<div class="content-wrapper" style="background: url({{asset('public/assets/profile_pics/bg.jpg')}}) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
     <div class="container-fluid"> 
 @yield('content')
  </div>
@@ -94,7 +97,7 @@
     <footer class="sticky-footer">
       <div class="container left-icon">
         <div class="text-center">
-          <small><strong>EASE SYSTEM 2018</strong></small>
+          <small><strong><font color="white">EASE SYSTEM 2018</font></strong></small>
         </div>
       </div>
     </footer>

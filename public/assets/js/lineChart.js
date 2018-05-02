@@ -14,13 +14,11 @@ $.ajax({
       
 
           for( var i=0; i<data.length; i++){
-              var gradePerSem = data[i].gwa;
+                      data[i].gwa;
            
 
           }
-      
-
-
+          
 
   
 
@@ -29,8 +27,9 @@ $.ajax({
     	school_year.push(values['year'] + " " + values['semester']);
     	gwa.push(values['gwa']);
     });
-
-// 
+console.log(gwa);
+console.log(school_year);
+// c
 
  var studentdata =  {
  			labels:school_year,
@@ -100,11 +99,21 @@ $.ajax({
 
 
     	};
+schoolYear = [];
+gwaPerSem = [];
+for(var x=0; x<gwa.length; x++){
+  schoolYear += school_year[x] + ": <b>" + gwa[x] + "</b><br>";
 
+  
+}
+
+
+console.log(schoolYear);
 
 Chart.defaults.global.defaultFontStyle = 'Bold'
 $("#interpretGWA").empty();
-$("#interpretGWA").append('<br>grades ' + gradePerSem[0] + '<br>');  
+$("#interpretGWA").append("<b>GWA per semester: </b><br>"+schoolYear);  
+
 var ctx = document.getElementById("myChart").getContext("2d");
 var myChart = new Chart(ctx, {
 	
@@ -113,8 +122,6 @@ var myChart = new Chart(ctx, {
     options: options,
    
 });
-
-
 }})
 }); 
 

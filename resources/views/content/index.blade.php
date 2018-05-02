@@ -26,8 +26,41 @@
 </div>
 </div>
 
+<div class="col-md-4">
+      <div class="card card-inverse card-primary mb-3">
+            <div class="card-header"  style="background-color: #003c9e; color: white; font-size: 8pt; ">
+           
+            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Import Data </strong></center></div>
+ <div class="card-body">
+<h5> Choose file to import </h5>
+<a href="{{ asset('public/assets/TestSample.xlsx') }}" download="Sample">Sample.xlsx</a>
 
- <div class="col-md-4">
+<br>
+
+<form role="form" method="post" enctype="multipart/form-data" action="http://localhost/ease_itp_final/import/excel">
+  {{ csrf_field() }}
+  <input class="form-contol-file" type="file" name="importedFile">  
+  <button class="btn btn-primary" type="submit" style="margin-top: 2%;">Import</button>
+</form>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+</div>
+<div class="row">
+ <div class="col-md-8">
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -74,33 +107,7 @@
 
 </div><!--content -->
 
-<div class="row" style="margin-left:auto;">
 
-       <div class="card card-inverse card-primary mb-3">
-            <div class="card-header"  style="background-color: #003c9e; color: white; font-size: 8pt; ">
-           
-            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Import Data </strong></center></div>
- <div class="card-body">
-<h5> Choose file to import </h5>
-<a href="{{ asset('public/assets/TestSample.xlsx') }}" download="Sample">Sample.xlsx</a>
-
-<br>
-
-<form role="form" method="post" enctype="multipart/form-data" action="http://localhost/ease_itp_final/import/excel">
-  {{ csrf_field() }}
-  <input class="form-contol-file" type="file" name="importedFile">  
-  <button class="btn btn-primary" type="submit" style="margin-top: 2%;">Import</button>
-</form>
-
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-</div>
-</div>
-</div>
 
 
 

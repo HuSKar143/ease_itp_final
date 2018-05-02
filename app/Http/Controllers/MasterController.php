@@ -352,13 +352,8 @@ public function importStudentInformation(Request $request){
 
 }
 
-public function getPrintData($x, $y = null){
-
-     return view('content.print',[
-                            'x' => $x,
-                            'y' => $y
-                        ]);
-
+public function informationPDF($year1, $year2){
+  return redirect('http://localhost/ease_itp_final/jpgraph/ease.php?q1='.$year1);
 }
 
 
