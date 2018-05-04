@@ -353,7 +353,15 @@ public function importStudentInformation(Request $request){
 }
 
 public function informationPDF($year1, $year2){
-  return redirect('http://localhost/ease_itp_final/jpgraph/ease.php?q1='.$year1);
+    if($year2 != null){
+        return redirect('http://localhost/ease_itp_final/jpgraph/ease.php?q1='.$year1.'&q2='.$year2);
+    }else{
+        return redirect('http://localhost/ease_itp_final/jpgraph/ease.php?q1='.$year1);
+    }
+}
+
+public function studentPDF($id){
+  return redirect('http://localhost/ease_itp_final/jpgraph/student_profile.php?id='.$id);
 }
 
 

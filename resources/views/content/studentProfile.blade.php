@@ -27,11 +27,16 @@
  <div class="card card-inverse card-primary mb-3">
             <div class="card-header"  style="background-color: #002663; color: white; ">
              <strong><i class="fa fa-drivers-license-o" style=" margin-top:1%;"></i> Profile</div></strong>
+             <div class="pull-right">
+             @foreach ($profile as $val)
+               <a href = "{{ url('/print/information/'.$val->id) }}" class="btn btn-default">Print</a>
+             @endforeach
+             </div>
  <div class="card-body">            
 
 
 <div class="row">  
- <div class="column" style=" padding: 0px; width: 19.5%;">
+ <div class="col-md-2">
   <div class="studentid">
   @foreach ($profile as $val)
 
@@ -48,7 +53,7 @@
   </div>
   </div>
 
-<div class="column" style=" padding-left: 0px; width: 50%; ">
+<div class="col-md-8">
 <div class="studentinfo info" > 
 <table  border="0" align="left" cellpadding="5">
   @foreach ($profile as $val)

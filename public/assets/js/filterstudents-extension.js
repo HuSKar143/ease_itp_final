@@ -18,6 +18,7 @@ function compareGraph(){
 
             var FirstGWA = setDataSlice(firstYear, 'gwa');
             var SecondGWA = setDataSlice(secondYear, 'gwa');
+            var SecondRawData = setRawData(secondYear, 'studentName', 'gwa', 'interpersonal','intrapersonal','stress','adaptability','mood');
             $("#barInterpret").empty();
             $("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
             + "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
@@ -36,6 +37,9 @@ function compareGraph(){
 
             var firstMood            = setDataToAssign(firstYear,FirstGWA, 'mood');
             var secondMood           = setDataToAssign(secondYear,SecondGWA, 'mood');
+
+
+             var reportAllEq = [];
 
             var correlatedInterpersonal = {
                     first: pearsonResults(firstInterpersonal),
@@ -176,11 +180,13 @@ function getStudentInfo(info){
             gwaAverage += (info[x]['gwa'] + info[x+1]['gwa']) / 2;
             studentInfo.push({
                 studentId : info[x]['student_id'],
+                 studentName : info[x]['lastname'],
                 interpersonal : info[x]['interpersonal'],
                 intrapersonal : info[x]['intrapersonal'],
                 stress : info[x]['stress'],
                 adaptability : info[x]['adapt'],
                 mood : info[x]['mood'],
+                 totaleq : info[x]['total_eq'],
                 gwa : gwaAverage
             });
             x += 1;
@@ -229,6 +235,44 @@ function setDataSlice(studentData, keyData){
 
 
     return gwaSlice;
+}
+function setRawData(studentData, student, gwa, inter, intra, stress, adapt, mood){
+    var name = [];
+    var interpersonal = [];
+    var intrapersonal = [];
+    var stresss = [];
+    var adaptability = [];
+    var moodd = [];
+    var gwaa = [];
+    $.each(studentData, function(key, values){
+
+        name.push(values[student]);
+        gwaa.push(values[gwa].toFixed(3));
+        interpersonal.push(values[inter]);
+        intrapersonal.push(values[intra]);
+        adaptability.push(values[adapt]);
+        moodd.push(values[mood]);
+        stresss.push(values[stress]);
+    });
+    var nameSlice = name.slice();
+    var gwaSlice = gwaa.slice();
+    var interSlice = interpersonal.slice();
+    var intraSlice = intrapersonal.slice();
+    var stressSlice = stresss.slice();
+    var moodSlice = moodd.slice();
+    var adaptSlice = adaptability.slice();
+
+setSliceToDisplay(nameSlice,gwaSlice,interSlice,intraSlice,adaptSlice,stressSlice,moodSlice);
+    
+}
+
+function setSliceToDisplay(name, gwa, inter, intra, adapt, stress, mood){
+var updatedReportEq = [];
+for(let i=0;i<inter.length;i++){
+      var obj = {name:name[i],gwa:gwa[i],inter:inter[i],intra:intra[i],adapt:adapt[i],stress:stress[i],mood:mood[i]};
+      updatedReportEq.push(obj);
+    }
+generateReportTable(updatedReportEq);
 }
 
 function setDataToAssign(studentData, gwa, keyData){

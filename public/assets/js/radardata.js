@@ -106,49 +106,49 @@ var eqtotal = data['a'][0].total_eq;
 getPrediction(eqtotal,yintercept,slope);
 
 
-//*********************next next year prediction*********************
-var predictedGwa =getPast(totalEqC,yintercept,slope);
-console.log(predictedGwa);
-var predictedGwaC = predictedGwa.slice(); 
-//*********************next next year prediction*********************
+// //*********************next next year prediction*********************
+// var predictedGwa =getPast(totalEqC,yintercept,slope);
+// console.log(predictedGwa);
+// var predictedGwaC = predictedGwa.slice(); 
+// //*********************next next year prediction*********************
 
-//mean
-var xbarNew = getAverage(totalEqC);
+// //mean
+// var xbarNew = getAverage(totalEqC);
 
-var ybarNew = getAverage(predictedGwaC);
+// var ybarNew = getAverage(predictedGwaC);
 
-//excel c
-var xxbarNew = getdoublebar(totalEqC,xbarNew);
+// //excel c
+// var xxbarNew = getdoublebar(totalEqC,xbarNew);
 
-//excel d
-var yybarNew = getdoublebar(predictedGwaC,ybarNew);
+// //excel d
+// var yybarNew = getdoublebar(predictedGwaC,ybarNew);
 
-//excel f
-var xxraiseNew = getraise2(xxbarNew).map(Number);
-//excel g
-var yyraiseNew = getraise2(yybarNew).map(Number);
-//excel i6
-var sumxxbarraiseNew = xxraiseNew.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
-//sumyybarraise I7
-var sumOfyyraiseNew = yyraiseNew.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
+// //excel f
+// var xxraiseNew = getraise2(xxbarNew).map(Number);
+// //excel g
+// var yyraiseNew = getraise2(yybarNew).map(Number);
+// //excel i6
+// var sumxxbarraiseNew = xxraiseNew.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
+// //sumyybarraise I7
+// var sumOfyyraiseNew = yyraiseNew.reduce(function (a, b) {return parseFloat(a) + parseFloat(b);}, 0);
 
-var standardXNew = standardDeviation(xxraiseNew);
-var standardYNew = standardDeviation(yyraiseNew);
-
-
-var totaleqGwaNew   = assignXY(totalEqC,predictedGwaC);
-
-var totaleqRNew = pearsonResults(totaleqGwaNew);
-
-var slopeNew = totaleqRNew * (standardYNew/standardXNew);
+// var standardXNew = standardDeviation(xxraiseNew);
+// var standardYNew = standardDeviation(yyraiseNew);
 
 
-var yinterceptNew = ybarNew- (slopeNew*xbarNew);
+// var totaleqGwaNew   = assignXY(totalEqC,predictedGwaC);
+
+// var totaleqRNew = pearsonResults(totaleqGwaNew);
+
+// var slopeNew = totaleqRNew * (standardYNew/standardXNew);
 
 
-var nextNextYear = getPredictionNew(eqtotal,yinterceptNew,slopeNew);
-console.log(nextNextYear);
-$("#predictInterpret").append("Next next year predicted GWA: <br><b>" + nextNextYear);
+// var yinterceptNew = ybarNew- (slopeNew*xbarNew);
+
+
+// var nextNextYear = getPredictionNew(eqtotal,yinterceptNew,slopeNew);
+// console.log(nextNextYear);
+// $("#predictInterpret").append("Next next year predicted GWA: <br><b>" + nextNextYear);
 
 
 //GRAPH

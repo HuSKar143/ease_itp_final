@@ -4,7 +4,7 @@ require_once ('jpGraph/src/jpgraph_scatter.php');
 require_once ('jpGraph/src/jpgraph_bar.php');
 require('fpdf/fpdf.php');
 
-// $command = isset($_GET['year']) ? $_GET['year'] : null;
+$command = isset($_GET['year']) ? $_GET['year'] : null;
 
 
 class PrintInformation{
@@ -67,7 +67,7 @@ class PrintInformation{
 											$yyAverage[$x][$eq[$x]]);
 		}
 
-		$xxAverageSquared = $this->pearsonEquation3($xxAverage['totalGWA'], 'totalGWA');
+		$xxAverageSquared = $this->pearsonEquation3($xxAverage['totalGWA']);
 
 		for($x = 0; $x< count($eq); $x++){
 			$yyAverageSquared[$eq[$x]] = $this->pearsonEquation3($yyAverage[$x][$eq[$x]]);
@@ -90,9 +90,108 @@ class PrintInformation{
 				)
 			);
 		}
-		// var_dump($interpretationArray);
+	
 		$this->getPDF($eq, $interpretationArray, $data->num_rows);
 
+	}
+
+	public function compareData(){
+		$eq = array('intrapersonal', 'interpersonal', 'stress', 'adapt', 'mood');
+		$comparedSY = array($_GET['q1'], $_GET['q2']);
+		$data = array();
+		$xxAverage = array();
+		$yyAverage = array();
+		$xxAverage_yyAverage = array();
+		$xxAverageSquared = array();
+		$yyAverageSquared = array();
+
+
+		for($x = 0; $x < count($comparedSY); $x++){
+			$schoolyear = "select id from schoolyear where year = '$comparedSY[$x]'";
+			$schoolyearData = $this->connect()->query($schoolyear);
+			$arrayData = array();
+
+			foreach ($schoolyearData as $value) {
+				$arrayData[] = $value['id'];
+			}
+
+			$studentData = "select grades.student_id, avg(grades.gwa) as totalGWA, 
+							schoolyear.*, eq.* 
+							from grades
+							left join schoolyear on schoolyear.id = grades.schoolyear
+							left join eq on eq.student_id = grades.student_id
+							where grades.schoolyear between '$arrayData[0]' and '$arrayData[1]' 
+							group by grades.student_id";
+
+			$data[] = $this->connect()->query($studentData);
+		}
+
+		foreach($data as $schoolyear){
+			$xxAverage[] = $this->pearsonEquation($schoolyear, 'totalGWA');
+		}
+
+		
+		foreach($data as $schoolyear){
+			$average = array();
+			for($x = 0; $x < count($eq); $x++){
+				$average[] = $this->pearsonEquation($schoolyear, $eq[$x]);
+			}
+			$yyAverage[] = $average;
+		}
+
+		for($x = 0; $x < count($data); $x++){
+			$student = $xxAverage[$x]['totalGWA'];
+			$eqs = $yyAverage[$x];
+			$temp_xxAverage_yyAverage = array();
+				for($y = 0; $y < count($eqs); $y++){
+					$studentEQ = $eqs[$y][$eq[$y]];
+					$temp_xxAverage_yyAverage[$eq[$y]] = $this->pearsonEquation2($student, 
+											$studentEQ);
+				}
+
+			$xxAverage_yyAverage[] = $temp_xxAverage_yyAverage;
+	
+		}
+
+		foreach($xxAverage as $student){
+			$xxAverageSquared[] = $this->pearsonEquation3($student['totalGWA']);
+		}
+
+		foreach($yyAverage as $eqs){
+			$temp_yyAverageSquared = array();
+			for($x = 0; $x < count($eqs); $x++){
+				$studentEQ = $eqs[$x][$eq[$x]];
+				$temp_yyAverageSquared[$eq[$x]] = $this->pearsonEquation3($studentEQ);
+			}
+			$yyAverageSquared[] = $temp_yyAverageSquared;
+		}
+
+		$interpretationArray = array();
+
+		for($x = 0; $x < count($data); $x++){
+			$temp_interpretionArray = array();
+			for($x1 = 0 ; $x1 < count($eq); $x1++){
+				$temp_interpretationArray[$eq[$x1]] = $this->getPearsonResult(
+					$xxAverage_yyAverage[$x][$eq[$x1]],
+					array(
+						'x' => $xxAverageSquared[$x],
+						'y' => $yyAverageSquared[$x][$eq[$x1]]
+					)
+				);
+			}
+			$interpretationArray[] = $temp_interpretationArray;
+		}
+		
+
+
+		for($x = 0; $x<count($eq); $x++){
+			$this->scatterPlotGraph2($data, $eq[$x]);
+			// $this->barPlotGraph2($data, $eq[$x]);
+		}
+
+		$this->getPDF($eq, $interpretationArray);
+
+		
 	}
 
 	public function pearsonEquation($data, $index){
@@ -221,6 +320,82 @@ class PrintInformation{
 
 	}
 
+	public function scatterPlotGraph2($data, $index){
+
+
+
+		$arrayGWA = array();
+		$arrayEQ = array();
+
+		foreach($data as $schoolyear){
+			$temp_arrayGWA = array();
+			$temp_arrayEQ = array();
+			foreach($schoolyear as $student){
+				$temp_arrayGWA[] = $student['totalGWA'];
+				$temp_arrayEQ[] = $student[$index];
+			}
+
+			$arrayGWA[] = $temp_arrayGWA;
+			$arrayEQ[] = $temp_arrayEQ;
+		}
+
+		$titleGraph = "";
+
+		switch($index){
+			case 'intrapersonal' :
+				$titleGraph = 'Intrapersonal and GWA ScatterPlot';
+				break;
+			case 'interpersonal' :
+				$titleGraph = 'Interpersonal and GWA ScatterPlot';
+				break;
+			case 'stress' :
+				$titleGraph = 'Stress Management and GWA ScatterPlot';
+				break;
+			case 'adapt' :
+				$titleGraph = 'Adaptability and GWA ScatterPlot';
+				break;
+			case 'mood' :
+				$titleGraph = 'General Mood and GWA ScatterPlot'; 
+				break;
+			default :
+
+				break;
+
+		}
+
+
+		$graph = new Graph(760,300);
+		$graph->SetScale("intlin", 0, 0);
+		$graph->xaxis->scale->SetAutoMin(0);
+		$graph->yaxis->scale->SetAutoMin(0);
+		$graph->yaxis->scale->SetAutoMax(5);
+
+		 
+		$graph->img->SetMargin(40,40,40,40);        
+		$graph->SetShadow();
+		 
+		$graph->title->Set($titleGraph);
+		$graph->title->SetFont(FF_FONT1,FS_BOLD);
+		 
+		$sp1 = new ScatterPlot($arrayGWA[0],$arrayEQ[0]);
+		$sp1->mark->SetType(MARK_FILLEDCIRCLE);
+		$sp1->mark->SetFillColor("red");
+		$graph->Add($sp1);	
+
+		$sp2 = new ScatterPlot($arrayGWA[1],$arrayEQ[1]);
+		$sp2->mark->SetType(MARK_FILLEDCIRCLE);
+		$sp2->mark->SetFillColor("pink");
+		$graph->Add($sp2);	
+
+		@unlink($index.".png");
+
+		$graph->Stroke($index.'.png');
+
+
+
+
+	}
+
 	public function barPlotGraph($data, $index){
 		$barPlot = array();
 		$bar = array();
@@ -291,7 +466,7 @@ class PrintInformation{
 		$graph->title->Set("Summarized ".$titleGraph);
 		$graph->xaxis->title->Set('School Year '. $_GET['q1']);
 		$graph->yaxis->title->Set("Total Emotional Quotient");
-		$graph->yaxis->scale->SetAutoMax(210);
+		// $graph->yaxis->scale->SetAutoMax(210);
 		 
 		 
 		// Display the graph
@@ -299,79 +474,207 @@ class PrintInformation{
 		$graph->Stroke($index.'Bar'.".png");
 	}
 
-	public function getPDF($data, $correlation, $counting){
+
+
+	public function getPDF($data, $correlation, $counting = null){
 
 	
 		
 		$pdf = new FPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',16);
+		if(count($correlation) == 2){
+			$counter = 0;
+			foreach($correlation as $correlatedData){
+				if($counter == 0){
+				for($x = 0; $x < count($data); $x++){
+				$relationship = "";
+				$strength = "";
 
-		$flag = 0;
+				$eq = "";
+				$pdf->Cell(40,10, $pdf->Image($data[$x].'.png', 5, null));
+				$pdf->Ln(5);
 
-		while($flag < count($data)){
-			$relationship = "";
-			$strength = "";
-			if($correlation[$data[$flag]] > 0){
-				$relationship = "Negative (GWA is decreasing while Emotional Quotient is also increasing or Vice Versa)";
-			}else{
-				$relationship = "Positive (GWA is increasing while Emotional Quotient  is also increasing)";	
+				for($x1 = 0; $x1 < count($correlation); $x1++){
+					switch($data[$x]){
+						case "interpersonal" :
+							$eq = "Interpersonal";
+
+							break;
+
+						case "intrapersonal" :
+							$eq = "Intrapersonal";
+
+							break;
+
+						case "stress" :
+							$eq = "Stress Management";
+
+							break;
+
+						case "adapt" :
+							$eq = "Adaptability";
+
+							break;
+
+						case "mood" :
+							$eq = "General Mood";
+
+							break;
+
+						default :
+
+							break;
+
+					}
+
+					if($correlatedData[$data[$x1]] > 0){
+						$relationship = "Negative (GWA is decreasing while ".$eq." is also increasing or Vice Versa)";
+					}else{
+						$relationship = "Positive (GWA is increasing while ".$eq." is also increasing)";	
+					}
+					$correlationValue = abs($correlatedData[$data[$x1]]);
+					if($correlationValue >= 0.00 && $correlationValue <= 0.19){
+						$strength = "Very Weak";
+					}elseif($correlationValue >= 0.20 && $correlationValue <= 0.39){
+						$strength = "Weak";
+					}elseif($correlationValue >= 0.40 && $correlationValue <= 0.59){
+						$strength = "Moderate";
+					}elseif($correlationValue >= 0.60 && $correlationValue <= 0.79){
+						$strength = "Strong";
+					}elseif($correlationValue >= 0.80 && $correlationValue <= 1){
+						$strength = "Very Strong";
+					}
+
+
+
+					
+					
+					$pdf->SetFont('Arial','',10);
+					$pdf->Write(5,' Interpretation:
+
+									School year : '. $_GET['q1'] .'
+									Correlation Coefficient: '.$correlatedData[$data[$x1]].'
+									Relationship: '. $relationship .' 
+									Strength of Relationship: '. $strength);
+					$pdf->Ln(30);
+				 }
+				}
+
+
+
+				$counter++;	
 			}
-			$correlationValue = abs($correlation[$data[$flag]]);
-			if($correlationValue >= 0.00 && $correlationValue <= 0.19){
-				$strength = "Very Weak";
-			}elseif($correlationValue >= 0.20 && $correlationValue <= 0.39){
-				$strength = "Weak";
-			}elseif($correlationValue >= 0.40 && $correlationValue <= 0.59){
-				$strength = "Moderate";
-			}elseif($correlationValue >= 0.60 && $correlationValue <= 0.79){
-				$strength = "Strong";
-			}elseif($correlationValue >= 0.80 && $correlationValue <= 1){
-				$strength = "Very Strong";
-			}
-
-
-
-			
-			$pdf->Cell(40,10, $pdf->Image($data[$flag].'.png', 5, null));
-			$pdf->Ln(5);
-			$pdf->SetFont('Arial','',10);
-			$pdf->Write(5,' Interpretation:
-
-							School year : '. $_GET['q1'] .'
-							Correlation Coefficient: '.$correlation[$data[$flag++]].'
-							Relationship: '. $relationship .' 
-							Strength of Relationship: '. $strength);
-			$pdf->Ln(30);
-
 		}
-		$bar = 0;		
-		do{
 
-			$pdf->Cell(40,10, $pdf->Image($data[$bar++].'Bar.png', 5, null));
-			$pdf->Ln(5);
-			$pdf->SetFont('Arial','',10);
-			$pdf->Write(5,' Interpretation:
+		}else{
 
-							School Year '. $_GET['q1'] .':'. $counting . '
-							Legend:
-							
-							Low: 50-84 
-							Average: 85-114 
-							High: 115-170');
-			$pdf->Ln(30);
-			$flag--;
-		}while($flag != 0);
+			$flag = 0;
+
+			while($flag < count($data)){
+				$relationship = "";
+				$strength = "";
+
+				$eq = "";
+
+				switch($data[$flag]){
+					case "interpersonal" :
+						$eq = "Interpersonal";
+
+						break;
+
+					case "intrapersonal" :
+						$eq = "Intrapersonal";
+
+						break;
+
+					case "stress" :
+						$eq = "Stress Management";
+
+						break;
+
+					case "adapt" :
+						$eq = "Adaptability";
+
+						break;
+
+					case "mood" :
+						$eq = "General Mood";
+
+						break;
+
+					default :
+
+						break;
+
+				}
+
+				if($correlation[$data[$flag]] > 0){
+					$relationship = "Negative (GWA is decreasing while ".$eq." is also increasing or Vice Versa)";
+				}else{
+					$relationship = "Positive (GWA is increasing while ".$eq." is also increasing)";	
+				}
+				$correlationValue = abs($correlation[$data[$flag]]);
+				if($correlationValue >= 0.00 && $correlationValue <= 0.19){
+					$strength = "Very Weak";
+				}elseif($correlationValue >= 0.20 && $correlationValue <= 0.39){
+					$strength = "Weak";
+				}elseif($correlationValue >= 0.40 && $correlationValue <= 0.59){
+					$strength = "Moderate";
+				}elseif($correlationValue >= 0.60 && $correlationValue <= 0.79){
+					$strength = "Strong";
+				}elseif($correlationValue >= 0.80 && $correlationValue <= 1){
+					$strength = "Very Strong";
+				}
 
 
-		$pdf->Output('D', $_GET['q1']." S.Y Student Information.pdf");
+
+				
+				$pdf->Cell(40,10, $pdf->Image($data[$flag].'.png', 5, null));
+				$pdf->Ln(5);
+				$pdf->SetFont('Arial','',10);
+				$pdf->Write(5,' Interpretation:
+
+								School year : '. $_GET['q1'] .'
+								Correlation Coefficient: '.$correlation[$data[$flag++]].'
+								Relationship: '. $relationship .' 
+								Strength of Relationship: '. $strength);
+				$pdf->Ln(30);
+
+			}
+
+			$bar = 0;	
+
+			do{
+
+				$pdf->Cell(40,10, $pdf->Image($data[$bar++].'Bar.png', 5, null));
+				$pdf->Ln(5);
+				$pdf->SetFont('Arial','',10);
+				$pdf->Write(5,' Interpretation:
+
+								School Year '. $_GET['q1'] .':'. $counting . '
+								Legend:
+								
+								Low: 50-84 
+								Average: 85-114 
+								High: 115-170');
+				$pdf->Ln(30);
+				$flag--;
+			}while($flag != 0);
+		}
+		
+		 $pdf->Output('D', $_GET['q1']." S.Y Student Information.pdf");
 	}
 
 
 }
 
 $print = new PrintInformation();
-$print->printData();
+if(isset($_GET['q2'])){
+	$print->compareData();
+}else{
+	$print->printData();
+}
 
 ?>
 

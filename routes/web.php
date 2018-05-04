@@ -43,3 +43,4 @@ Route::post('/studentProfile/eut', 'MasterController@getPredictionData');
 Route::get('/getPrintData/{x}/{y?}', 'MasterController@getPrintData');
 
 Route::get('/get/pdf/{x}/{y?}', 'MasterController@informationPDF');
+Route::get('/print/information/{id}', 'MasterController@studentPDF');
