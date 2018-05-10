@@ -1,22 +1,33 @@
 var correlationResult = null;
-
+var btnCompare = false;
 
 $(function(){
 
 		$(".btn-compare-graph").click(function(event){
+      btnCompare = true;
+
 			compareGraph();
 		});		
 
 		$("#exampleFormControlSelect1").change(function(event){
 			// var arr = [79, 5, 18, 5, 32, 1, 16, 1, 82, 13];
 			// var sorted = arr.slice().sort(function(a,b){return b-a});
-			// var ranks = arr.slice().map(function(v){ return sorted.indexOf(v)+1 });	
+			// var ranks = arr.slice().map(function(v){ return sorted.indexOf(v)+1 });
+
+      $(".print").removeClass('hide');
+
 			$(".hidden-compared-year").removeClass('hide');
 			var selectedYear = this.value;
 			var options = "";
 
 			$("#exampleFormControlSelect1").map(function(index, element){
+        $flag = 0;
+
 				$.each(element, function(key, values){
+          if($flag == 0){
+            options += "<option value='' hidden>School Year</option>";
+            $flag++;
+          }
 					if(selectedYear != values.value && values.value != 0){
 						options += "<option value='"+values.value+"'>"+"School Year "+values.value+"</option>";
 					}

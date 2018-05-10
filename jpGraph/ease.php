@@ -2,10 +2,38 @@
 require_once ('jpGraph/src/jpgraph.php');
 require_once ('jpGraph/src/jpgraph_scatter.php');
 require_once ('jpGraph/src/jpgraph_bar.php');
-require('fpdf/fpdf.php');
+ require('fpdf/fpdf.php');
 
 $command = isset($_GET['year']) ? $_GET['year'] : null;
 
+class PDF extends FPDF
+{
+// Page header
+	function Header()
+	{
+	    // Logo
+	    $this->Image('ease_print.png',10,6,30);
+	    // Arial bold 15
+	    $this->SetFont('Arial','B',15);
+	    // Move to the right
+	    $this->Cell(80);
+	    // Title
+	    // $this->Cell(30,10,'Title',1,0,'C');
+	    // Line break
+	    $this->Ln(20);
+	}
+
+// Page footer
+	// function Footer()
+	// {
+	//     // Position at 1.5 cm from bottom
+	//     $this->SetY(-15);
+	//     // Arial italic 8
+	//     $this->SetFont('Arial','I',8);
+	//     // Page number
+	//     $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+	// }
+}
 
 class PrintInformation{
 
@@ -90,10 +118,13 @@ class PrintInformation{
 				)
 			);
 		}
-	
-		$this->getPDF($eq, $interpretationArray, $data->num_rows);
+
+
+		
+		$this->getPDF($eq, $interpretationArray, $data->num_rows, $data);
 
 	}
+
 
 	public function compareData(){
 		$eq = array('intrapersonal', 'interpersonal', 'stress', 'adapt', 'mood');
@@ -185,11 +216,11 @@ class PrintInformation{
 
 
 		for($x = 0; $x<count($eq); $x++){
-			$this->scatterPlotGraph2($data, $eq[$x]);
-			// $this->barPlotGraph2($data, $eq[$x]);
+			 $this->scatterPlotGraph2($data, $eq[$x]);
+		    $this->barPlotGraph2($data, $eq[$x]);
 		}
 
-		$this->getPDF($eq, $interpretationArray);
+		$this->getPDF($eq, $interpretationArray, null, $data);
 
 		
 	}
@@ -327,6 +358,7 @@ class PrintInformation{
 		$arrayGWA = array();
 		$arrayEQ = array();
 
+
 		foreach($data as $schoolyear){
 			$temp_arrayGWA = array();
 			$temp_arrayEQ = array();
@@ -379,12 +411,12 @@ class PrintInformation{
 		 
 		$sp1 = new ScatterPlot($arrayGWA[0],$arrayEQ[0]);
 		$sp1->mark->SetType(MARK_FILLEDCIRCLE);
-		$sp1->mark->SetFillColor("red");
+		$sp1->mark->SetFillColor("red@0.2");
 		$graph->Add($sp1);	
 
 		$sp2 = new ScatterPlot($arrayGWA[1],$arrayEQ[1]);
 		$sp2->mark->SetType(MARK_FILLEDCIRCLE);
-		$sp2->mark->SetFillColor("pink");
+		$sp2->mark->SetFillColor("blue@0.2");
 		$graph->Add($sp2);	
 
 		@unlink($index.".png");
@@ -475,14 +507,97 @@ class PrintInformation{
 	}
 
 
+	public function barPlotGraph2($data, $index){
+		$plotData = array();
+		$barPlot = array();
 
-	public function getPDF($data, $correlation, $counting = null){
+		foreach($data as $schoolYear){
+			$tempData = array();
+			foreach($schoolYear as $studentEQ){
+				$tempData[] = $studentEQ[$index];
+			}
+			$plotData[] = $tempData;
+		}
 
-	
+		foreach($plotData as $values){
+			$tempData = array();
+			$tempData['low'] = 0;
+			$tempData['average'] = 0;
+			$tempData['high'] = 0;
+				foreach($values as $value){
+					if($value >= 50 && $value <= 84){
+						$tempData['low'] += 1;
+					}elseif($value >= 85 && $value <= 114){
+						$tempData['average'] += 1;				
+					}elseif($value >= 115 && $value <= 170){	
+						$tempData['high'] += 1;
+					}	
+				}
+			$barPlot[] = $tempData;
+		}
+
+		$titleGraph = "";
+
+		switch($index){
+			case 'intrapersonal' :
+				$titleGraph = 'Intrapersonal';
+				break;
+			case 'interpersonal' :
+				$titleGraph = 'Interpersonal';
+				break;
+			case 'stress' :
+				$titleGraph = 'Stress Management';
+				break;
+			case 'adapt' :
+				$titleGraph = 'Adaptability';
+				break;
+			case 'mood' :
+				$titleGraph = 'General Mood'; 
+				break;
+			default :
+
+				break;
+
+		}
+
+		$plots = array();
+		foreach($barPlot as $plot){
+			
+			$plot = array($plot['low'], $plot['average'], $plot['high']);
+			$plots[] = new BarPlot($plot);
+		}
+
+		$gbplot = new GroupBarPlot($plots);
+		 
+		// ...and add it to the graPH
+		$graph = new Graph(760,300);    
+		$graph->SetScale("textlin");
+
+		$graph->xaxis->SetTickLabels(array('Low', 'Average', 'High')); 
+
+		$graph->Add($gbplot);
+		 
+		$graph->title->Set("Summarized " . $titleGraph);
+		$graph->xaxis->title->Set('School Year '. $_GET['q1'].' - '.$_GET['q2']);
+		$graph->yaxis->title->Set("Total Emotional Quotient");
+		 
+		 
+		// Display the graph
+		@unlink($index."Bar".".png");		
 		
-		$pdf = new FPDF();
+
+		$graph->Stroke($index.'Bar'.".png");
+		
+	}
+
+
+	public function getPDF($data, $correlation, $counting = null, $students){
+
+		$pdf = new PDF();
 		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',16);
+		$pdf->SetFont('Arial','B',12);
+		$pdf->SetAutoPageBreak(true, 60);
+
 		if(count($correlation) == 2){
 			$counter = 0;
 			foreach($correlation as $correlatedData){
@@ -494,6 +609,9 @@ class PrintInformation{
 				$eq = "";
 				$pdf->Cell(40,10, $pdf->Image($data[$x].'.png', 5, null));
 				$pdf->Ln(5);
+				$pdf->Cell(40,10, $pdf->Write(5, "Interpretation :"));
+				$pdf->Ln(5);
+
 
 				for($x1 = 0; $x1 < count($correlation); $x1++){
 					switch($data[$x]){
@@ -551,21 +669,67 @@ class PrintInformation{
 					
 					
 					$pdf->SetFont('Arial','',10);
-					$pdf->Write(5,' Interpretation:
-
-									School year : '. $_GET['q1'] .'
+					$pdf->Write(5,' 
+									School year : '. ($x1 == 0 ? $_GET['q1'] : $_GET['q2']) .'
 									Correlation Coefficient: '.$correlatedData[$data[$x1]].'
 									Relationship: '. $relationship .' 
 									Strength of Relationship: '. $strength);
-					$pdf->Ln(30);
+					$pdf->Ln(10);
 				 }
 				}
-
-
 
 				$counter++;	
 			}
 		}
+
+		$bar = 0;	
+
+			do{
+
+				$pdf->Cell(40,10, $pdf->Image($data[$bar].'Bar.png', 5, null));
+				$pdf->Ln(5);
+				$pdf->SetFont('Arial','',10);
+				$pdf->Write(5,' Interpretation:
+
+								Legend:			
+								Low: 50-84 
+								Average: 85-114 
+								High: 115-170');
+
+				$pdf->Ln(10);
+
+				$barFlag = 0;
+				foreach($students as $student){
+					$studentScores = array();
+					$studentScores['low'] = 0;
+					$studentScores['average'] = 0;
+					$studentScores['high'] = 0;
+					
+					foreach($student as $info){
+								if($info[$data[$bar]] >= 50 && $info[$data[$bar]] <= 84){
+									$studentScores['low'] += 1;
+								}elseif($info[$data[$bar]] >= 85 && $info[$data[$bar]] <= 114){
+									$studentScores['average'] += 1;				
+								}elseif($info[$data[$bar]] >= 115 && $info[$data[$bar]] <= 170){	
+									$studentScores['high'] += 1;
+								}	
+					}
+					$pdf->Write(5,'School Year '. ($barFlag == 0 ? $_GET['q1'] : $_GET['q2']) .'
+								Number of Students : '. ($studentScores['low']+$studentScores['average']+$studentScores['high']) . '
+								Low: '.$studentScores['low'].'
+								Average: '.$studentScores['average'].' 
+								High: '.$studentScores['high']);
+					$pdf->Ln(10);
+
+					$barFlag++;
+				}
+
+		
+
+				
+				$pdf->Ln(30);
+			$bar++;
+			}while($bar < count($data));
 
 		}else{
 
@@ -647,17 +811,43 @@ class PrintInformation{
 
 			do{
 
+				$studentScores = array();
+				$studentScores['low'] = 0;
+				$studentScores['average'] = 0;
+				$studentScores['high'] = 0;
+
+				foreach($students as $info){
+						if($info[$data[$bar]] >= 50 && $info[$data[$bar]] <= 84){
+							$studentScores['low'] += 1;
+						}elseif($info[$data[$bar]] >= 85 && $info[$data[$bar]] <= 114){
+							$studentScores['average'] += 1;				
+						}elseif($info[$data[$bar]] >= 115 && $info[$data[$bar]] <= 170){	
+							$studentScores['high'] += 1;
+						}	
+				}
+
+
 				$pdf->Cell(40,10, $pdf->Image($data[$bar++].'Bar.png', 5, null));
 				$pdf->Ln(5);
 				$pdf->SetFont('Arial','',10);
 				$pdf->Write(5,' Interpretation:
 
-								School Year '. $_GET['q1'] .':'. $counting . '
 								Legend:
-								
-								Low: 50-84 
-								Average: 85-114 
-								High: 115-170');
+									Low: 50-84 
+									Average: 85-114 
+									High: 115-170');
+				$pdf->Ln(5);
+
+				$pdf->Write(5,' School Year '. $_GET['q1']. '
+								Number of Students:' .$counting. '
+								Low: '.$studentScores['low'].'
+								Average: '.$studentScores['average'].' 
+								High: '.$studentScores['high']);
+
+				
+
+
+
 				$pdf->Ln(30);
 				$flag--;
 			}while($flag != 0);

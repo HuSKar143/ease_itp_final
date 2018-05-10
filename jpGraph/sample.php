@@ -1,60 +1,29 @@
 <?php // content="text/plain; charset=utf-8"
-require_once ('jpgraph/src/jpgraph.php');
-require_once ('jpgraph/src/jpgraph_scatter.php');
+require_once ('jpGraph/src/jpgraph.php');
+require_once ('jpGraph/src/jpgraph_scatter.php');
+require_once ('jpGraph/src/jpgraph_bar.php');
+require_once ('jpGraph/src/jpgraph_radar.php');
+require_once ('jpgraph/src/jpgraph_line.php');
 require('fpdf/fpdf.php');
 
-$datax = array(3.5,3.7,3,4,6.2,6,3.5,8,14,8,11.1,13.7);
-$datax1 = array(5,6,7,8,9,10,11,12,14,13,16.1,17);
-$datay = array(20,22,12,13,17,20,16,19,30,31,40,43);
- 
-$graph = new Graph(800,500);
-$graph->SetScale("linlin");
- 
-$graph->img->SetMargin(40,40,40,40);        
-$graph->SetShadow();
- 
-$graph->title->Set("A simple scatter plot");
-$graph->title->SetFont(FF_FONT1,FS_BOLD);
- 
-$sp1 = new ScatterPlot($datay,$datax);
-$sp1->mark->SetType(MARK_FILLEDCIRCLE);
- $sp1->mark->SetFillColor("red");
-$graph->Add($sp1);
-
-
-$sp1 = new ScatterPlot($datax1,$datay);
-$sp1->mark->SetType(MARK_FILLEDCIRCLE);
-$sp1->mark->SetFillColor("pink");
-$graph->Add($sp1);
-// $gdImgHandler = $graph->Stroke(_IMG_HANDLER);
-@unlink("test-image.png");
-
-$graph->Stroke('test-image.png');
-
-
+$datay = array(1.23, 1.9, 1.6, 3.1, 3.4, 2.8, 2.1, 1.9);
 $graph = new Graph(300,200);
-$graph->SetScale("linlin");
+$graph->SetScale('textlin');
  
-$graph->img->SetMargin(40,40,40,40);        
-$graph->SetShadow();
+
+
  
-$graph->title->Set("A simple scatter plot");
+$graph->title->Set("Example of filled line plot");
 $graph->title->SetFont(FF_FONT1,FS_BOLD);
  
-$sp1 = new ScatterPlot($datay,$datax);
-$sp1->mark->SetType(MARK_FILLEDCIRCLE);
- $sp1->mark->SetFillColor("red");
-$graph->Add($sp1);
+$p1 = new LinePlot($datay);
+$p1->mark->SetType(MARK_UTRIANGLE);
+$p1->mark->SetColor('blue');
+$p1->mark->SetFillColor('blue');
+$graph->Add($p1);
+ 
+$graph->Stroke();
 
-
-$sp1 = new ScatterPlot($datax1,$datay);
-$sp1->mark->SetType(MARK_FILLEDCIRCLE);
-$sp1->mark->SetFillColor("pink");
-$graph->Add($sp1);
-// $gdImgHandler = $graph->Stroke(_IMG_HANDLER);
-@unlink("test-image1.png");
-
-$graph->Stroke('test-image1.png');
 
 
 $pdf = new FPDF();

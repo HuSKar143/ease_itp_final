@@ -17,11 +17,11 @@ use Illuminate\Http\Request;
 //return view('')->with('succes', 'message');mao na ang session
 
 Auth::routes();
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 
 //link for pages
  Route::get('/','MasterController@index');
- Route::get('/listOfStudents','MasterController@listOfStudents');
+ Route::get('/listOfStudents','MasterController@listOfStudents')->middleware('auth');
 
  Route::get('/studentProfile/{holderID}','MasterController@studentProfile');
 
@@ -44,3 +44,6 @@ Route::get('/getPrintData/{x}/{y?}', 'MasterController@getPrintData');
 
 Route::get('/get/pdf/{x}/{y?}', 'MasterController@informationPDF');
 Route::get('/print/information/{id}', 'MasterController@studentPDF');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

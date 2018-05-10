@@ -15,10 +15,12 @@ function compareGraph(){
         getDataForGraph.done(function(data){
             var firstYear = getStudentInfo(data['a']);
             var secondYear = getStudentInfo(data['b']);
+            var highElem;
+            if(firstYear.length < secondYear.length){ highElem = secondYear; }else if(firstYear.length > secondYear.length){ highElem = firstYear;}
 
             var FirstGWA = setDataSlice(firstYear, 'gwa');
             var SecondGWA = setDataSlice(secondYear, 'gwa');
-            var SecondRawData = setRawData(secondYear, 'studentName', 'gwa', 'interpersonal','intrapersonal','stress','adaptability','mood');
+            var SecondRawData = setRawData(highElem, 'studentName', 'gwa', 'interpersonal','intrapersonal','stress','adaptability','mood');
             $("#barInterpret").empty();
             $("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
             + "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
@@ -72,14 +74,17 @@ function compareGraph(){
             stressinterpret:        pearsonResults(secondStress),
             moodinterpret:          pearsonResults(secondMood)
 
+            } 
 
 
-
-
-
-} 
-
-
+            countBarResult {
+             intrapersonal : countBar('intrapersonal', firstYear, secondYear);
+             interpersonal : countBar('interpersonal', firstYear, secondYear);
+             stress        : countBar('stress', firstYear, secondYear);
+             adaptability  : countBar('adaptability', firstYear, secondYear);
+             mood          : countBar('mood', firstYear, secondYear);
+            
+           }
 
 
     
@@ -302,7 +307,7 @@ function drawGraphScatter(key, firstYear, secondYear){
     
     var xFirstData = [];
     var xSecondData = [];
-
+   
 
     for(x=0; x<firstYear.length; x++){
         xFirstData.push({
@@ -392,13 +397,13 @@ var scatterChart = new Chart(ctx, {
 });
 
 }
-
-function drawGraphBar(key, firstyear, secondyear){
-
-    var xFirstData = [];
-    var xSecondData = [];
-    
-    var x = [],sum=0,sum2=0,sum3=0;
+function countBar (key, firstyear, secondyear) {
+    var kani = [];
+    var x = [];
+    var low = [];
+    var average = [];
+    var  high = []; 
+    var sum=0,sum2=0,sum3=0;
     for(let i=0;i<firstyear.length;i++){
         if(firstyear[i][key]>=50 && firstyear[i][key]<=84){
             sum =sum +1;
@@ -407,14 +412,22 @@ function drawGraphBar(key, firstyear, secondyear){
         }else if(firstyear[i][key]>=115 && firstyear[i][key]<=170){
             sum3 =sum3 +1;
         }
+
     }
+
     x.push(sum);
     x.push(sum2);
     x.push(sum3);
 
 
 
-    var y = [],sum=0,sum2=0,sum3=0;
+    low.push(sum);
+    average.push(sum2);
+    high.push(sum3);
+       
+   
+
+    var y = [], sum=0,sum2=0,sum3=0;
     for(let i=0;i<secondyear.length;i++){
         if(secondyear[i][key]>=50 && secondyear[i][key]<=84){
             sum =sum +1;
@@ -427,6 +440,63 @@ function drawGraphBar(key, firstyear, secondyear){
     y.push(sum);
     y.push(sum2);
     y.push(sum3);
+
+    kani.push(x);
+    kani.push(y);
+
+    return kani;
+
+
+
+}
+
+function drawGraphBar(key, firstyear, secondyear){
+
+    var xFirstData = [];
+    var xSecondData = [];
+
+    var x = [];
+    var low = [];
+    var average = [];
+    var  high = []; 
+    var sum=0,sum2=0,sum3=0;
+    for(let i=0;i<firstyear.length;i++){
+        if(firstyear[i][key]>=50 && firstyear[i][key]<=84){
+            sum =sum +1;
+        }else if(firstyear[i][key]>=85 && firstyear[i][key]<=114){
+            sum2 =sum2 +1;
+        }else if(firstyear[i][key]>=115 && firstyear[i][key]<=170){
+            sum3 =sum3 +1;
+        }
+
+    }
+
+    x.push(sum);
+    x.push(sum2);
+    x.push(sum3);
+
+
+
+    low.push(sum);
+    average.push(sum2);
+    high.push(sum3);
+   
+
+
+    var y = [], sum=0,sum2=0,sum3=0;
+    for(let i=0;i<secondyear.length;i++){
+        if(secondyear[i][key]>=50 && secondyear[i][key]<=84){
+            sum =sum +1;
+        }else if(secondyear[i][key]>=85 && secondyear[i][key]<=114){
+            sum2 =sum2 +1;
+        }else if(secondyear[i][key]>=115 && secondyear[i][key]<=170){
+            sum3 =sum3 +1;
+        }
+    }
+    y.push(sum);
+    y.push(sum2);
+    y.push(sum3);
+
 
 
 
@@ -507,6 +577,9 @@ var interData = {
     };
 $("#"+key+"BarContainer").empty();
 $("#"+key+"BarContainer").append('<canvas id="'+key+'-BarChart"></canvas>');
+
+
+
 Chart.defaults.global.defaultFontStyle = 'Bold'
 var ctx = document.getElementById(key+"-BarChart").getContext("2d");
 var barChart = new Chart(ctx, {

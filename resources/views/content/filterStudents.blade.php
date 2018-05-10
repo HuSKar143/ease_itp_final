@@ -29,7 +29,7 @@
      <select class="form-control" id="exampleFormControlSelect1">
       @foreach ($filter as $val)
           <option selected hidden value="0">FROM</option>
-            <option value="{{ $val->year }}"> School Year {{$val->year}}</option>
+            <option value="{{ $val->year }}"> School Year {{ $val->year }}</option>
       @endforeach
     </select>
   </div>
@@ -44,7 +44,7 @@
   </div>
     <div class="column" >
       <button class="btn btn-primary btn-compare-graph" style="margin-top: 5px;">Compare</button>
-      <a href="#" class="btn btn-primary print" style="margin-top:5px;"><span class="fa fa-print"></span> Print</a>
+      <a href="#" class="btn btn-primary print hide" style="margin-top:5px;"><span class="fa fa-print"></span> Print</a>
     </div>
    
 </div>
@@ -164,7 +164,12 @@
   </div>
 
 </div>
-<div class="card-footer bg-transparent"><b>Interpretation: </b><div id="barInterpret"></div></div>
+<div class="card-footer bg-transparent"><b>Interpretation: </b>
+
+<div id="barInterpret"></div>
+<div id="nBarInterpret"></div>
+
+</div>
 		</div>
 </div>
 {{-- 
@@ -184,6 +189,7 @@
     <thead class="nosort thead-light">
         <tr >
             <th>Last Name</th>
+            <th>GWA</th>
             <th>Interpersonal</th>
             <th>Intrapersonal</th>
             <th>Adaptability</th>
@@ -223,6 +229,11 @@
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/filterstudents-extension.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/dropDown.js')}}"></script>
+     <!-- <script type="text/javascript" src="{{asset('public/assets/js/pdfmake.min.js')}}"></script> -->
+     <script type="text/javascript" src="{{asset('public/assets/js/buttons.html5.min.js')}}"></script>
+     <script type="text/javascript" src="{{asset('public/assets/js/vfs_fonts.min.js')}}"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
      <!-- <script type="text/javascript">
       $(function(){
         $(".print").click(function(event){
@@ -237,12 +248,24 @@
 
      </script> -->
      <script type="text/javascript">
+
+
+
        $('.print').click(function(event){
-        var select = $("#exampleFormControlSelect1").val();
-        var select1 = $("#exampleFormControlSelect2").val();
 
 
-           $(this).attr('href', 'http://localhost/ease_itp_final/get/pdf/'+select+'/'+select1);
+            var select = $("#exampleFormControlSelect1").val();
+            var select1 = $("#exampleFormControlSelect2").val();
+
+          if(select != 0){
+            if(btnCompare == false){
+             $(this).attr('href', 'http://localhost/ease_itp_final/get/pdf/'+select);
+            }else{
+               $(this).attr('href', 'http://localhost/ease_itp_final/get/pdf/'+select+'/'+select1);
+            }
+          }else{
+            alert("error");
+          }
 
        });
 
@@ -251,9 +274,9 @@
       <script type="text/javascript">
             $(document).ready(function() {
         $('#studentReport ').DataTable( {
-            dom: 'Bfrtip',
+           dom: 'Bfrtip',
            buttons: [
-               'print'
+               'pdf','print'
             ]
         } );
     } );

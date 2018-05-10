@@ -24,7 +24,7 @@ DEFINE("LP_AREA_NO_BORDER",true);
 class LinePlot extends Plot{
     public $mark=null;
     protected $filled=false;
-    protected $fill_color='blue';
+    protected $fill_color='red';
     protected $step_style=false, $center=false;
     protected $line_style=1; // Default to solid
     protected $filledAreas = array(); // array of arrays(with min,max,col,filled in them)
@@ -73,7 +73,7 @@ class LinePlot extends Plot{
     }
 
     function SetFillColor($aColor,$aFilled=true) {
-    	//$this->color = $aColor;
+    	$this->color = $aColor;
         $this->fill_color=$aColor;
         $this->filled=$aFilled;
     }

@@ -5,6 +5,7 @@ use Session;
 use Response;
 use View;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Students;
@@ -15,8 +16,13 @@ use Maatwebsite\Excel\Facades\Excel;
 use Hash;
 
 
+
 class MasterController extends Controller
 {
+
+    function __construct(){
+        $this->middleware('auth');
+    }
 
 	public function index(){
 		
@@ -352,7 +358,7 @@ public function importStudentInformation(Request $request){
 
 }
 
-public function informationPDF($year1, $year2){
+public function informationPDF($year1, $year2 = null){
     if($year2 != null){
         return redirect('http://localhost/ease_itp_final/jpgraph/ease.php?q1='.$year1.'&q2='.$year2);
     }else{

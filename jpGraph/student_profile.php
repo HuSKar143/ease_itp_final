@@ -8,6 +8,35 @@ require('fpdf/fpdf.php');
 
 $command = isset($_GET['year']) ? $_GET['year'] : null;
 
+class PDF extends FPDF
+{
+// Page header
+	function Header()
+	{
+	    // Logo
+	    $this->Image('ease_print.png',10,6,30);
+	    // Arial bold 15
+	    $this->SetFont('Arial','B',15);
+	    // Move to the right
+	    $this->Cell(80);
+	    // Title
+	    // $this->Cell(30,10,'Title',1,0,'C');
+	    // Line break
+	    $this->Ln(20);
+	}
+
+// Page footer
+	// function Footer()
+	// {
+	//     // Position at 1.5 cm from bottom
+	//     $this->SetY(-15);
+	//     // Arial italic 8
+	//     $this->SetFont('Arial','I',8);
+	//     // Page number
+	//     $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+	// }
+}
+
 
 class PrintInformation{
 
@@ -78,7 +107,7 @@ class PrintInformation{
 		$titles=array('Intrapersonal','Interpersonal','Stress Management','Adaptability','General Mood');
 		$data=$eqData;
 		 
-		$graph = new RadarGraph (760,300);
+		$graph = new RadarGraph (760,320);
 		 
 		$graph->title->Set('Emotional Quotient');
 		$graph->title->SetFont(FF_VERDANA,FS_NORMAL,12);
@@ -94,7 +123,7 @@ class PrintInformation{
 		$graph->axis->title->SetFont(FF_ARIAL,FS_NORMAL,12);
 		$graph->axis->title->SetMargin(5);
 		// $graph->SetGridDepth(DEPTH_BACK);
-		$graph->SetSize(0.6);
+		$graph->SetSize(0.7);
 		 
 		$plot = new RadarPlot($data);
 		$plot->SetColor('red@0.2');
@@ -118,20 +147,22 @@ class PrintInformation{
 		 
 		$graph->img->SetMargin(100,100,40,40);
 		$graph->yaxis->scale->SetAutoMax(5);
-		$graph->xaxis->SetTickLabels($xLabels); 
+		// $graph->xaxis->SetTickLabels($xLabels); 
 
 
 		$graph->SetShadow();
 		 
 		$graph->title->Set("General Weighted Average");
 		$graph->title->SetFont(FF_FONT1,FS_BOLD);
+
+
 		 
 		$p1 = new LinePlot($datay);
-		$p1->SetFillColor("orange");
-		$p1->mark->SetType(MARK_FILLEDCIRCLE);
-		$p1->mark->SetFillColor("red");
-		
 		$graph->Add($p1);
+		$p1->SetColor("#B22222");
+		$p1->mark->SetType(MARK_IMG_MBALL,'red');
+		$p1->SetFillColor("red@0.7");
+		
 		 
 		@unlink("student_gwa.png");
 
@@ -235,9 +266,10 @@ class PrintInformation{
 	}
 
 	public function studentPDF($eqsInfo, $eqsData, $gwaInfo, $gwaData, $studentInfo, $prediction){
-		$pdf = new FPDF();
+		$pdf = new PDF();
 		$pdf->AddPage();
-		$pdf->SetFont('Arial','',10);
+		$pdf->SetFont('Arial','',15);
+		$pdf->SetAutoPageBreak(true, 80);
 		$pdf->Cell(40,10,
 		$pdf->Write(5,'Name : '. $studentInfo['firstname'].' '.$studentInfo['lastname'].'                                  Course: '.$studentInfo['coursename']));
 		$pdf->Ln(15);
@@ -296,7 +328,7 @@ class PrintInformation{
 					$pdf->Write(5, $gwaInfo[$x].' : '.$gwaData[$x]);
 					$pdf->Ln(5);
 		}
-
+		$pdf->Ln(10);
 		$pdf->SetFont('Arial', 'B', 12);
 		$pdf->Write(5,'Prediction Result');
 		$pdf->Ln(5);
@@ -305,8 +337,7 @@ class PrintInformation{
 		$pdf->Write(5,'Interpretation:
 					   Using Linear Regression, we came up with a predictive model 
 					   GWA = '. number_format($prediction[1], 5) .'+('. number_format($prediction[0], 5) .' * Total EQ) 
-
-					   Based on his/her current GWA and Total EQ, his/her predicted GWA for next school year is:'.number_format($prediction[2], 5));
+					   Based on his/her current GWA and Total EQ, his/her predicted GWA for next school year is: '.number_format($prediction[2], 5));
 
 		 $pdf->Output('D', " Student Information.pdf");
 
