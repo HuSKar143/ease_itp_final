@@ -1,6 +1,22 @@
 var year;
 var comparedCorrelationResult = {};
 
+            var secondBarInterpersonal  = 0;
+            var secondBarIntrapersonal  = 0;
+            var secondBarStress = 0;
+            var secondBarAdaptability = 0;
+            var secondBarMood  = 0;
+var countBarResult = {};
+
+(function(){
+
+            $("#exampleFormControlSelect1").change(function(event){
+     
+
+      $("#comparedBarInterpret").addClass('hide');
+    }); 
+
+    });
 
 function compareGraph(){
     year = $("#exampleFormControlSelect1").val();
@@ -40,6 +56,19 @@ function compareGraph(){
             var firstMood            = setDataToAssign(firstYear,FirstGWA, 'mood');
             var secondMood           = setDataToAssign(secondYear,SecondGWA, 'mood');
 
+          
+            secondBarInterpersonal  = setDataBar(secondYear,'interpersonal');
+            secondBarIntrapersonal  = setDataBar(secondYear,'intrapersonal');
+            secondBarStress = setDataBar(secondYear,'stress');
+            secondBarAdaptability = setDataBar(secondYear,'adaptability');
+            secondBarMood  = setDataBar(secondYear,'mood');
+
+          
+
+
+
+
+  
 
              var reportAllEq = [];
 
@@ -75,18 +104,27 @@ function compareGraph(){
             moodinterpret:          pearsonResults(secondMood)
 
             } 
+       
 
 
-            countBarResult {
-             intrapersonal : countBar('intrapersonal', firstYear, secondYear);
-             interpersonal : countBar('interpersonal', firstYear, secondYear);
-             stress        : countBar('stress', firstYear, secondYear);
-             adaptability  : countBar('adaptability', firstYear, secondYear);
-             mood          : countBar('mood', firstYear, secondYear);
-            
+             countBarResult = {
+             intrapersonal : countBarScores(secondBarIntrapersonal),
+             interpersonal : countBarScores(secondBarInterpersonal),
+             stress        : countBarScores(secondBarStress),
+             adaptability  : countBarScores(secondBarAdaptability),
+             mood          : countBarScores(secondBarMood)
            }
+             
+         
 
+      
 
+var comparedBar = [];
+  $.each(countBarResult, function(keys, values){
+      comparedBar.push(values);
+  });
+
+console.log(comparedBar);
     
  
 var comparedPearsonResult = [];
@@ -129,6 +167,72 @@ var comparedPearsonResult = [];
 
 }
 
+function countBar(key) {
+    var kani = [];
+    var x = [];
+
+ //    var sum=0,sum2=0,sum3=0;
+ // for(let i=0;i<firstyear.length;i++){
+ //         if(firstyear[i][key]>=50 && firstyear[i][key]<=84){
+ //             sum =sum +1;
+ //         }else if(firstyear[i][key]>=85 && firstyear[i][key]<=114){
+ //             sum2 =sum2 +1;
+ //     }else if(firstyear[i][key]>=115 && firstyear[i][key]<=170){
+ //             sum3 =sum3 +1;
+ //         }
+
+ //    }
+
+ //     x.push(sum);
+ //     x.push(sum2);
+ //    x.push(sum3);
+
+       
+   
+
+    
+    
+
+
+}
+
+function showBarInterpret(key) {
+
+// $("#nBarInterpret").empty();
+ $("#comparedBarInterpret").empty();
+ $("#comparedBarInterpret").append("School year: <b>" + $("#exampleFormControlSelect2").val() + "</b>"+ countBarResult[key]);
+// console.log(countBarResult[key]);
+
+
+}
+
+function countBarScores(key) {
+var kani = [];
+
+
+var y = [], sum=0,sum2=0,sum3=0;
+
+    for(let i=0;i<key.length;i++){
+        if(key[i]>=50 && key[i]<=84){
+            sum =sum +1;
+        }else if(key[i]>=85 && key[i]<=114){
+            sum2 =sum2 +1;
+        }else if(key[i]>=115 && key[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }
+    y.push(sum);
+    y.push(sum2);
+    y.push(sum3);
+    
+   kani.push("<br>Low: <b>"+ sum + "</b><br>average: <b>" + sum2 + "</b><br>high: <b>" +sum3 + "</b>");
+
+    console.log(key.length);
+    var kaniGiSlice = kani.slice();
+   return kaniGiSlice;
+
+} 
+
 
 
    function comparedInterpret(key) {
@@ -142,7 +246,7 @@ $("#comparedInter").empty();
 $("#comparedIntra").empty();
 
   if (comparedCorrelationResult[key]<0){
-        $("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
+        $("#comparedInter").append('<font color="green"><b> Results of Compared Year: </b></font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
      }
 
 
@@ -161,7 +265,7 @@ $("#comparedIntra").empty();
 
 
   if (comparedCorrelationResult[key]>0){
-    $("#comparedInter").append('<font color="blue"><b> Results of Compared Year: </font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    $("#comparedInter").append('<font color="green"><b> Results of Compared Year: </b></font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
     }
   else if(comparedCorrelationResult[key]>=-0.19 && comparedCorrelationResult[key]<=0){
     $("#comparedIntra").append('Strength of Relationship: <b>Very Weak</b>');  
@@ -177,6 +281,7 @@ $("#comparedIntra").empty();
 
 
 }
+
 function getStudentInfo(info){
     var studentInfo = [];
     for(x=0; x<info.length; x++){
@@ -291,6 +396,17 @@ function setDataToAssign(studentData, gwa, keyData){
     return assignXY(copyDataSet, gwa);
 }
 
+function setDataBar(studentData, keyData){
+    var dataSet = [];
+    $.each(studentData, function(key, values){
+        dataSet.push(values[keyData]);
+    });
+
+    var copyDataSet = dataSet.slice();
+
+    return copyDataSet;
+}
+
 function assignXY(eq, gwa){
   var a = [];
      for(let i=0;i<eq.length;i++){
@@ -311,15 +427,15 @@ function drawGraphScatter(key, firstYear, secondYear){
 
     for(x=0; x<firstYear.length; x++){
         xFirstData.push({
-            x: firstYear[x]['gwa'],
-            y: firstYear[x][key]
+            y: firstYear[x]['gwa'],
+            x: firstYear[x][key]
         });
     }
 
     for(x=0; x<secondYear.length; x++){
         xSecondData.push({
-            x: secondYear[x]['gwa'],
-            y: secondYear[x][key]
+            y: secondYear[x]['gwa'],
+            x: secondYear[x][key]
         });
     }
 
@@ -332,11 +448,12 @@ function drawGraphScatter(key, firstYear, secondYear){
         scales: {
             xAxes: [{
               ticks: {
+                  max: 200,
                 beginAtZero: true
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'General Weighted Average'
+                  labelString: key.charAt(0).toUpperCase() +  key.slice(1)  + ' Test Scores'
                             },
                 scaleBeginAtZero : true,
                 gridLines:{
@@ -349,12 +466,12 @@ function drawGraphScatter(key, firstYear, secondYear){
             }],
             yAxes: [{
                 ticks: {
-                max: 200,
+              
                 beginAtZero: true
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Intrapersonal'
+                  labelString: 'General Weighted Average'
                             },
                  gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
             }]
@@ -397,58 +514,7 @@ var scatterChart = new Chart(ctx, {
 });
 
 }
-function countBar (key, firstyear, secondyear) {
-    var kani = [];
-    var x = [];
-    var low = [];
-    var average = [];
-    var  high = []; 
-    var sum=0,sum2=0,sum3=0;
-    for(let i=0;i<firstyear.length;i++){
-        if(firstyear[i][key]>=50 && firstyear[i][key]<=84){
-            sum =sum +1;
-        }else if(firstyear[i][key]>=85 && firstyear[i][key]<=114){
-            sum2 =sum2 +1;
-        }else if(firstyear[i][key]>=115 && firstyear[i][key]<=170){
-            sum3 =sum3 +1;
-        }
 
-    }
-
-    x.push(sum);
-    x.push(sum2);
-    x.push(sum3);
-
-
-
-    low.push(sum);
-    average.push(sum2);
-    high.push(sum3);
-       
-   
-
-    var y = [], sum=0,sum2=0,sum3=0;
-    for(let i=0;i<secondyear.length;i++){
-        if(secondyear[i][key]>=50 && secondyear[i][key]<=84){
-            sum =sum +1;
-        }else if(secondyear[i][key]>=85 && secondyear[i][key]<=114){
-            sum2 =sum2 +1;
-        }else if(secondyear[i][key]>=115 && secondyear[i][key]<=170){
-            sum3 =sum3 +1;
-        }
-    }
-    y.push(sum);
-    y.push(sum2);
-    y.push(sum3);
-
-    kani.push(x);
-    kani.push(y);
-
-    return kani;
-
-
-
-}
 
 function drawGraphBar(key, firstyear, secondyear){
 

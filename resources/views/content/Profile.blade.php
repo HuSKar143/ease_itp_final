@@ -3,8 +3,8 @@
 
 @section('content')
 
-<div class="row">
-  <div class="studentid">
+<div class="row ">
+  <div class="studentid fontProductSans">
   	 <img class="profpic" src= {{ asset('public/assets/images/profpic.jpg') }} > 
   </div>
 
@@ -15,8 +15,8 @@
   <h1 class="info">  Course: </h1><br>
   <h1 class="info">  Year & Section: </h1></div>
  
-</div> -->
-<div class="studentinfo info" > 
+</div> --> 
+<div class="studentinfo info fontProductSans" > 
 <table  border="0" align="left" cellpadding="5">
   
   <tr>

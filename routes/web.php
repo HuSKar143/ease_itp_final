@@ -21,6 +21,7 @@ Auth::routes();
 
 //link for pages
  Route::get('/','MasterController@index');
+ Route::get('/ImportData','MasterController@ImportData');
  Route::get('/listOfStudents','MasterController@listOfStudents')->middleware('auth');
 
  Route::get('/studentProfile/{holderID}','MasterController@studentProfile');

@@ -457,3 +457,173 @@ var doughnutChart = new Chart(ctx, {
 });
 
 }
+
+
+var ctx = document.getElementById( "widgetChart1" );
+    ctx.height = 150;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels: ['2013-2014','2014-2015','2015-2016','2016-2017'],
+            type: 'line',
+            datasets: [ {
+                data: [65, 59, 84, 84],
+                label: 'Dataset',
+                backgroundColor: 'transparent',
+                borderColor: 'rgba(255,255,255,.55)',
+            }, ]
+        },
+        options: {
+
+            maintainAspectRatio: false,
+            legend: {
+                display: false
+            },
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                titleFontSize: 12,
+                titleFontColor: '#000',
+                bodyFontColor: '#000',
+                backgroundColor: '#fff',
+                titleFontFamily: 'Montserrat',
+                bodyFontFamily: 'Montserrat',
+                cornerRadius: 3,
+                intersect: false,
+            },
+            scales: {
+                xAxes: [ {
+                    gridLines: {
+                        color: 'transparent',
+                        zeroLineColor: 'transparent'
+                    },
+                    ticks: {
+                        fontSize: 2,
+                        fontColor: 'transparent'
+                    }
+                } ],
+                yAxes: [ {
+                    display:false,
+                    ticks: {
+                        display: false,
+                    }
+                } ]
+            },
+            title: {
+                display: false,
+            },
+            elements: {
+                line: {
+                    borderWidth: 1
+                },
+                point: {
+                    radius: 4,
+                    hitRadius: 10,
+                    hoverRadius: 4
+                }
+            }
+        }
+    } );
+
+  //WidgetChart 2
+    var ctx = document.getElementById( "widgetChart3" );
+    ctx.height = 70;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels: ['2013-2014', '2014-2015', '2015-2016', '2016-2017'],
+            type: 'line',
+            datasets: [ {
+                data: [70, 70, 140, 210],
+                label: 'Dataset',
+                backgroundColor: 'rgba(255,255,255,.2)',
+                borderColor: 'rgba(255,255,255,.55)',
+            }, ]
+        },
+        options: {
+
+            maintainAspectRatio: true,
+            legend: {
+                display: false
+            },
+            responsive: true,
+            // tooltips: {
+            //     mode: 'index',
+            //     titleFontSize: 12,
+            //     titleFontColor: '#000',
+            //     bodyFontColor: '#000',
+            //     backgroundColor: '#fff',
+            //     titleFontFamily: 'Montserrat',
+            //     bodyFontFamily: 'Montserrat',
+            //     cornerRadius: 3,
+            //     intersect: false,
+            // },
+            scales: {
+                xAxes: [ {
+                    gridLines: {
+                        color: 'transparent',
+                        zeroLineColor: 'transparent'
+                    },
+                    ticks: {
+                        fontSize: 2,
+                        fontColor: 'transparent'
+                    }
+                } ],
+                yAxes: [ {
+                    display:false,
+                    ticks: {
+                        display: false,
+                    }
+                } ]
+            },
+            title: {
+                display: false,
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                },
+                point: {
+                    radius: 0,
+                    hitRadius: 10,
+                    hoverRadius: 4
+                }
+            }
+        }
+    } );
+
+
+    //WidgetChart 4
+    var ctx = document.getElementById( "widgetChart4" );
+    ctx.height = 50;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: ['High', 'Average', 'Low'],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    data: [111, 81, 80],
+                    borderColor: "rgba(0, 123, 255, 0.9)",
+                    //borderWidth: "0",
+                    backgroundColor: "rgba(255,255,255,.3)"
+                }
+            ]
+        },
+        options: {
+              maintainAspectRatio: true,
+              legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                  display: false,
+                  categoryPercentage: 1,
+                  barPercentage: 0.5
+                }],
+                yAxes: [ {
+                    display: false
+                } ]
+            }
+        }
+    } );

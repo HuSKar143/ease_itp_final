@@ -27,7 +27,7 @@
  @yield('css')
 </head>
 
-<body class="fixed-nav sticky-footer" id="page-top" >
+<body class="fixed-nav sticky-footer" id="page-top" style="background-color:  #e2e2e2; " >
 
 
  
@@ -35,13 +35,21 @@
   
 
 <main>
-<div class="content-wrapper" style="background: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg ) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
-    <div class="container-fluid"> 
+<div>
+
+
+<div class="col-lg-6" style="margin: 0 auto;">
+<!-- Example Pie Chart Card-->
+       <div class="card mb-5 text-center">
+            <div class="card-header" style="background-color: #002663; color: white;">
+            <img src="{{asset('public/assets/profile_pics/logo.png')}}" width=150></img></div>
+            <div class="card-body">
 @yield('content')
+ 
+</div>
+
+
+
  </div>
  </div>
 </main>

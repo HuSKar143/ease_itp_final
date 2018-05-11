@@ -9,7 +9,7 @@
 
 
            
-<div class="col-lg-12">
+<div class="col-lg-12 fontProductSans">
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -28,9 +28,7 @@
             <div class="card-header"  style="background-color: #002663; color: white; ">
              <strong><i class="fa fa-drivers-license-o" style=" margin-top:1%;"></i> Profile</div></strong>
              <div class="pull-right">
-             @foreach ($profile as $val)
-               <a href = "{{ url('/print/information/'.$val->id) }}" class="btn btn-default">Print</a>
-             @endforeach
+            
              </div>
  <div class="card-body">            
 
@@ -53,8 +51,8 @@
   </div>
   </div>
 
-<div class="col-md-8">
-<div class="studentinfo info" > 
+<div class="col-md-8 ">
+<div class="studentinfo info fontProductSans" style="font-size: 10pt;" > 
 <table  border="0" align="left" cellpadding="5">
   @foreach ($profile as $val)
   <tr>
@@ -204,6 +202,12 @@
         
         
    
+</div>
+
+<div class="printProfile">
+ @foreach ($profile as $val)
+               <a href = "{{ url('/print/information/'.$val->id) }}" class="btn btn-default">Print</a>
+             @endforeach
 </div>
 </div>
     </section>

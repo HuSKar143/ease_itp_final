@@ -1,8 +1,5 @@
   
-
-
-
-  $(function () {
+$(function () {
       $('.pr-price').hide();
       $('.d1').show();
       $('#selectResults').change(function (event) {

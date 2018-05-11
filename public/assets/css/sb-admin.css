@@ -598,11 +598,40 @@ img.profpic {
 }
 .nav-color {
 
-color: #FEFFFF;
+color: #07abf1;
 
 }
 
 .bgimg { 
  background-color: #f4f4f4;
+}
+
+@font-face  {
+
+  font-family: try;
+  src: url(../profile_pics/Montserrat-Regular.ttf);
+}
+.fontProductSans {
+
+  font-family: try;
+}
+.smallerfont {
+
+ 
+  font-size: 4pt;
+}
+.nav-link-text {
+  padding-left: 5%;
+  font-size: 11pt;
+}
+
+.printProfile {
+  text-align: center;
+  float: right;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  color: white;
+  width: 100px;
 }
 

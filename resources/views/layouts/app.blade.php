@@ -39,21 +39,28 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
           <a class="nav-link selected active" href="{{ url('/') }}">
             <i class="fa fa-fw fa-dashboard nav-color"></i>
-            <strong><span class="nav-link-text nav-color active">Home</span></strong>
+            <strong><span class="nav-link-text fontProductSans">Home</span></strong>
           </a>
         </li>
         
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="List of Students">
           <a class="nav-link selected" href="{{ url('/listOfStudents') }}">
             <i class="fa fa-fw fa-table nav-color"></i>
-            <strong><span class="nav-link-text nav-color" sty>List of students</span></strong>
+            <strong><span class="nav-link-text fontProductSans" sty>List of students</span></strong>
           </a>
         </li>
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Data Visualization">
           <a class="nav-link selected" href="{{ url('/filterStudents') }}">
             <i class="fa fa-fw fa-area-chart nav-color"></i>
-            <strong><span class="nav-link-text nav-color" sty>Data Visualization</span></strong>
+            <strong><span class="nav-link-text fontProductSans" sty>Data Visualization</span></strong>
+          </a>
+        </li>
+
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Data Visualization">
+          <a class="nav-link selected" href="{{ url('/ImportData') }}">
+            <i class="fa fa-fw fa-area-chart nav-color"></i>
+            <strong><span class="nav-link-text fontProductSans" sty>Import Data</span></strong>
           </a>
         </li>
       </ul>
@@ -67,8 +74,8 @@
      <ul class="navbar-nav ml-auto">
       
           <li class="nav-item hello">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+          <a class="nav-link fontProductSans" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out "></i>Logout</a>
         </li>
       </ul>
     </div>
@@ -79,11 +86,7 @@
   
 
 <main>
-<div class="content-wrapper" style="background: url({{asset('public/assets/profile_pics/bg.jpg')}}) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
+<div class="content-wrapper" style="background-color: #e2e2e2;">
     <div class="container-fluid"> 
 @yield('content')
  </div>
@@ -106,7 +109,7 @@
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade fontProductSans" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -120,7 +123,7 @@
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                             {{ csrf_field() }}
-              <button type="submit">Logout</button>
+              <button type="submit" class="btn-primary">Logout</button>
                                         </form>
           </div>
         </div>

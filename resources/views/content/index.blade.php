@@ -7,10 +7,65 @@
 
 
 <div class="content">
-
 <div class="row">
+<div class="col-sm-6 col-lg-4 fontProductSans">
+                <div class="card text-white" style="background-color: #20a8d8;">
+                    <div class="card-body pb-0">
+                        <h4 class="mb-0">
+                            <span>School year 2016-2017</span>
+                        </h4>
+                        <p class="text-light">Relationship of EQ and AP: Very strong</p>
 
-<div class="col-md-8">
+                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-4 fontProductSans">
+                <div class="card text-white" style="background-color:#ffc107;">
+                    <div class="card-body pb-0">
+                        <h4 class="mb-0">
+                            <span class="count">210</span>
+                        </h4>
+                        <p class="text-light">Currently Enrolled Students</p>
+
+                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                            <canvas id="widgetChart3"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-lg-4 fontProductSans">
+                <div class="card text-white" style="background-color: #f86c6b;">
+                    <div class="card-body pb-0">
+                        <h4 class="mb-0">
+                            <span><b>75%</b> of 210</span>
+                        </h4>
+                        <p class="text-light">Students with low Interpersonal</p>
+
+                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                            <canvas id="widgetChart4"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--/.col-->
+
+</div>
+
+<div class="row"  style="margin-top: 3%;">
+
+<div class="col-md-8 fontProductSans" >
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -26,41 +81,15 @@
 </div>
 </div>
 
-<div class="col-md-4">
-      <div class="card card-inverse card-primary mb-3">
-            <div class="card-header"  style="background-color: #003c9e; color: white; font-size: 8pt; ">
-           
-            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Import Data </strong></center></div>
- <div class="card-body">
-<h5> Choose file to import </h5>
-<a href="{{ asset('public/assets/TestSample.xlsx') }}" download="Sample">Sample.xlsx</a>
-
-<br>
-
-<form role="form" method="post" enctype="multipart/form-data" action="http://localhost/ease_itp_final/import/excel">
-  {{ csrf_field() }}
-  <input class="form-contol-file" type="file" name="importedFile">  
-  <button class="btn btn-primary" type="submit" style="margin-top: 2%;">Import</button>
-</form>
-
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-</div>
-</div>
-</div>
 
 
 
 
 
 
-</div>
-<div class="row">
- <div class="col-md-8">
+
+
+ <div class="col-md-4 fontProductSans">
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
@@ -116,6 +145,7 @@
 
 	
      <script type="text/javascript" src="{{asset('public/assets/js/summary.js')}}"></script>
+          <script type="text/javascript" src="{{asset('public/assets/js/widget.js')}}"></script>
 
 
 @endsection

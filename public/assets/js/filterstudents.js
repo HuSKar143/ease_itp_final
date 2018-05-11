@@ -1,13 +1,24 @@
 var correlationResult = null;
 var btnCompare = false;
+var numberBarScores = {};
 
 $(function(){
 
 		$(".btn-compare-graph").click(function(event){
-      btnCompare = true;
+   	   btnCompare = true;
 
-			compareGraph();
-		});		
+      compareGraph();
+
+
+       $("#comparedInter").removeClass('hide');
+      $("#comparedIntra").removeClass('hide');
+      $("#comparedBarInterpret").removeClass('hide');
+
+      $("#comparedBarInterpret").removeClass('hide');
+    });	
+
+
+
 
 		$("#exampleFormControlSelect1").change(function(event){
 			// var arr = [79, 5, 18, 5, 32, 1, 16, 1, 82, 13];
@@ -15,6 +26,9 @@ $(function(){
 			// var ranks = arr.slice().map(function(v){ return sorted.indexOf(v)+1 });
 
       $(".print").removeClass('hide');
+      $("#comparedInter").addClass('hide');
+      $("#comparedIntra").addClass('hide');
+      $("#comparedBarInterpret").addClass('hide');
 
 			$(".hidden-compared-year").removeClass('hide');
 			var selectedYear = this.value;
@@ -36,6 +50,8 @@ $(function(){
 			$("#exampleFormControlSelect2").empty();
 			$("#exampleFormControlSelect2").append(options);
       
+
+      var hello = $("#exampleFormControlSelect1").val(); 
 			var filteredStudents = $('#filteredStudents'),
             StudentListFilter = $('#StudentListFilter'),
             filteredStudentsDataTable = filteredStudents.DataTable();
@@ -158,7 +174,7 @@ $(function(){
 						var stressCopy = stress.slice();
 						var adaptabilityCopy = adaptability.slice();
 						var moodCopy = mood.slice();
-                      
+                    
 
 // *****************variables to be used on graphs*****************
                         var namePerfectCopy = studName.slice();console.log(namePerfectCopy);
@@ -188,6 +204,24 @@ correlationResult ={
   stressinterpret:        pearsonResults(stressGwa),
   moodinterpret:          pearsonResults(moodGwa)
 }
+
+  numberBarScores = {
+    intrapersonal : countBarScores(intrapersonalCopy),
+    interpersonal : countBarScores(interpersonalCopy),
+    stress        : countBarScores(stressCopy),
+    adaptability  : countBarScores(adaptabilityCopy),
+    mood          : countBarScores(moodCopy),
+
+
+  }
+
+
+
+
+
+
+
+
 var pearsonResult = [];
   $.each(correlationResult, function(keys, values){
       pearsonResult.push(values);
@@ -278,6 +312,46 @@ graphAdaptabilityBar(adaptabilityPerfectCopy);
 	}); //function ending tag
 
 //***list of functions***
+
+function displayBarScores(key) {
+
+  $("#nBarInterpret").empty();
+  $("#nBarInterpret").append("School year: <b> " + $("#exampleFormControlSelect1").val() + "</b>"+ numberBarScores[key]);
+
+}
+
+function countBarScores(key) {
+var kani = [];
+
+
+var y = [], sum=0,sum2=0,sum3=0;
+
+    for(let i=0;i<key.length;i++){
+        if(key[i]>=50 && key[i]<=84){
+            sum =sum +1;
+        }else if(key[i]>=85 && key[i]<=114){
+            sum2 =sum2 +1;
+        }else if(key[i]>=115 && key[i]<=170){
+            sum3 =sum3 +1;
+        }
+    }
+    y.push(sum);
+    y.push(sum2);
+    y.push(sum3);
+
+    kani.push("<br>Low: <b>"+ sum + "</b><br>average: <b>" + sum2 + "</b><br>high: <b>" +sum3 + "</b>");
+
+    console.log(key.length);
+
+    if (kani == "undefined"){
+
+      kani = 12;
+    }
+  
+   return kani;
+
+} 
+
 
 function generateReportTable(data){
  
@@ -502,7 +576,7 @@ function graphInterpersonalScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'General Weighted Average'
+                  labelString: 'Interpersonal Test Scores'
                             },
 
                 scaleBeginAtZero : true,
@@ -524,7 +598,7 @@ function graphInterpersonalScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Interpersonal'
+                  labelString: 'General Weighted Average'
                             },
 
                  gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
@@ -586,7 +660,7 @@ function graphIntrapersonalScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'General Weighted Average'
+                  labelString: 'Intapersonal Test Scores'
                             },
 
                 scaleBeginAtZero : true,
@@ -608,7 +682,7 @@ function graphIntrapersonalScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Intrapersonal'
+                  labelString: 'General Weighted Average'
                             },
 
                  gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
@@ -667,7 +741,7 @@ function graphStressScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'General Weighted Average'
+                  labelString: 'Stress Management Test Scores'
                             },
 
                 scaleBeginAtZero : true,
@@ -689,7 +763,7 @@ function graphStressScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Stress Management'
+                  labelString: 'General Weighted Average'
                             },
 
                  gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
@@ -752,7 +826,7 @@ function graphAdaptabilityScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'General Weighted Average'
+                  labelString: 'Adaptability Test Scores'
                             },
 
                 scaleBeginAtZero : true,
@@ -774,7 +848,7 @@ function graphAdaptabilityScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Adaptability'
+                  labelString: 'General Weighted Average'
                             },
 
                  gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }
@@ -833,7 +907,7 @@ function graphMoodScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'General Weighted Average'
+                  labelString: 'General Mood Test Scores'
                             },
 
                 scaleBeginAtZero : true,
@@ -855,7 +929,7 @@ function graphMoodScatter(data){
               },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Mood Management'
+                  labelString: 'General Weighted Average'
                             },
 
                  gridLines:{display:false, lineWidth:0,color: "rgba(0,0,0,0.3)" }

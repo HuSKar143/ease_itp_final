@@ -29,6 +29,11 @@ class MasterController extends Controller
 		return view('content.index');
 	}
 
+    public function ImportData(){
+        
+        return view('content.dataImport');
+    }
+
 	public function generateStudentsList() {
 		
             $StudentList = DB::table('students')
