@@ -25,17 +25,24 @@
     <link href="{{asset('public/assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
    <link href="{{asset('public/assets/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
  @yield('css')
+ <style>
+ #hoverChangeColor:hover {
+color: yellow;
+background-color: red;
+ }
+
+ </style>
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top" >
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top" id="mainNav" style="padding: 8px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-nav fixed-top shadowbaby" id="mainNav" style="padding: 8px;">
     <img src="{{asset('public/assets/profile_pics/logo.png')}}" width=150></img>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive" >
-      <ul class="navbar-nav navbar-sidenav bg-light" id="exampleAccordion">
+      <ul class="navbar-nav navbar-sidenav bg-light " id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
           <a class="nav-link selected active" href="{{ url('/') }}">
             <i class="fa fa-fw fa-dashboard nav-color"></i>
@@ -59,7 +66,7 @@
 
          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Data Visualization">
           <a class="nav-link selected" href="{{ url('/ImportData') }}">
-            <i class="fa fa-fw fa-area-chart nav-color"></i>
+            <i class="fa fa-fw fa-database nav-color"></i>
             <strong><span class="nav-link-text fontProductSans" sty>Import Data</span></strong>
           </a>
         </li>
@@ -75,7 +82,7 @@
       
           <li class="nav-item hello">
           <a class="nav-link fontProductSans" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out "></i>Logout</a>
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
     </div>
@@ -123,7 +130,7 @@
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                             {{ csrf_field() }}
-              <button type="submit" class="btn-primary">Logout</button>
+              <button type="submit" id="hoverChangeColor" style="background-color: blue; padding: 7px 11px 7px 11px; border: none; color:white; border-radius: 5px;  cursor: pointer; ">Logout</button>
                                         </form>
           </div>
         </div>
@@ -143,6 +150,7 @@
     <script type="text/javascript" src="{{asset('public/assets/datatables/dataTables.bootstrap4.js')}}"></script>
     <!-- Custom scripts for all pages-->
     <script type="text/javascript" src="{{asset('public/assets/js/sb-admin.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/assets/js/dashboard.js')}}"></script>
     <!-- Custom scripts for this page-->
        <script type="text/javascript" src="{{asset('public/assets/js/selectedNav.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/bootstrap/js/bootstrap-navtabs.min.js')}}" ></script>

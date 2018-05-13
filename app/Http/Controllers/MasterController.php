@@ -75,6 +75,15 @@ class MasterController extends Controller
         return json_encode($studentGwaData);
     }
 
+    public function dashboard(){
+        $totalStudent =  DB::table('students')
+        ->select('id')
+        ->get();
+
+        return json_encode($totalStudent);
+
+    }
+
  
        
     public function listOfStudents(){

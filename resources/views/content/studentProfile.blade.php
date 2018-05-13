@@ -34,30 +34,71 @@
 
 
 <div class="row">  
- <div class="col-md-2">
-  <div class="studentid">
+
+
+
+
+{{-- 
+  <tr>
+    <th>Month</th>
+    <th>Savings</th>
+    <th rowspan="3">Savings for holiday!</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>February</td>
+    <td>$80</td>
+  </tr>
+</table> --}}
+
+
+{{--   <div class="studentid">
+
+<table border="2">
+
+
+
+</table>
+
+  </div>
+  --}}
+
+
+
+
+
+
+
+
+<div class="col-md-12 ">
+<div class="studentinfo info fontProductSans" style="font-size: 10pt;" > 
+<table  border="0" align="left" cellpadding="5" width="100%">
+
   @foreach ($profile as $val)
 
-  	 <img class="profpic" src= <?php 
-  	 if($val->gender=="m") {
-  	 	   echo  asset('public/assets/profile_pics/boy.png');
-  	 	 } 	 	 
-  	 else if($val->gender=="f") {
-  	 	   echo  asset('public/assets/profile_pics/girl.png');
-  	 	 }
-  	 	 ?>>
+     <tr>
 
+    <th width="35%" rowspan="7"><img class="profpic" src= <?php 
+               if($val->gender=="m") {
+                     echo  asset('public/assets/profile_pics/boy.png');
+                                     }     
+               else if($val->gender=="f") {
+                     echo  asset('public/assets/profile_pics/girl.png');
+                                           }?>></th>
+    
+      </tr>
   @endforeach
-  </div>
-  </div>
 
-<div class="col-md-8 ">
-<div class="studentinfo info fontProductSans" style="font-size: 10pt;" > 
-<table  border="0" align="left" cellpadding="5">
+
+
+
   @foreach ($profile as $val)
   <tr>
     
-    <td><div align="left">Name:</td>
+    <td width="15%"><div align="left">Name:</td>
     <td> <b>{{$val->lastname}}</b>, {{$val->firstname}}  </td>
   </tr>
 <tr>

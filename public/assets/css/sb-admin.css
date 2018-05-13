@@ -635,3 +635,13 @@ color: #07abf1;
   width: 100px;
 }
 
+.shadowbaby {
+
+  box-shadow: 0 7px 10px rgba(136, 136, 136, 0.70);
+  border-bottom: 1px solid rgba(150, 150, 150, 0.6);
+}
+
+#hoverChangeColor:hover {
+background: yellow;
+
+}

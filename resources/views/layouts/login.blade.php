@@ -43,7 +43,7 @@
        <div class="card mb-5 text-center">
             <div class="card-header" style="background-color: #002663; color: white;">
             <img src="{{asset('public/assets/profile_pics/logo.png')}}" width=150></img></div>
-            <div class="card-body">
+            <div class="card-body shadowbaby">
 @yield('content')
  
 </div>

@@ -46,5 +46,6 @@ Route::get('/getPrintData/{x}/{y?}', 'MasterController@getPrintData');
 Route::get('/get/pdf/{x}/{y?}', 'MasterController@informationPDF');
 Route::get('/print/information/{id}', 'MasterController@studentPDF');
 Auth::routes();
+Route::get('/dashboard', 'MasterController@dashboard');
 
 Route::get('/home', 'HomeController@index')->name('home');
