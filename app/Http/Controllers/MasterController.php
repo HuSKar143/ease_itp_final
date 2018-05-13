@@ -76,9 +76,16 @@ class MasterController extends Controller
     }
 
     public function dashboard(){
-        $totalStudent =  DB::table('students')
-        ->select('id')
-        ->get();
+        // $totalStudent =  DB::table('students')
+        // ->select('id')
+        // ->get();
+
+            $totalStudent = DB::table('grades')
+            ->leftJoin('eq', 'eq.student_id', '=', 'grades.student_id')
+            ->leftJoin('schoolyear', 'grades.schoolyear', '=', 'schoolyear.id')
+            ->whereBetween('grades.schoolyear', [10, 11])
+            ->get();
+            
 
         return json_encode($totalStudent);
 
