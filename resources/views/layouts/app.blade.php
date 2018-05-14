@@ -22,6 +22,7 @@
 
   <!-- Custom styles for this template-->
     <link href="{{asset('public/assets/css/sb-admin.css')}}" rel="stylesheet">
+    <link href="{{asset('public/assets/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('public/assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
    <link href="{{asset('public/assets/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
  @yield('css')
@@ -93,7 +94,7 @@ background-color: red;
   
 
 <main>
-<div class="content-wrapper" style="background-color: #e2e2e2;">
+<div class="content-wrapper " style="background-color: #f2f2f2;">
     <div class="container-fluid"> 
 @yield('content')
  </div>

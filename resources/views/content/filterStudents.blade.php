@@ -15,7 +15,7 @@
 
 <div class="row">
 <div class="col-lg-12 fontProductSans" > 
- <div class="card card-inverse card-primary mb-3">
+ <div class="card card-inverse card-primary mb-3 boxshadow">
             <div class="card-header"  style="background-color:#001d4c; color: white; font-size: 8pt; float:left;  ">
            
             <center><strong><i class="fa fa-drivers-license-o" style="margin-top:1%;"></i> Filter </strong></center></div>
@@ -67,8 +67,8 @@
 </div>
 </div>
 </div>
-</div>
-</div>
+
+
 
 
 
@@ -89,7 +89,7 @@
 
 <div class="pr-price d1 fontProductSans">
 
-   <div class="card card-inverse card-primary mb-3">
+   <div class="card card-inverse card-primary mb-3 boxshadow">
             <div class="card-header"  style="background-color:#001d4c; color: white; font-size: 12pt; ">
            <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Pearson's Correlation Coefficient</strong></center></div>
  
@@ -236,8 +236,13 @@
 
 
 
-
-
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 </div>
 </div>

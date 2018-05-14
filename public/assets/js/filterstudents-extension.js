@@ -40,6 +40,7 @@ function compareGraph(){
             $("#barInterpret").empty();
             $("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
             + "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
+            
 
             var firstInterpersonal   = setDataToAssign(firstYear,FirstGWA, 'interpersonal');
             var secondInterpersonal  = setDataToAssign(secondYear,SecondGWA, 'interpersonal');

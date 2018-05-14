@@ -4,12 +4,12 @@
 
 <div class="col-lg-12 fontProductSans">
 <!-- Example Pie Chart Card-->
-       <div class="card mb-3 text-center">
+       <div class="card mb-3 text-center boxshadow">
             <div class="card-header" style="background-color: #002663; color: white;">
              <strong> <i class="fa fa-address-book-o"></i> List of Students</div></strong>
             <div class="card-body">
 
-<table id="StudentList" class="table table-bordered table-striped table-sm" style="text-align: left; width: 100%;" >
+<table id="StudentList" class="table table-bordered table-striped table-sm " style="text-align: left; width: 100%;" >
     <thead class="nosort thead-light">
         <tr >
             <th>First Name</th>

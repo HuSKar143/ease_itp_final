@@ -9,15 +9,15 @@
 <div class="content">
 <div class="row">
 <div class="col-sm-12 col-lg-12 fontProductSans">
-                <div class="card text-white" style="background-color: #20a8d8;">
+                <div class="card text-white boxshadow bg-primary";">
                     <div class="card-body pb-0">
                         <h4 class="mb-0">
-                            <span id="currentSY">School year 2016-2017</span>
+                            <span id="currentSY" style="font-size: 30pt;"><i class="fa fa-line-chart" style="color:white; margin-right: 1%;"></i>School year 2016-2017 <br><span id="currentSY" style="font-size: 20pt;">Current year result: </span><br></span>
                         </h4>
-                        <p class="text-light" id="currentInterpret"></p>
+                    
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                            <canvas id="widgetChart1"></canvas>
+                        <p class="text-light" id="currentInterpret"></p>
                         </div>
 
                     </div>
@@ -29,16 +29,23 @@
 <div class="row" style="margin-top:3%;">
 
             <div class="col-sm-6 col-lg-4 fontProductSans">
-                <div class="card text-white" style="background-color:blue;">
+                <div class="card text-white boxshadow" style="background-color:white;">
                     <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span id="currentStudents"></span>
+                        <h4 class="mb-0" style="font-size: 30pt;">
+                            <i class="fa fa-user" style="color: #259b24;"></i><span style="margin-left: 2%;" class="text-dark" id="currentStudents"></span>
                         </h4>
-                        <p class="text-light">Currently Enrolled Students</p>
+                        <p class="text-dark">Currently Enrolled Students</p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
-                       {{--      <canvas id="widgetChart3"></canvas> --}}
-                        </div>
+
+                          <div class="progress m-t-20">
+                                    <div id="maleCount" class="progress-bar-striped bg-danger" style="text-align: center;" role="progressbar"></div>
+                              
+
+                         
+                                     <div id="femaleCount" class="progress-bar-striped bg-primary" style="text-align: center;" role="progressbar"></div> </div>
+                                     </div>
+
 
                     </div>
 
@@ -46,15 +53,25 @@
             </div>
 
 
-            <div class="col-sm-6 col-lg-4 fontProductSans">
-                <div class="card text-white" style="background-color: red;">
+            <div class="col-lg-4 fontProductSans">
+                <div class="card text-white boxshadow" style="background-color: white;">
                     <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span id="lowInter"></span>
+                        <h4 class="mb-0" style="font-size: 30pt;">
+                           <i class="fa fa-users" style="color:#3232f6;"></i><span style="margin-left: 2%;" class="text-dark" id="lowInter"></span>
                         </h4>
-                        <p class="text-light">Students with low Interpersonal</p>
+                        <p class="text-dark">Students with low Interpersonal</p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="progress m-t-20">
+                                    <div id="lowInterBar" class="progress-bar-striped bg-danger" style="text-align: center;" role="progressbar"></div>
+                                </div>
+
+                                <div class="progress m-t-20" style="margin-top: 2%;">
+                                     <div id="aveInterBar" class="progress-bar-striped bg-primary" style="text-align: center;" role="progressbar"></div> </div>
+
+
+                                             <div class="progress m-t-20" style="margin-top: 2%;">
+                                      <div id="highInterBar" class="progress-bar-striped bg-success" style="text-align: center;" role="progressbar"></div></div>
                           {{--   <canvas id="widgetChart4"></canvas> --}}
                         </div>
 
@@ -64,14 +81,24 @@
             </div>
 
                <div class="col-sm-6 col-lg-4 fontProductSans">
-                <div class="card text-white" style="background-color:green;">
+                <div class="card text-white boxshadow" style="background-color:white;">
                     <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span id="lowIntra"></span>
+                        <h4 class="mb-0" style="font-size: 30pt;">
+                            <i class="fa fa-universal-access" style="color:#3f51b5;"></i><span style="margin-left: 2%;" class="text-dark" id="lowIntra"></span>
                         </h4>
-                        <p class="text-light">Students with low Intrapersonal</p>
+                        <p class="text-dark">Students with low Intrapersonal</p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="progress m-t-20">
+                                    <div id="lowIntraBar" class="progress-bar-striped bg-danger" style="text-align: center;" role="progressbar"></div> </div>
+
+                                           <div class="progress m-t-20" style="margin-top: 2%;">
+                                     <div id="aveIntraBar" class="progress-bar-striped bg-primary" style="text-align: center;" role="progressbar"></div> </div>
+
+
+                                             <div class="progress m-t-20" style="margin-top: 2%;">
+                                      <div id="highIntraBar" class="progress-bar-striped bg-success" style="text-align: center;" role="progressbar"></div></div>
+                                </div>
                           {{--   <canvas id="widgetChart3"></canvas> --}}
                         </div>
 
@@ -83,17 +110,29 @@
 
 </div>
 
-<div class="row" style="margin-top:3%; padding-bottom: 5%;">
+<div class="row" style="margin-top:2%; padding-bottom: 5%;">
 
-            <div class="col-sm-6 col-lg-4 fontProductSans">
-                <div class="card text-white" style="background-color:blue;">
+        <div class="col-sm-6 col-lg-4 fontProductSans">
+                <div class="card text-white boxshadow" style="background-color:white;">
                     <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span id="lowStress"></span>
+                        <h4 class="mb-0" style="font-size: 30pt;">
+                            <i class="fa fa-heartbeat" style="color:#E51C23;"></i><span style="margin-left: 2%;" class="text-dark" id="lowStress"></span>
                         </h4>
-                        <p class="text-light">Students with low Stress Management</p>
+                        <p class="text-dark">Students with low Stress Management</p>
 
-                        <div class="chart-wrapper px-0" style="height:70px;" height="70">
+
+                        <div class="chart-wrapper px-0" style="height:80px;" height="70">
+                         <div class="progress m-t-20">
+                                    <div id="lowStressBar" class="progress-bar-striped bg-danger" style="text-align: center;" role="progressbar"></div>
+                                </div>
+
+
+                                <div class="progress m-t-20" style="margin-top: 2%;">
+                                     <div id="aveStressBar" class="progress-bar-striped bg-primary" style="text-align: center;" role="progressbar"></div> </div>
+
+
+                                             <div class="progress m-t-20" style="margin-top: 2%;">
+                                      <div id="highStressBar" class="progress-bar-striped bg-success" style="text-align: center;" role="progressbar"></div></div>
                            {{--  <canvas id="widgetChart3"></canvas> --}}
                         </div>
 
@@ -103,14 +142,24 @@
             </div>
 
             <div class="col-sm-6 col-lg-4 fontProductSans">
-                <div class="card text-white" style="background-color:red;">
+                <div class="card text-white boxshadow" style="background-color:white;">
                     <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span id="lowAdapt"></span>
+                        <h4 class="mb-0" style="font-size: 30pt;">
+                            <i class="fa fa-link" style="color:#FFC107;"></i><span style="margin-left: 2%;" class="text-dark" id="lowAdapt"></span>
                         </h4>
-                        <p class="text-light">Students with low Adaptability</p>
+                        <p class="text-dark">Students with low Adaptability</p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="progress m-t-20">
+                                    <div id="lowAdaptBar" class="progress-bar-striped bg-danger" style="text-align: center;" role="progressbar"></div>
+                                </div>
+
+                                 <div class="progress m-t-20" style="margin-top: 2%;">
+                                     <div id="aveAdaptBar" class="progress-bar-striped bg-primary" style="text-align: center;" role="progressbar"></div> </div>
+
+
+                                             <div class="progress m-t-20" style="margin-top: 2%;">
+                                      <div id="highAdaptBar" class="progress-bar-striped bg-success" style="text-align: center;" role="progressbar"></div></div>
                           {{--   <canvas id="widgetChart4"></canvas> --}}
                         </div>
 
@@ -120,14 +169,24 @@
             </div>
 
                <div class="col-sm-6 col-lg-4 fontProductSans">
-                <div class="card text-white" style="background-color:green;">
+                <div class="card text-white boxshadow" style="background-color:white;">
                     <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                            <span id="lowMood"></span>
+                        <h4 class="mb-0" style="font-size: 30pt;">
+                            <i class="fa fa-child" style="color:#FF5722;"></i><span style="margin-left: 2%;" class="text-dark" id="lowMood"></span>
                         </h4>
-                        <p class="text-light">Students with low General Mood</p>
+                        <p class="text-dark">Students with low General Mood</p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70">
+                        <div class="progress m-t-20">
+                                    <div id="lowMoodBar" class="progress-bar-striped bg-danger" style="text-align: center;" role="progressbar"></div>
+                                </div>
+
+                                    <div class="progress m-t-20" style="margin-top: 2%;">
+                                     <div id="aveMoodBar" class="progress-bar-striped bg-primary" style="text-align: center;" role="progressbar"></div> </div>
+
+
+                                             <div class="progress m-t-20" style="margin-top: 2%;">
+                                      <div id="highMoodBar" class="progress-bar-striped bg-success" style="text-align: center;" role="progressbar"></div></div>
                     {{--         <canvas id="widgetChart3"></canvas> --}}
                         </div>
 
@@ -223,6 +282,7 @@
 	
      <script type="text/javascript" src="{{asset('public/assets/js/dashboard.js')}}"></script>
           <script type="text/javascript" src="{{asset('public/assets/js/widget.js')}}"></script>
+          <script type="text/javascript" src="{{asset('public/assets/js/summary.js')}}"></script>
 
 
 @endsection

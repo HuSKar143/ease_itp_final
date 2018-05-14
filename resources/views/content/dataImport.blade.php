@@ -5,7 +5,7 @@
 
 <center>
 <div class="col-md-5 fontProductSans" style="margin-top: 8%;">
-      <div class="card card-inverse card-primary mb-3">
+      <div class="card card-inverse card-primary mb-3 boxshadow">
             <div class="card-header"  style="background-color: orange; color: white; font-size: 12pt; ">
            
             <center><strong><i class="fa fa-drivers-license-o" style="margin-left:-7%; margin-top:1%;"></i> Import Data </strong></center></div>

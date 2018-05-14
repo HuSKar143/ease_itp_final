@@ -645,3 +645,20 @@ color: #07abf1;
 background: yellow;
 
 }
+
+.boxshadow {
+-webkit-box-shadow: 0px 5px 60px -14px rgba(0,0,0,0.52);
+-moz-box-shadow: 0px 5px 60px -14px rgba(0,0,0,0.52);
+box-shadow: 0px 5px 60px -14px rgba(0,0,0,0.52);
+}
+
+.lihok {
+  transition: width 0.5s;
+  -webkit-transition: width 0.5s;
+}
+
+.progress-animated {
+  animation-duration: 5s;
+  animation-name: myanimation;
+  transition: all 5s ease 0s;
+} 

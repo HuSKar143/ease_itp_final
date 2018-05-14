@@ -92,7 +92,12 @@ interpretResult(totaleqR);
  intraCount(intrapersonalPerfectCopy);
  stressCount(stressPerfectCopy);
  adaptCount(adaptabilityPerfectCopy);
- moodCount(moodPerfectCopy);                  
+ moodCount(moodPerfectCopy);        
+
+
+
+   
+
 
 }//success
 });//ajax
@@ -109,25 +114,88 @@ $("#currentStudents").append(totalstudents);
 function interCount(data){
 
 var low = [];
+var average = []; 
+var high = [];
     for(let i=0;i<data.length;i++){
         var obj;
         if(data[i]<=84 &&  data[i]>=50)
             low.push(obj);
     }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=114 &&  data[i]>=85)
+            average.push(obj);
+    }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=170 &&  data[i]>=115)
+            high.push(obj);
+    }
 var newData = low.length;
+var newData2 = average.length;
+var newData3 = high.length;
+
+var percent = (newData/data.length)*100;
+var percent2 = (newData2/data.length)*100;
+var percent3 = (newData3/data.length)*100;
+
+$("#highInterBar").empty();
+$("#highInterBar").css('width', percent3 + '%'  );
+$("#highInterBar").append(percent3.toFixed(2) +'%');
+
+$("#aveInterBar").empty();
+$("#aveInterBar").css('width', percent2 + '%'  );
+$("#aveInterBar").append(percent2.toFixed(2) +'%');
+
+
+$("#lowInterBar").empty();
+$("#lowInterBar").css('width', percent + '%'  );
+$("#lowInterBar").append(percent.toFixed(2) +'%');
 $("#lowInter").empty();
 $("#lowInter").append(newData);
+
+
 }
 
 function intraCount(data){
 
 var low = [];
+var average = []; 
+var high = [];
     for(let i=0;i<data.length;i++){
         var obj;
         if(data[i]<=84 &&  data[i]>=50)
             low.push(obj);
     }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=114 &&  data[i]>=85)
+            average.push(obj);
+    }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=170 &&  data[i]>=115)
+            high.push(obj);
+    }
 var newData = low.length;
+var newData2 = average.length;
+var newData3 = high.length;
+
+var percent = (newData/data.length)*100;
+var percent2 = (newData2/data.length)*100;
+var percent3 = (newData3/data.length)*100;
+
+$("#highIntraBar").empty();
+$("#highIntraBar").css('width', percent3 + '%'  );
+$("#highIntraBar").append(percent3.toFixed(2) +'%');
+
+$("#aveIntraBar").empty();
+$("#aveIntraBar").css('width', percent2 + '%'  );
+$("#aveIntraBar").append(percent2.toFixed(2) +'%');
+
+$("#lowIntraBar").empty();
+$("#lowIntraBar").css('width', percent + '%'  );
+$("#lowIntraBar").append(percent.toFixed(2) +'%');
 $("#lowIntra").empty();
 $("#lowIntra").append(newData);
 }
@@ -135,25 +203,84 @@ $("#lowIntra").append(newData);
 function stressCount(data){
 
 var low = [];
+var average = []; 
+var high = [];
     for(let i=0;i<data.length;i++){
         var obj;
         if(data[i]<=84 &&  data[i]>=50)
             low.push(obj);
     }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=114 &&  data[i]>=85)
+            average.push(obj);
+    }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=170 &&  data[i]>=115)
+            high.push(obj);
+    }
 var newData = low.length;
+var newData2 = average.length;
+var newData3 = high.length;
+
+var percent = (newData/data.length)*100;
+var percent2 = (newData2/data.length)*100;
+var percent3 = (newData3/data.length)*100;
+
+$("#highStressBar").empty();
+$("#highStressBar").css('width', percent3 + '%'  );
+$("#highStressBar").append(percent3.toFixed(2) +'%');
+
+$("#aveStressBar").empty();
+$("#aveStressBar").css('width', percent2 + '%'  );
+$("#aveStressBar").append(percent2.toFixed(2) +'%');
+
+$("#lowStressBar").empty();
+$("#lowStressBar").css('width', percent + '%'  );
+$("#lowStressBar").append(percent.toFixed(2) +'%');
 $("#lowStress").empty();
 $("#lowStress").append(newData);
 }
 
 function adaptCount(data){
-
 var low = [];
+var average = []; 
+var high = [];
     for(let i=0;i<data.length;i++){
         var obj;
         if(data[i]<=84 &&  data[i]>=50)
             low.push(obj);
     }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=114 &&  data[i]>=85)
+            average.push(obj);
+    }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=170 &&  data[i]>=115)
+            high.push(obj);
+    }
 var newData = low.length;
+var newData2 = average.length;
+var newData3 = high.length;
+
+var percent = (newData/data.length)*100;
+var percent2 = (newData2/data.length)*100;
+var percent3 = (newData3/data.length)*100;
+
+$("#highAdaptBar").empty();
+$("#highAdaptBar").css('width', percent3 + '%'  );
+$("#highAdaptBar").append(percent3.toFixed(2) +'%');
+
+$("#aveAdaptBar").empty();
+$("#aveAdaptBar").css('width', percent2 + '%'  );
+$("#aveAdaptBar").append(percent2.toFixed(2) +'%');
+
+$("#lowAdaptBar").empty();
+$("#lowAdaptBar").css('width', percent + '%'  );
+$("#lowAdaptBar").append(percent.toFixed(2) +'%');
 $("#lowAdapt").empty();
 $("#lowAdapt").append(newData);
 }
@@ -161,12 +288,44 @@ $("#lowAdapt").append(newData);
 function moodCount(data){
 
 var low = [];
+var average = []; 
+var high = [];
     for(let i=0;i<data.length;i++){
         var obj;
         if(data[i]<=84 &&  data[i]>=50)
             low.push(obj);
     }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=114 &&  data[i]>=85)
+            average.push(obj);
+    }
+    for(let i=0;i<data.length;i++){
+        var obj;
+        if(data[i]<=170 &&  data[i]>=115)
+            high.push(obj);
+    }
 var newData = low.length;
+var newData2 = average.length;
+var newData3 = high.length;
+
+var percent = (newData/data.length)*100;
+var percent2 = (newData2/data.length)*100;
+var percent3 = (newData3/data.length)*100;
+
+$("#highMoodBar").empty();
+$("#highMoodBar").css('width', percent3 + '%'  );
+$("#highMoodBar").append(percent3.toFixed(2) +'%');
+
+$("#aveMoodBar").empty();
+$("#aveMoodBar").css('width', percent2 + '%'  );
+$("#aveMoodBar").append(percent2.toFixed(2) +'%');
+
+
+
+$("#lowMoodBar").empty();
+$("#lowMoodBar").css('width', percent + '%'  );
+$("#lowMoodBar").append(percent.toFixed(2) +'%');
 $("#lowMood").empty();
 $("#lowMood").append(newData);
 }
@@ -214,15 +373,28 @@ function interpretResult(data){
 
 	$("#currentInterpret").empty();
 	 if(data>=0 && data<=0.19){
-        $("#currentInterpret").append('Strength of Relationship: <b>Very Weak</b>');   
-    }else if(data>=0.20 && cdata<=0.39){
-        $("#currentInterpret").append('Strength of Relationship: <b>Weak</b>');    
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Weak</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');   
+    }else if(data>=0.20 && data<=0.39){
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Weak</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');    
     }else if(data>=0.40 && data<=0.59){
-        $("#currentInterpret").append('Strength of Relationship: <b>Moderate</b>');    
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Moderate</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');    
     }else if(data>=0.60 && data<=0.79){
-        $("#currentInterpret").append('Strength of Relationship: <b>Strong</b>');  
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Strong</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');  
     }else if(data>=0.80 && data<=1.0){
-        $("#currentInterpret").append('Strength of Relationship: <b>Very Strong</b>'); 
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Strong</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.'); 
+    }
+
+
+    if(data<=-0 && data>=-0.19){
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Weak</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');   
+    }else if(data<=-0.20 && data>=-0.39){
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Weak</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');    
+    }else if(data<=-0.40 && data>=-0.59){
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Moderate</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');    
+    }else if(data<=-0.60 && data>=-0.79){
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Strong</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');  
+    }else if(data<=-0.80 && data>=-1.0){
+        $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Strong</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.'); 
     }
 }
 

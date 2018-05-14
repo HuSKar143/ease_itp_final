@@ -121,6 +121,7 @@ $(function(){
 				  			totaleq : values[0]['total_eq']
 				  			});
 
+              console.log(student_eq);
 				  		$.each(values, function(key, value){
 				  			gwaTotal += value['gwa'];
 				  		});
@@ -417,7 +418,7 @@ function yearInterpret(key){
 
 
 	if (correlationResult[key]<0){
-		$("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');	
+		$("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key].toFixed(2) + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');	
 	}
 
 
@@ -433,7 +434,7 @@ function yearInterpret(key){
 		$("#pearsonInterpret2").append('Strength of Relationship: <b>Very Strong</b>');	
 	}
   if (correlationResult[key]>0){
-    $("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    $("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key].toFixed(2) + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
     }
   else if(correlationResult[key]>=-0.19 && correlationResult[key]<=0){
     $("#pearsonInterpret2").append('Strength of Relationship: <b>Very Weak</b>');  
