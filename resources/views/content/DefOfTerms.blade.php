@@ -17,47 +17,143 @@
 <h5> Pearson's Correlation Coefficient</h5>
 <p align=justify> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It is the test statistics that measures the statistical relationship, or association, between two continuous variables.  It is known as the best method of measuring the association between variables of interest because it is based on the method of covariance.  It gives information about the magnitude of the association, or correlation, as well as the direction of the relationship.</p>
 
-<b> <p> Direction of Relationship: <br></b>
+<p><b> Strength of Relationship: </b></p>
+<table class="tg" style="margin:0 auto;">
+  <tr>
+    <th class="tg-ml2k"><b>Indicator</th>
+    <th class="tg-ml2k"><b><i>r</i></th></b>
+  </tr>
+  <tr>
+    <td class="tg-kvf6">Very Weak</td>
+    <td class="tg-wn7o">0.00-0.19</td>
+  </tr>
+  <tr>
+    <td class="tg-kvf6">Weak</td>
+    <td class="tg-qtrh">0.20-0.39</td>
+  </tr>
+  <tr>
+    <td class="tg-kvf6">Moderate</td>
+    <td class="tg-qtrh">0.40-0.59</td>
+  </tr>
+  <tr>
+    <td class="tg-kvf6">Strong</td>
+    <td class="tg-qtrh">0.60-0.79</td>
+  </tr>
+  <tr>
+    <td class="tg-kvf6">Very Strong</td>
+    <td class="tg-qtrh">0.80-1.0</td>
+  </tr>
+</table>
 
 
-<b> Negative Relationship: </b> <i>General Weighted average is increasing and Emotional is also increasing.</i> <br>
-<b> Positive Relationship: </b> <i>General Weighted average is increasing while Emotional is also decreasing or Vice versa</i> <br>
 
-<p><b> Pearson's <i>R</i> strength indicator: </b><br></p>
-<table  border="0" align="left" cellpadding="0" width="15%" style="text-align:right;">
-<tr>
- <th>Very Weak </th>
- <td><b><i>: .00-.19 </i></b>
- </td>
- </tr>
- <tr>
- <th>Weak </th>
- <td><b><i>: .20-.39</i></b>
- </td>
- </tr>
- <tr>
- <th>Moderate: </th>
- <td><b><i>: .40-.59 </i></b>
- </td>
- </tr>
- <tr>
- <th>Strong </th>
- <td><b><i>: .60-.79 </i></b>
- </td>
- </tr>
- <tr>
- <th>Very Strong </th>
- <td><b><i>: .80-1.0 </i></b>
- </td>
- </tr></table>
-</p>
-</b></div>
-
-
- <div style="border: 1px solid rgba(0,0,0,0.5); border-radius: 20px; margin-left: 2%; padding: 15px 15px 15px 15px; height: 18%;">
 <i style="color:red;"> Reminder: </i><br>
-<b>General Weighted average: </b><i>The bigger the numerical value the smaller the descriptive value. Which means <b><i>1</i></b> is the highest and <b><i>5</i></b> is the lowest</i></br></br>
-</p></div>
+<b>General Weighted average: </b><i>The bigger the numerical value the smaller the descriptive value. Which means <b><i>1</i></b> is the highest and <b><i>5</i></b> is the lowest.</i><br>
+<br>
+
+
+<b> <H5> Direction of Relationship: </H5></b>
+
+
+<b> Negative Relationship: </b> General Weighted average's descriptive value is increasing and Emotional Quotient is also increasing. Here is a sample data of a negative relationship: <br>
+<table class="negaTable" style="text-align: center; margin:0 auto;">
+  <tr>
+    <th class="negaTable-baqh" colspan="4">Sample Data</th>
+  </tr>
+  <tr>
+    <td class="negaTable-amwm">GWA Numerical Value</td>
+    <td class="negaTable-amwm">Descriptive Value</td>
+    <td class="negaTable-amwm">EQ Score Numerical Value</td>
+    <td class="negaTable-amwm">Descriptive Value</td>
+  </tr>
+  <tr>
+    <td class="negaTable-amwm">1.43</td>
+    <td class="negaTable-lqud">High</td>
+    <td class="negaTable-amwm">120</td>
+    <td class="negaTable-lqud">High</td>
+  </tr>
+  <tr>
+    <td class="negaTable-amwm">1.2</td>
+    <td class="negaTable-lqud">High</td>
+    <td class="negaTable-amwm">130</td>
+    <td class="negaTable-lqud">High</td>
+  </tr>
+  <tr>
+    <td class="negaTable-amwm">2.1</td>
+    <td class="negaTable-lqud">Average</td>
+    <td class="negaTable-amwm">98</td>
+    <td class="negaTable-lqud">Average</td>
+  </tr>
+  <tr>
+    <td class="negaTable-amwm">3.16</td>
+    <td class="negaTable-lqud">Low</td>
+    <td class="negaTable-amwm">76</td>
+    <td class="negaTable-lqud">low</td>
+  </tr>
+  <tr>
+    <td class="negaTable-amwm">3.32</td>
+    <td class="negaTable-lqud">Low</td>
+    <td class="negaTable-amwm">60</td>
+    <td class="negaTable-lqud">Low</td>
+  </tr>
+</table>
+<br>
+<i><p> Negative relationship because GWA's numerical value is increasing while EQ scores' numberical value is decreasing or Vice versa</b>. They both have an <b>increasing or decreasing descriptive values</b> because the smaller the numerical number of GWA the higher the descriptive value.  </p></i>
+<br>
+<b> Positive Relationship: </b> General Weighted average is increasing while Emotional Quotient is also decreasing or Vice versa. Here is a sample data of a negative relationship: <br><br>
+<table class="posiTable" style="text-align: center; margin:0 auto;">
+  <tr>
+    <th class="posiTable-baqh" colspan="4">Sample Data</th>
+  </tr>
+  <tr>
+    <td class="posiTable-amwm">GWA Numerical Value</td>
+    <td class="posiTable-amwm">Descriptive Value</td>
+    <td class="posiTable-amwm">EQ Score Numerical Value</td>
+    <td class="posiTable-amwm">Descriptive Value</td>
+  </tr>
+  <tr>
+    <td class="posiTable-amwm">1.43</td>
+    <td class="posiTable-vk0p">High</td>
+    <td class="posiTable-amwm">60</td>
+    <td class="posiTable-lqud">Low</td>
+  </tr>
+  <tr>
+    <td class="posiTable-amwm">1.2</td>
+    <td class="posiTable-vk0p">High</td>
+    <td class="posiTable-amwm">71</td>
+    <td class="posiTable-lqud">Low</td>
+  </tr>
+  <tr>
+    <td class="posiTable-amwm">3.26</td>
+    <td class="posiTable-vk0p">Low</td>
+    <td class="posiTable-amwm">146</td>
+    <td class="posiTable-lqud">High</td>
+  </tr>
+  <tr>
+    <td class="posiTable-amwm">3.12</td>
+    <td class="posiTable-vk0p">Low</td>
+    <td class="posiTable-amwm">132</td>
+    <td class="posiTable-lqud">High</td>
+  </tr>
+  <tr>
+    <td class="posiTable-amwm">3.32</td>
+    <td class="posiTable-vk0p">Low</td>
+    <td class="posiTable-amwm">157</td>
+    <td class="posiTable-lqud">High</td>
+  </tr>
+</table>
+<br>
+<i><p> Positive relationship because GWA and EQ scores' <b>numerical values are both increasing</b>. They have <b>opposite descriptive values</b> because the highest value of GWA is 1 and 5 is the lowest.  </p></i>
+<hr>
+
+<p><b>Slope of a regression line (b)</b> represents the rate of change in y as x changes. Because y is dependent on x, the slope describes the predicted values of y given x.</p>
+</div>
+
+
+
+
+
+
 
 
 

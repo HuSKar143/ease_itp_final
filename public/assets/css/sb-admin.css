@@ -662,3 +662,31 @@ box-shadow: 0px 5px 60px -14px rgba(0,0,0,0.52);
   animation-name: myanimation;
   transition: all 5s ease 0s;
 } 
+
+.posiTable  {border-collapse:collapse;border-spacing:0;border-color:#aaa;}
+.posiTable td{font-family:Arial, sans-serif;font-size:14px;padding:10px 20px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;}
+.posiTable th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 20px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;}
+.posiTable .posiTable-kvf6{font-weight:bold;font-style:italic;color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+.posiTable .posiTable-8s8y{background-color:#f56b00;color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+.posiTable .posiTable-119l{background-color:#FCFBE3;font-weight:bold;color:#036400;border-color:inherit;text-align:center;vertical-align:top}
+.posiTable .posiTable-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.posiTable .posiTable-jyax{background-color:#FCFBE3;font-weight:bold;text-align:center;vertical-align:top}
+.posiTable .posiTable-g2oq{background-color:#FCFBE3;font-weight:bold;font-style:italic;color:#036400;border-color:inherit;text-align:center;vertical-align:top}
+
+.negaTable  {border-collapse:collapse;border-spacing:0;border-color:#aaa;}
+.negaTable td{font-family:Arial, sans-serif;font-size:14px;padding:10px 20px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;}
+.negaTable th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 20px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;}
+.negaTable .negaTable-kvf6{font-weight:bold;font-style:italic;color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+.negaTable .negaTable-8s8y{background-color:#f56b00;color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+.negaTable .negaTable-119l{background-color:#FCFBE3;font-weight:bold;color:#036400;border-color:inherit;text-align:center;vertical-align:top}
+.negaTable .negaTable-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.negaTable .negaTable-jyax{background-color:#FCFBE3;font-weight:bold;text-align:center;vertical-align:top}
+.negaTable .negaTable-g2oq{background-color:#FCFBE3;font-weight:bold;font-style:italic;color:#036400;border-color:inherit;text-align:center;vertical-align:top}
+
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#aaa;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 20px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#333;background-color:#fff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 20px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#aaa;color:#fff;background-color:#f38630;}
+.tg .tg-kvf6{font-weight:bold;font-style:italic;color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-wn7o{font-weight:bold;color:#036400;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-ml2k{color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-qtrh{font-weight:bold;font-style:italic;color:#036400;border-color:inherit;text-align:center;vertical-align:top}
