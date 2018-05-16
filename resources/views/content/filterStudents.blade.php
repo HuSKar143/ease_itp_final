@@ -261,10 +261,11 @@
      <script type="text/javascript" src="{{asset('public/assets/js/dropDown.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/pdfmake.min.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/buttons.html5.min.js')}}"></script>
+     <script type="text/javascript" src="{{asset('public/assets/js/vfs_fonts.js')}}"></script>
 
   
-     {{-- <script type="text/javascript" src="{{asset('public/assets/js/vfs_fonts.min.js')}}"></script> --}}
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<!--      <script type="text/javascript" src="{{asset('public/assets/js/vfs_fonts.min.js')}}"></script>  -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> -->
      
 
 
