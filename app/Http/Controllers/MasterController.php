@@ -380,7 +380,7 @@ public function importStudentInformation(Request $request){
         });
     }
 
-    return redirect('/filterStudents')->with("success", "The file imported successfully!");
+    return redirect('/')->with("success", "The file imported successfully!");
 
 }
 
