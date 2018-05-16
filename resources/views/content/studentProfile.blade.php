@@ -13,6 +13,7 @@
 
 <!-- Example Pie Chart Card-->
        <div class="card card-inverse card-primary mb-3">
+
             <div class="card-header"  style="background-color: #002663; color: white; ">
             <a class="nav-link back-button" href="{{ url('/listOfStudents') }}">
             <i class="fa fa-fw fa-mail-reply"></i></a>
@@ -23,7 +24,8 @@
 
 
 
-
+<div class="row">
+<div class="col-md-6">
  <div class="card card-inverse card-primary mb-3">
             <div class="card-header"  style="background-color: #002663; color: white; ">
              <strong><i class="fa fa-drivers-license-o" style=" margin-top:1%;"></i> Profile</div></strong>
@@ -31,50 +33,15 @@
             
              </div>
  <div class="card-body">            
-
+<div class="printProfile" >
+ @foreach ($profile as $val)
+               <a href = "{{ url('/print/information/'.$val->id) }}"  style="background-color: blue; padding: 7px 11px 7px 11px; border: none; color:white; border-radius: 5px;  cursor: pointer;">Print</a>
+             @endforeach
+</div>
 
 <div class="row">  
-
-
-
-
-{{-- 
-  <tr>
-    <th>Month</th>
-    <th>Savings</th>
-    <th rowspan="3">Savings for holiday!</th>
-  </tr>
-  <tr>
-    <td>January</td>
-    <td>$100</td>
-  </tr>
-  <tr>
-    <td>February</td>
-    <td>$80</td>
-  </tr>
-</table> --}}
-
-
-{{--   <div class="studentid">
-
-<table border="2">
-
-
-
-</table>
-
-  </div>
-  --}}
-
-
-
-
-
-
-
-
-<div class="col-md-12 ">
-<div class="studentinfo info fontProductSans" style="font-size: 10pt;" > 
+<div class="col-lg-12">
+<div class="studentinfo info fontProductSans" style="font-size: 9pt;" > 
 <table  border="0" align="left" cellpadding="5" width="100%">
 
   @foreach ($profile as $val)
@@ -98,12 +65,12 @@
   @foreach ($profile as $val)
   <tr>
     
-    <td width="15%"><div align="left">Name:</td>
-    <td> <b>{{$val->lastname}}</b>, {{$val->firstname}}  </td>
+    <td width="20%"><div align="left">Name:</td>
+    <td > <b>{{$val->lastname}}</b>, {{$val->firstname}}  </td>
   </tr>
 <tr>
-    <td valign="top"><div align="left">Course:</div></td>
-    <td valign="top"> <?php 
+    <td valign="center"><div align="left">Course:</div></td>
+    <td valign="center"> <?php 
    
     if ($val->coursename=="BSIT") {
       
@@ -118,8 +85,8 @@
 ?>
     </td>
   <tr>
-    <td valign="top"><div align="left">Gender:</div></td>
-    <td valign="top"> <?php 
+    <td valign="center"><div align="left">Gender:</div></td>
+    <td valign="center"> <?php 
    
     if ($val->gender=="m") {
 
@@ -180,7 +147,22 @@
 @endforeach
 </div>
 </div>
+
 </div>
+</div>
+
+      <div class="col-lg-6"><!-- Example Pie Chart Card-->
+          <div class="card mb-3">
+            <div class="card-header" style="background-color: #c10000; color:white;">
+             <strong> <i class="fa fa-pie-chart"></i> Prediction Result</div> </strong>
+            <div class="card-body">
+             <b><i>Interpretation: </i></b><div id="predictInterpret"></div> </i>
+            
+            </div>
+            
+          </div>
+          </div>
+          </div>
   <!--<div class="studentinfo"> 
   <h1 class="info"> Name: </h1> <br>
   <h1 class="info"> Address: </h1><br>
@@ -228,28 +210,9 @@
 </div>
 
 
-<div class="row">
-          <div class="col-lg-6"><!-- Example Pie Chart Card-->
-          <div class="card mb-3">
-            <div class="card-header" style="background-color: #c10000; color:white;">
-             <strong> <i class="fa fa-pie-chart"></i> Prediction Result</div> </strong>
-            <div class="card-body">
-             <i>Interpretation: <div id="predictInterpret"></div> </i>
-            
-            </div>
-            
-          </div>
-          </div>
-        
-        
-   
-</div>
 
-<div class="printProfile">
- @foreach ($profile as $val)
-               <a href = "{{ url('/print/information/'.$val->id) }}" class="btn btn-default">Print</a>
-             @endforeach
-</div>
+
+
 </div>
     </section>
 

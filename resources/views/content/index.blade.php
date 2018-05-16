@@ -20,9 +20,12 @@
                         <p class="text-light" id="currentInterpret"></p>
                         </div>
 
+<div style="float:right; margin-bottom: 2%;">
+<a class="btn" style="background-color:#002663; border-color: #002663;color:white; border-radius: 100px;" href="{{ url('/defofterms') }}"><i class="fa fa-question"></i> </a></div>
                     </div>
 
                 </div>
+
             </div>
             </div>
 

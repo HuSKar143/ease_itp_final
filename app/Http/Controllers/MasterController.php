@@ -29,6 +29,11 @@ class MasterController extends Controller
 		return view('content.index');
 	}
 
+    public function defofterms(){
+        
+        return view('content.DefOfTerms');
+    }
+
     public function ImportData(){
         
         return view('content.dataImport');

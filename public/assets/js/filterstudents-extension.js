@@ -40,7 +40,7 @@ function compareGraph(){
             $("#barInterpret").empty();
             $("#barInterpret").append("<b>Number of students <br></b> " + "School Year " + year + ": " + "<b><i>" + firstYear.length + "</b></i><br>"
             + "School Year " + yearToCompared + ": " + "<b><i>" + secondYear.length + "</b></i><br>" );
-            
+
 
             var firstInterpersonal   = setDataToAssign(firstYear,FirstGWA, 'interpersonal');
             var secondInterpersonal  = setDataToAssign(secondYear,SecondGWA, 'interpersonal');
@@ -201,7 +201,7 @@ function showBarInterpret(key) {
 
 // $("#nBarInterpret").empty();
  $("#comparedBarInterpret").empty();
- $("#comparedBarInterpret").append("School year: <b>" + $("#exampleFormControlSelect2").val() + "</b>"+ countBarResult[key]);
+ $("#comparedBarInterpret").append("<b>School year: " + $("#exampleFormControlSelect2").val() + "</b>"+ countBarResult[key]);
 // console.log(countBarResult[key]);
 
 
@@ -226,7 +226,7 @@ var y = [], sum=0,sum2=0,sum3=0;
     y.push(sum2);
     y.push(sum3);
     
-   kani.push("<br>Low: <b>"+ sum + "</b><br>average: <b>" + sum2 + "</b><br>high: <b>" +sum3 + "</b>");
+   kani.push("<br>Low: <b>"+ sum + " students</b><br>Average: <b>" + sum2 + " students</b><br>High: <b>" +sum3 + " students</b>");
 
     console.log(key.length);
     var kaniGiSlice = kani.slice();
@@ -247,7 +247,7 @@ $("#comparedInter").empty();
 $("#comparedIntra").empty();
 
   if (comparedCorrelationResult[key]<0){
-        $("#comparedInter").append('<font color="green"><b> Results of Compared Year: </b></font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
+        $("#comparedInter").append('<font color="green"><b> Results of Compared Year: </b></font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b><font color="green">' + comparedCorrelationResult[key].toFixed(2) + '</font></b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b><br>');    
      }
 
 
@@ -266,7 +266,7 @@ $("#comparedIntra").empty();
 
 
   if (comparedCorrelationResult[key]>0){
-    $("#comparedInter").append('<font color="green"><b> Results of Compared Year: </b></font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b>' + comparedCorrelationResult[key] + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    $("#comparedInter").append('<font color="green"><b> Results of Compared Year: </b></font><br>'+'School year: <b>'+ $("#exampleFormControlSelect2").val()+'</b><br>Correlation Coefficient: <b><font color="green">' + comparedCorrelationResult[key].toFixed(2) + '</font></b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
     }
   else if(comparedCorrelationResult[key]>=-0.19 && comparedCorrelationResult[key]<=0){
     $("#comparedIntra").append('Strength of Relationship: <b>Very Weak</b>');  
@@ -468,7 +468,12 @@ function drawGraphScatter(key, firstYear, secondYear){
             yAxes: [{
                 ticks: {
               
-                beginAtZero: true
+                 beginAtZero:true,
+                   reverse: true,
+                   stepSize: .5,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
               },
                 scaleLabel: {
                   display: true,

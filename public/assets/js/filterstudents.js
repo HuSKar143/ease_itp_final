@@ -212,9 +212,7 @@ correlationResult ={
     stress        : countBarScores(stressCopy),
     adaptability  : countBarScores(adaptabilityCopy),
     mood          : countBarScores(moodCopy),
-
-
-  }
+    }
 
 
 
@@ -317,7 +315,7 @@ graphAdaptabilityBar(adaptabilityPerfectCopy);
 function displayBarScores(key) {
 
   $("#nBarInterpret").empty();
-  $("#nBarInterpret").append("School year: <b> " + $("#exampleFormControlSelect1").val() + "</b>"+ numberBarScores[key]);
+  $("#nBarInterpret").append("<br><b>School year:  " + $("#exampleFormControlSelect1").val() + "</b>" + numberBarScores[key]);
 
 }
 
@@ -340,14 +338,12 @@ var y = [], sum=0,sum2=0,sum3=0;
     y.push(sum2);
     y.push(sum3);
 
-    kani.push("<br>Low: <b>"+ sum + "</b><br>average: <b>" + sum2 + "</b><br>high: <b>" +sum3 + "</b>");
+    // kani.push("Low: <b>"+ sum + "</b><br>average: <b>" + sum2 + "</b><br>high: <b>" +sum3 + "</b>");
 
-    console.log(key.length);
+    kani.push(sum + " " + sum2 + " " + sum3);
+ 
 
-    if (kani == "undefined"){
-
-      kani = 12;
-    }
+    
   
    return kani;
 
@@ -418,7 +414,7 @@ function yearInterpret(key){
 
 
 	if (correlationResult[key]<0){
-		$("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key].toFixed(2) + '</b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');	
+		$("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b><font color="green">' + correlationResult[key].toFixed(2) + '</font></b><br> Relationship:<font color="blue"> Positive </font> (<b>GWA is increasing and ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');	
 	}
 
 
@@ -434,7 +430,7 @@ function yearInterpret(key){
 		$("#pearsonInterpret2").append('Strength of Relationship: <b>Very Strong</b>');	
 	}
   if (correlationResult[key]>0){
-    $("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b>' + correlationResult[key].toFixed(2) + '</b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
+    $("#pearsonInterpret").append('School year: <b>'+ $("#exampleFormControlSelect1").val()+'</b><br>Correlation Coefficient: <b><font color="green">' + correlationResult[key].toFixed(2) + '</font></b><br> Relationship: <font color="red">Negative</font> (<b>GWA is decreasing while ' +key.charAt(0).toUpperCase() +  key.slice(1,-9)+ ' is also increasing) </b>');
     }
   else if(correlationResult[key]>=-0.19 && correlationResult[key]<=0){
     $("#pearsonInterpret2").append('Strength of Relationship: <b>Very Weak</b>');  
@@ -565,7 +561,7 @@ function graphInterpersonalScatter(data){
             display: true,
             text: 'Interpersonal and GWA Scatterplot',
             fontSize: 20,
-        },
+            fontFamily: "product sans"        },
 
         scales: {
 
@@ -595,7 +591,12 @@ function graphInterpersonalScatter(data){
             yAxes: [{
                 ticks: {
 
-                beginAtZero: true
+                beginAtZero:true,
+                   reverse: true,
+                   stepSize: .5,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
               },
                 scaleLabel: {
                   display: true,
@@ -679,7 +680,12 @@ function graphIntrapersonalScatter(data){
             yAxes: [{
                 ticks: {
 
-                beginAtZero: true
+                 beginAtZero:true,
+                   reverse: true,
+                   stepSize: .5,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
               },
                 scaleLabel: {
                   display: true,
@@ -760,7 +766,12 @@ function graphStressScatter(data){
             yAxes: [{
                 ticks: {
 
-                beginAtZero: true
+                 beginAtZero:true,
+                   reverse: true,
+                   stepSize: .5,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
               },
                 scaleLabel: {
                   display: true,
@@ -845,7 +856,12 @@ function graphAdaptabilityScatter(data){
             yAxes: [{
                 ticks: {
 
-                beginAtZero: true
+                 beginAtZero:true,
+                   reverse: true,
+                   stepSize: .5,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
               },
                 scaleLabel: {
                   display: true,
@@ -925,8 +941,12 @@ function graphMoodScatter(data){
             }],
             yAxes: [{
                 ticks: {
-
-                beginAtZero: true
+                beginAtZero:true,
+                   reverse: true,
+                   stepSize: .5,
+                   max: 5,
+                   min: 1,
+                   autoskip:false,
               },
                 scaleLabel: {
                   display: true,

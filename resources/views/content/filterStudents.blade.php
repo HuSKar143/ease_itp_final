@@ -98,7 +98,7 @@
 
  <div class="tabbable full-width-tabs">
   <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-    <li onclick ="yearInterpret('intrapersonalinterpret'); comparedInterpret('intrapersonalinterpret');"><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
+    <li class="active" onclick ="yearInterpret('intrapersonalinterpret'); comparedInterpret('intrapersonalinterpret');"><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
 
 
     <li onclick ="yearInterpret('interpersonalinterpret'); comparedInterpret('interpersonalinterpret');"><a data-toggle="tab" href="#interpersonalContainer">Interpersonal </a></li>
@@ -115,7 +115,7 @@
  </div>
  </div>
  
-  <div class="tab-content" style="margin-top: -2%; padding: 25px 25px 25px 25px;"" >
+  <div class="tab-content fontProductSans" style="margin-top: -2%; padding: 25px 25px 25px 25px;"" >
     <div id="intrapersonalContainer" class="tab-pane active">
     </div>
     <div id="interpersonalContainer" class="tab-pane fade">
@@ -128,6 +128,8 @@
     </div>
   </div>
   <div class="card-footer bg-transparent"><b>Interpretation: </b><br>
+
+                
   <p id="pearsonInterpret"></p>
   <p id="pearsonInterpret2"></p>
  
@@ -143,11 +145,8 @@
  <p id="wadap3"> </p>
 
 
-<p id="comparedInter"> </p>
-<p id="comparedIntra"> </p>
-<p id="comparedStress"> </p>
-<p id="comparedAdapt"> </p>
-<p id="comparedMood"> </p>
+  <div style="float:right; margin-bottom: 2%;">
+<a class="btn" style="background-color:#002663; border-color: #002663;color:white; border-radius: 100px;" href="{{ url('/defofterms') }}"><i class="fa fa-question"></i> </a></div>
   </div>
 
 
@@ -174,11 +173,11 @@
 
 	 <div class="tabbable full-width-tabs">
 		  <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-		    <li onclick= "displayBarScores('intrapersonal'); showBarInterpret('intrapersonal')">  <a data-toggle="tab" href="#intrapersonalBarContainer">Intrapersonal</a></li>
-		    <li onclick= "displayBarScores('interpersonal'); showBarInterpret('interpersonal')"><a data-toggle="tab" href="#interpersonalBarContainer">Interpersonal </a></li>
-		    <li onclick= "displayBarScores('stress'); showBarInterpret('stress')"><a data-toggle="tab" href="#stressBarContainer">Stress Management</a></li>
-		    <li onclick= "displayBarScores('adaptability'); showBarInterpret('adaptability')"><a data-toggle="tab" href="#adaptabilityBarContainer">Adaptability</a></li>
-		    <li onclick= "displayBarScores('mood'); showBarInterpret('mood')"><a data-toggle="tab" href="#moodBarContainer">General Mood</a></li>
+		    <li id="intrapersonalTab" class="active" onclick= "displayBarScores('intrapersonal'); showBarInterpret('intrapersonal')">  <a data-toggle="tab" href="#intrapersonalBarContainer">Intrapersonal</a></li>
+		    <li id="interpersonalTab" onclick= "displayBarScores('interpersonal'); showBarInterpret('interpersonal')"><a data-toggle="tab" href="#interpersonalBarContainer">Interpersonal </a></li>
+		    <li id="stressTab" onclick= "displayBarScores('stress'); showBarInterpret('stress')"><a data-toggle="tab" href="#stressBarContainer">Stress Management</a></li>
+		    <li id="adaptabilityTab" onclick= "displayBarScores('adaptability'); showBarInterpret('adaptability')"><a data-toggle="tab" href="#adaptabilityBarContainer">Adaptability</a></li>
+		    <li id="moodTab" onclick= "displayBarScores('mood'); showBarInterpret('mood')"><a data-toggle="tab" href="#moodBarContainer">General Mood</a></li>
 		  </ul>
 	 </div>
  
@@ -194,9 +193,12 @@
 <div class="card-footer bg-transparent"><b>Interpretation: </b>
 
 <div id="barInterpret"></div>
+
 <p id="nBarInterpret"></p>
 <p id="comparedBarInterpret" class="hide"></p> 
 
+  <div style="float:right; margin-bottom: 2%;">
+<a class="btn" style="background-color:#002663; border-color: #002663;color:white; border-radius: 100px;" href="{{ url('/defofterms') }}"><i class="fa fa-question"></i> </a></div>
 </div>
 		</div>
 </div>
@@ -246,12 +248,7 @@
 
 </div>
 </div>
-{{-- </div>
 
-
-
-
-</div> --}}
 
 
 @endsection
@@ -264,6 +261,8 @@
      <script type="text/javascript" src="{{asset('public/assets/js/dropDown.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/pdfmake.min.js')}}"></script>
      <script type="text/javascript" src="{{asset('public/assets/js/buttons.html5.min.js')}}"></script>
+
+  
      {{-- <script type="text/javascript" src="{{asset('public/assets/js/vfs_fonts.min.js')}}"></script> --}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
      

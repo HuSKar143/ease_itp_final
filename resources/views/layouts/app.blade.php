@@ -17,8 +17,6 @@
   <link href="{{asset('public/assets/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/css/material-icons.css')}}" rel="stylesheet">
   <link href="{{asset('public/assets/datatables/buttons.dataTables.min.css')}}" rel="stylesheet">
-  <link href="{{asset('public/assets/bootstrap/js/bootstrap.min.js')}}" rel="stylesheet">
-  <link href="{{asset('public/assets/jquery/jquery.min.js')}}" rel="stylesheet">
 
   <!-- Custom styles for this template-->
     <link href="{{asset('public/assets/css/sb-admin.css')}}" rel="stylesheet">
@@ -69,6 +67,13 @@ background-color: red;
           <a class="nav-link selected" href="{{ url('/ImportData') }}">
             <i class="fa fa-fw fa-database nav-color"></i>
             <strong><span class="nav-link-text fontProductSans" sty>Import Data</span></strong>
+          </a>
+        </li>
+
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Data Visualization">
+          <a class="nav-link selected" href="{{ url('/defofterms') }}">
+            <i class="fa fa-fw fa-question nav-color"></i>
+            <strong><span class="nav-link-text fontProductSans" sty>Definition of Terms</span></strong>
           </a>
         </li>
       </ul>
@@ -131,7 +136,7 @@ background-color: red;
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                             {{ csrf_field() }}
-              <button type="submit" id="hoverChangeColor" style="background-color: blue; padding: 7px 11px 7px 11px; border: none; color:white; border-radius: 5px;  cursor: pointer; ">Logout</button>
+              <button type="submit" id="hoverChangeColor" style="background-color: blue; padding: 7px 11px 7px 11px; border: none; color:white; border-radius: 5px;  cursor: pointer;">Logout</button>
                                         </form>
           </div>
         </div>
@@ -143,6 +148,9 @@ background-color: red;
     <script type="text/javascript" src="{{asset('public/assets/jquery/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/jquery/nav-tabs.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/assets/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/assets/jquery/jquery.min.js')}}"></script>  
+
     <!-- Core plugin JavaScript-->
     <script type="text/javascript" src="{{asset('public/assets/jquery-easing/jquery.easing.min.js')}}"></script>
     <!-- Page level plugin JavaScript-->
