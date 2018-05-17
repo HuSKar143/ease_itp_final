@@ -647,9 +647,9 @@ class PrintInformation{
 					}
 
 					if($correlatedData[$data[$x1]] > 0){
-						$relationship = "Negative (GWA is decreasing while ".$eq." is also increasing or Vice Versa)";
+						$relationship = "Positive (GWA is decreasing while ".$eq." is also increasing or Vice Versa)";
 					}else{
-						$relationship = "Positive (GWA is increasing while ".$eq." is also increasing)";	
+						$relationship = "Negative (GWA is increasing while ".$eq." is also increasing)";	
 					}
 					$correlationValue = abs($correlatedData[$data[$x1]]);
 					if($correlationValue >= 0.00 && $correlationValue <= 0.19){
@@ -774,9 +774,9 @@ class PrintInformation{
 				}
 
 				if($correlation[$data[$flag]] > 0){
-					$relationship = "Negative (GWA is decreasing while ".$eq." is also increasing or Vice Versa)";
+					$relationship = "Positive (GWA is decreasing while ".$eq." is also increasing or Vice Versa)";
 				}else{
-					$relationship = "Positive (GWA is increasing while ".$eq." is also increasing)";	
+					$relationship = "Negative (GWA is increasing while ".$eq." is also increasing)";	
 				}
 				$correlationValue = abs($correlation[$data[$flag]]);
 				if($correlationValue >= 0.00 && $correlationValue <= 0.19){
@@ -836,7 +836,7 @@ class PrintInformation{
 									Low: 50-84 
 									Average: 85-114 
 									High: 115-170');
-				$pdf->Ln(5);
+				$pdf->Ln(15);
 
 				$pdf->Write(5,' School Year '. $_GET['q1']. '
 								Number of Students:' .$counting. '

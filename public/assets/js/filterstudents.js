@@ -214,7 +214,7 @@ correlationResult ={
     mood          : countBarScores(moodCopy),
     }
 
-
+console.log(numberBarScores.intrapersonal);
 
 
 
@@ -239,7 +239,10 @@ var reportAllEq = [];
     
 generateReportTable(reportAllEq);
 
-
+var intrapret = "intrapersonalinterpret";
+yearInterpret(intrapret);
+var intrapretbar = "intrapersonal";
+displayBarScores(intrapretbar);
 
 
 
@@ -313,7 +316,8 @@ graphAdaptabilityBar(adaptabilityPerfectCopy);
 //***list of functions***
 
 function displayBarScores(key) {
-
+console.log(key);
+console.log(numberBarScores.key);
   $("#nBarInterpret").empty();
   $("#nBarInterpret").append("<br><b>School year:  " + $("#exampleFormControlSelect1").val() + "</b>" + numberBarScores[key]);
 

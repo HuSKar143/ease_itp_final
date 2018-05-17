@@ -12,7 +12,7 @@
                 <div class="card text-white boxshadow bg-primary";">
                     <div class="card-body pb-0">
                         <h4 class="mb-0">
-                            <span id="currentSY" style="font-size: 30pt;"><i class="fa fa-line-chart" style="color:white; margin-right: 1%;"></i>School year 2016-2017 <br><span id="currentSY" style="font-size: 20pt;">Current year result: </span><br></span>
+                            <span id="currentSY" style="font-size: 30pt;"><i class="fa fa-line-chart" style="color:white; margin-right: 1%;"></i><span id="currentSYear"></span> <br><span id="currentSY" style="font-size: 20pt;">Current year result: </span><br></span>
                         </h4>
                     
 

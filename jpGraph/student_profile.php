@@ -337,7 +337,7 @@ class PrintInformation{
 		$pdf->Write(5,'Interpretation:
 					   Using Linear Regression, we came up with a predictive model 
 					   GWA = '. number_format($prediction[1], 5) .'+('. number_format($prediction[0], 5) .' * Total EQ) 
-					   Based on his/her current GWA and Total EQ, his/her predicted GWA for next school year is: '.number_format($prediction[2], 5));
+					   Based on his/her current GWA and Total EQ, his/her predicted GWA for next school year is: '.number_format($prediction[2], 3));
 
 		 $pdf->Output('D', " Student Information.pdf");
 

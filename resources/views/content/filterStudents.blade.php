@@ -98,7 +98,7 @@
 
  <div class="tabbable full-width-tabs">
   <ul class="nav nav-tabs" style="background-color: #e6e6e6; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-    <li onclick ="yearInterpret('intrapersonalinterpret'); comparedInterpret('intrapersonalinterpret');"><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
+    <li  class="active" onclick ="yearInterpret('intrapersonalinterpret'); comparedInterpret('intrapersonalinterpret');"><a data-toggle="tab" href="#intrapersonalContainer">Intrapersonal</a></li>
 
 
     <li onclick ="yearInterpret('interpersonalinterpret'); comparedInterpret('interpersonalinterpret');"><a data-toggle="tab" href="#interpersonalContainer">Interpersonal </a></li>

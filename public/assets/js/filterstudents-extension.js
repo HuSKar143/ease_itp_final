@@ -32,7 +32,13 @@ function compareGraph(){
             var firstYear = getStudentInfo(data['a']);
             var secondYear = getStudentInfo(data['b']);
             var highElem;
-            if(firstYear.length < secondYear.length){ highElem = secondYear; }else if(firstYear.length > secondYear.length){ highElem = firstYear;}
+            if(firstYear.length < secondYear.length){
+             highElem = secondYear; 
+            }else if(firstYear.length > secondYear.length){
+              highElem = firstYear;
+            }else{
+              highElem = firstYear;
+            }
 
             var FirstGWA = setDataSlice(firstYear, 'gwa');
             var SecondGWA = setDataSlice(secondYear, 'gwa');
@@ -133,6 +139,10 @@ var comparedPearsonResult = [];
       comparedPearsonResult.push(values);
   });
 
+var intrapret = "intrapersonalinterpret";
+comparedInterpret(intrapret);
+var intrapretbar = "intrapersonal";
+showBarInterpret(intrapretbar);
 
 
 // $("#comparedIntra").append('Compared Intrapersonal: ' + pearsonResults(secondIntrapersonal));
@@ -198,7 +208,8 @@ function countBar(key) {
 }
 
 function showBarInterpret(key) {
-
+console.log(key);
+console.log(countBarResult[key]);
 // $("#nBarInterpret").empty();
  $("#comparedBarInterpret").empty();
  $("#comparedBarInterpret").append("<b>School year: " + $("#exampleFormControlSelect2").val() + "</b>"+ countBarResult[key]);

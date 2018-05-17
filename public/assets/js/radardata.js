@@ -247,7 +247,9 @@ function getPredictionNew(eq,y,s){
 
 function getPrediction(eq,y,s){
     var predict = y+(s*eq);
-    return $("#predictInterpret").append('<p> Using Linear Regression, we came up with a predictive model <br> <b>GWA</b> = '+y+ '+(' +s+ ' * <b>Total EQ</b>) <br><br> Based on his/her current GWA and Total EQ, his/her predicted GWA for next school year is: <b>'+ predict+'</b></p>');
+    var value = parseFloat(predict).toFixed(3);
+    console.log(value);
+    return $("#predictInterpret").append('<p> Using Linear Regression, the prediction model:  <br> <b>GWA</b> = '+y+ '+(' +s+ ' * <b>Total EQ</b>) <br><br> His/Her current GWA and Total EQ, his/her predicted GWA for next school year is: <b>'+ value+'</b></p>');
 }
 
 function pearsonResults(values) {

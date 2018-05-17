@@ -370,32 +370,40 @@ function assignXY(eq, gwa){
 }
 
 function interpretResult(data){
-
+console.log(data);
+ if(data!=0){
 	$("#currentInterpret").empty();
+    $("#currentSYear").empty();
+
 	 if(data>=0 && data<=0.19){
+        $("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Weak</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');   
-    }else if(data>=0.20 && data<=0.39){
+    }else if(data>=0.20 && data<=0.39){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Weak</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');    
-    }else if(data>=0.40 && data<=0.59){
+    }else if(data>=0.40 && data<=0.59){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Moderate</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');    
-    }else if(data>=0.60 && data<=0.79){
+    }else if(data>=0.60 && data<=0.79){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Strong</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.');  
-    }else if(data>=0.80 && data<=1.0){
+    }else if(data>=0.80 && data<=1.0){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Strong</b></u></i>' + ' and has a <u><i><b>Negative</b></u></i> relationship.'); 
     }
 
 
     if(data<=-0 && data>=-0.19){
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Weak</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');   
-    }else if(data<=-0.20 && data>=-0.39){
+    }else if(data<=-0.20 && data>=-0.39){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Weak</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');    
-    }else if(data<=-0.40 && data>=-0.59){
+    }else if(data<=-0.40 && data>=-0.59){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Moderate</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');    
-    }else if(data<=-0.60 && data>=-0.79){
+    }else if(data<=-0.60 && data>=-0.79){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Strong</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.');  
-    }else if(data<=-0.80 && data>=-1.0){
+    }else if(data<=-0.80 && data>=-1.0){$("#currentSYear").append('School year 2016-2017');
         $("#currentInterpret").append('The relationship between the Total Emotional Quotient and Academic performance of the students is <u><i><b>Very Strong</b></u></i>' + ' and has a <u><i><b>Positive</b></u></i> relationship.'); 
     }
+ }else{
+    $("#currentInterpret").empty();
+    $("#currentSYear").empty();
+ }
 }
 
 
